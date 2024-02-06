@@ -41,23 +41,23 @@ const CardItem = ({ item, index, setShouldUpdate }) => {
       <td>{`${item?.f_name} ${item?.l_name}`}</td>
       <td>{item?.email}</td>
       <td style={{ direction: "ltr" }}>
-        {item.user_phones[0]?.country_code} {item.user_phones[0]?.phone}
+        {item?.user_phones?.length && <>{item?.user_phones[0]?.country_code} {item?.user_phones[0]?.phone}</>}
       </td>
       <td>
         <Badge
           style={{ cursor: "pointer" }}
           onClick={() => navigate(`/rules/${item?.id}`)}
           variant={
-            item?.admin_roles.length === Rules?.length
+            item?.admin_roles?.length >= Rules?.length
               ? "outline-success"
-              : item?.admin_roles.length === 0
+              : item?.admin_roles?.length === 0
               ? "outline-danger"
               : "outline-secondary"
           }
         >
-          {item?.admin_roles.length === Rules?.length
+          {item?.admin_roles?.length >= Rules?.length
             ? Translate[lang]?.full_permissions
-            : item?.admin_roles.length === 0
+            : item?.admin_roles?.length === 0
             ? Translate[lang]?.no_permissions
             : Translate[lang]?.some_permissions}
         </Badge>
@@ -74,16 +74,13 @@ const CardItem = ({ item, index, setShouldUpdate }) => {
       <td>
         {isExist("admin") && (
           <Dropdown>
-            <Dropdown.Toggle
-              // variant="success"
-              className="light sharp i-false"
-            >
+            <Dropdown.Toggle className="light sharp i-false">
               <i className="la la-ellipsis-v" style={{ fontSize: "27px" }}></i>
             </Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item
                 onClick={() =>
-                  navigate(`/admins/edit-admin/${item.id}/${item.f_name}`, {
+                  navigate(`/admins/edit-admin/${item.id}/${item?.f_name}`, {
                     state: { edit: true, id: item.id, item: item },
                   })
                 }
@@ -100,7 +97,7 @@ const CardItem = ({ item, index, setShouldUpdate }) => {
       {deleteModal && (
         <DeleteModal
           open={deleteModal}
-          titleMsg={item.f_name}
+          titleMsg={item?.f_name}
           deletedItem={item}
           modelService={adminService}
           setShouldUpdate={setShouldUpdate}

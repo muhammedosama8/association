@@ -8,8 +8,8 @@ import {
   loginAction,
 } from "../../../store/actions/AuthActions";
 import { Translate } from "../../Enums/Tranlate";
-import login from "../../../images/login.svg";
-import logo from "../../../images/logo.svg";
+import login from "../../../images/logo1.png";
+import logo from "../../../images/logo1.png";
 
 function Login(props) {
   const navigate = useNavigate();
@@ -28,16 +28,10 @@ function Login(props) {
 
   return (
     <div className={`login-wrapper ${lang}`}>
-      <div className="login-aside-right d-flex flex-column justify-content-between">
-        <div className="pt-5 px-5">
-          <img src={logo} alt="logo" style={{ width: "211px" }} />
-        </div>
-        <div className="row m-0 justify-content-center align-items-center">
+      <div className="login-aside-right d-flex flex-column justify-content-center">
+        <div className="row justify-content-center align-items-center">
           <div className="col-xl-6 col-xxl-8 col-md-12">
-            <div className="authincation-content">
-              <div className="row no-gutters">
-                <div className="col-xl-12">
-                  <div className="auth-form">
+            <div className="authincation-content auth-form">
                     <div className=" mb-4">
                       <h5>{Translate[lang].sign_in}</h5>
                     </div>
@@ -133,13 +127,7 @@ function Login(props) {
                         </button>
                       </div>
                     </AvForm>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="text-center">
+                    <div className="text-center mb-2">
           <label
             className="poweredBy d-block"
             style={{ textWrap: "nowrap", fontSize: "12px" }}
@@ -153,7 +141,7 @@ function Login(props) {
               leap solutions kw{" "}
             </a>
           </label>
-          <p style={{ fontSize: "14px", color: "rgba(0, 0, 0, 0.87)" }}>
+          {/* <p style={{ fontSize: "14px", color: "rgba(0, 0, 0, 0.87)" }}>
             <a
               href="https://www.leapsolutionskw.com/"
               target="_blank"
@@ -169,7 +157,10 @@ function Login(props) {
             >
               Privacy policy
             </a>
-          </p>
+          </p> */}
+        </div>
+            </div>
+          </div>
         </div>
       </div>
       <div className="login-aside-left position-relative">

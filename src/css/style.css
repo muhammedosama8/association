@@ -44346,7 +44346,7 @@ table.dataTable thead .sorting {
 }
 
 .auth-form {
-  padding: 40px 19px;
+  padding: 12px 19px;
 }
 
 .auth-form .login-form .form-group div {
@@ -44356,7 +44356,7 @@ table.dataTable thead .sorting {
 
 @media only screen and (max-width: 575px) {
   .auth-form {
-    padding: 30px;
+    padding: 12px 30px;
   }
   .h-56{
     height: 45px!important;

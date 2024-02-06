@@ -179,103 +179,94 @@ const AdScreen = () => {
     );
   }
   return (
-    <Card>
-      <Card.Body>
+    <>
         {formData?.map((data, index) => {
           return (
-            <Row key={index}>
-              <Col
-                md={12}
-                style={{
-                  padding: "1rem",
-                  boxShadow: "0 0 8px #e0dbdb9e",
-                  borderRadius: "5px",
-                  marginBottom: "2rem",
-                }}
-              >
-                <div className="d-flex justify-content-between align-items-center mb-1">
-                  <p style={{ fontSize: "21px", marginBottom: "0" }}>
-                    {Translate[lang].ad}
-                  </p>
-                  {index > 0 && (
-                    <button
-                      className="btn btn-danger p-2"
-                      onClick={() => deleteScreen(index, data?.id)}
-                    >
-                      <i
-                        className="la la-times"
-                        style={{ fontSize: "20px" }}
-                      ></i>
-                    </button>
-                  )}
-                </div>
-                <div className="image-placeholder">
-                  <div className="avatar-edit">
-                    <input
-                      type="file"
-                      onChange={(e) => {
-                        if (!isExist("ad_screen")) {
-                          toast.error("Not Allowed, Don`t have Permission");
-                          return;
-                        }
-                        fileHandler(e, index);
-                      }}
-                      id={`imageUpload${index}`}
-                    />
-                    <label htmlFor={`imageUpload${index}`} name=""></label>
-                  </div>
-                  <div className="avatar-preview">
-                    <div
-                      id={`imagePreview${index}`}
-                      className="position-relative"
-                    >
-                      {index === 0 && (
+            <Card key={index}>
+              <Card.Body>
+                <div className="w-100 d-flex justify-content-between align-items-center mb-1">
+                      <p style={{ fontSize: "18px", marginBottom: "0" }}>
+                        {Translate[lang].ad}
+                      </p>
+                      {index > 0 && (
                         <button
-                          onClick={() => {
-                            deleteFirstScreen(index, data.id);
-                          }}
-                          style={{
-                            position: "absolute",
-                            top: "16px",
-                            borderRadius: "50%",
-                            right: "16px",
-                            border: "0",
-                            background: "#FF4847",
-                            color: "#fff",
-                            padding: "4px 7px",
-                            zIndex: "1",
-                          }}
+                          className="btn btn-danger p-1"
+                          onClick={() => deleteScreen(index, data?.id)}
                         >
                           <i
-                            className="la la-trash"
+                            className="la la-times"
                             style={{ fontSize: "18px" }}
                           ></i>
                         </button>
                       )}
-                      {!!data?.src && (
-                        <img
-                          id={`saveImageFile${index}`}
-                          src={data?.src}
-                          alt="icon"
-                        />
-                      )}
-                      {!data?.src && !data.loading && (
-                        <img
-                          id={`saveImageFile${index}`}
-                          src={uploadImg}
-                          alt="icon"
-                          style={{
-                            width: "80px",
-                            height: "80px",
-                          }}
-                        />
-                      )}
-                      {!data?.src && data.loading && <Loader />}
-                    </div>
-                  </div>
                 </div>
-              </Col>
-            </Row>
+                <div className="image-placeholder">
+                      <div className="avatar-edit">
+                        <input
+                          type="file"
+                          onChange={(e) => {
+                            if (!isExist("ad_screen")) {
+                              toast.error("Not Allowed, Don`t have Permission");
+                              return;
+                            }
+                            fileHandler(e, index);
+                          }}
+                          id={`imageUpload${index}`}
+                        />
+                        <label htmlFor={`imageUpload${index}`} name=""></label>
+                      </div>
+                      <div className="avatar-preview">
+                        <div
+                          id={`imagePreview${index}`}
+                          className="position-relative"
+                        >
+                          {index === 0 && (
+                            <button
+                              onClick={() => {
+                                deleteFirstScreen(index, data.id);
+                              }}
+                              style={{
+                                position: "absolute",
+                                top: "16px",
+                                borderRadius: "50%",
+                                right: "16px",
+                                border: "0",
+                                background: "#FF4847",
+                                color: "#fff",
+                                padding: "2px 5px",
+                                zIndex: "1",
+                              }}
+                            >
+                              <i
+                                className="la la-times"
+                                style={{ fontSize: "18px" }}
+                              ></i>
+                            </button>
+                          )}
+                          {!!data?.src && (
+                            <img
+                              id={`saveImageFile${index}`}
+                              src={data?.src}
+                              alt="icon"
+                            />
+                          )}
+                          {!data?.src && !data.loading && (
+                            <img
+                              id={`saveImageFile${index}`}
+                              src={uploadImg}
+                              alt="icon"
+                              style={{
+                                width: "80px",
+                                height: "80px",
+                              }}
+                            />
+                          )}
+                          {!data?.src && data.loading && <Loader />}
+                        </div>
+                      </div>
+                </div>
+              </Card.Body>
+            </Card>
           );
         })}
         {isExist("ad_screen") && (
@@ -298,8 +289,7 @@ const AdScreen = () => {
             </Button>
           </div>
         )}
-      </Card.Body>
-    </Card>
+    </>
   );
 };
 export default AdScreen;

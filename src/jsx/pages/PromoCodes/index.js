@@ -55,6 +55,11 @@ const PromCodes = () => {
             className="me-2 h-75"
             onClick={() => navigate("/promo-codes/add-promo-codes")}
           >
+            <i
+                  className={`la la-plus ${
+                    lang === "en" ? "mr-2" : "ml-2"
+                  } plus-icon`}
+                ></i>
             {Translate[lang]?.add} {Translate[lang]?.prom_codes}
           </Button>
         )}
