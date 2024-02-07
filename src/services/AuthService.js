@@ -47,14 +47,14 @@ export function saveTokenInLocalStorage(tokenDetails) {
   localStorage.setItem("userDetails", JSON.stringify(tokenDetails));
   localStorage.setItem(tokenKey, tokenDetails.accessToken);
   localStorage.setItem(
-    "TankKeyAdminRules",
+    "AssociationAdminRules",
     JSON.stringify(tokenDetails.admin.admin_roles?.map((item) => item.role))
   );
 }
 
 export function checkAutoLogin(dispatch, navigate) {
   const tokenDetailsString = localStorage.getItem("userDetails");
-  const adminRules = localStorage.getItem("TankKeyAdminRules");
+  const adminRules = localStorage.getItem("AssociationAdminRules");
   const adminLang = localStorage.getItem("adminLang");
   let tokenDetails = "";
 
