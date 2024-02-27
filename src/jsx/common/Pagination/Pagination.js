@@ -30,12 +30,11 @@ const Pagination = ({
     if (!!search) params["search"] = search;
 
     service?.getList({ ...params }).then((res) => {
-      console.log(res);
       if (res?.status === 200) {
-        setData([...res.data?.meta?.data]);
-        let total = Math.ceil(res.data?.meta?.totalLength / 15);
+        setData([...res.data?.data?.data]);
+        let total = Math.ceil(res.data?.data?.totalItems / 15);
         setTotalPages(total);
-        if (res.data?.meta?.totalLength > 0) {
+        if (res.data?.data?.totalItems > 0) {
           setHasData(1);
         } else {
           setHasData(0);
@@ -49,7 +48,7 @@ const Pagination = ({
   useEffect(() => {
     setPage(1);
   }, [isDeleted, shouldUpdate]);
-  console.log(page);
+
   if (totalPages > 1) {
     return (
       <Row className="pagination mt-3 px-2">

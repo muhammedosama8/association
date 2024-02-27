@@ -25,7 +25,6 @@ import SocialMedia from "./pages/Setting/SocialMedia";
 import Permission from "./pages/Rules";
 import Notification from "./pages/Notification";
 import Profile from "./pages/Profile";
-import Brands from "./pages/Brand";
 import Currency from "./pages/Setting/Currency";
 import StaticPages from "./pages/Setting/StaticPages";
 import AddNotification from "./pages/Notification/AddNotification";
@@ -37,12 +36,16 @@ import OrderFailed from "./common/OrderFailed";
 import BiddingManagement from "./pages/BiddingManagement";
 import KYCRequests from "./pages/KYCRequests";
 import TimeManagement from "./pages/TimeManagement";
-import AppCommissionManagement from "./pages/AppCommissionManagement";
 import WalletManagement from "./pages/WalletManagement";
 import PromCodes from "./pages/PromoCodes";
 import AddPromoCodes from "./pages/PromoCodes/AddPromoCodes";
 import TimeSlot from "./pages/TimeSlot";
 import SpecificBlock from "./pages/TimeSlot/SpecificBlock";
+import WebsiteBanners from "./pages/Website/Banners";
+import Members from "./pages/Website/Members";
+import BranchesAndMarkets from "./pages/Website/Branches and Markets"
+import Activities from "./pages/Website/Activities"
+import News from "./pages/Website/News"
 
 const Markup = () => {
   const allroutes = [
@@ -61,6 +64,13 @@ const Markup = () => {
     // Banners
     { url: "banners", component: <Banners /> },
 
+    // Website
+    { url : "website-banners", component: <WebsiteBanners />},
+    { url: "branches-and-markets", component: <BranchesAndMarkets /> },
+    { url: "activities", component: <Activities /> },
+    { url: "members", component: <Members /> },
+    { url: "news", component: <News /> },
+
     // Promo Codes
     { url: "promo-codes", component: <PromCodes /> },
     { url: "promo-codes/add-promo-codes", component: <AddPromoCodes /> },
@@ -73,9 +83,6 @@ const Markup = () => {
     // Ad Screen
     { url: "ad-screen", component: <AdScreen /> },
 
-    // Brand
-    { url: "brands", component: <Brands /> },
-
     // Users
     { url: "users", component: <Users /> },
 
@@ -87,12 +94,6 @@ const Markup = () => {
 
     // TimeManagement
     { url: "time-management", component: <TimeManagement /> },
-
-    // AppCommissionManagement
-    {
-      url: "app-commission-management",
-      component: <AppCommissionManagement />,
-    },
 
     // WalletManagement
     { url: "wallet-management", component: <WalletManagement /> },

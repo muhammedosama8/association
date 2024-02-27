@@ -3,6 +3,7 @@ import http from "./HttpService";
 import { API_BASE_URL_ENV } from "../jsx/common/common";
 
 const apiEndpoint = API_BASE_URL_ENV() + "/admin";
+const apiGetEndpoint = API_BASE_URL_ENV() + "/admin/admin";
 const apiTogglle = API_BASE_URL_ENV() + "/admin/block";
 const apiDashboard = API_BASE_URL_ENV() + "/admin/dashboard";
 const apiLogout = API_BASE_URL_ENV() + "/admin/logout";
@@ -20,9 +21,9 @@ export default class AdminService extends BaseService {
 
   getList(params) {
     if (params) {
-      return http.get(`${this.apiEndpoint}`, { params });
+      return http.get(`${apiGetEndpoint}`, { params });
     } else {
-      return http.get(`${this.apiEndpoint}`);
+      return http.get(`${apiGetEndpoint}`);
     }
   }
 

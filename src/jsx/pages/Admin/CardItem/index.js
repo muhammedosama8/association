@@ -41,7 +41,7 @@ const CardItem = ({ item, index, setShouldUpdate }) => {
       <td>{`${item?.f_name} ${item?.l_name}`}</td>
       <td>{item?.email}</td>
       <td style={{ direction: "ltr" }}>
-        {item?.user_phones?.length && <>{item?.user_phones[0]?.country_code} {item?.user_phones[0]?.phone}</>}
+        {!!item?.phone && <> {item?.country_code} {item?.phone}</>}
       </td>
       <td>
         <Badge

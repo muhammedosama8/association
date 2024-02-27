@@ -75,19 +75,27 @@ const SideBar = (props) => {
                           <li className={menuClass}  key={index} >{data.title}</li>
                       )
                     }else{
+                      {console.log(data, data.content)}
                       return(				
                         <li className={` ${ state.active === data.title ? 'mm-active' : ''}`}
                           key={index} 
                         >
-                          
                           {data.content && data.content.length > 0 ?
                             <>
                                 <Link to={"#"} 
-                                  className="has-arrow"
+                                  className="has-arrow position-relative"
                                   onClick={() => {handleMenuActive(data.title)}}
-                                >								
+                                >
                                     {data.iconStyle}
                                     <span className="nav-text">{Translate[lang][data.text]}</span>
+                                    <i 
+                                      className='la angle la-angle-down'
+                                      style={{
+                                        left: '0',
+                                        position: 'absolute',
+                                        top: '18px'
+                                      }}
+                                    ></i>
                                 </Link>
                                   <Collapse in={state.active === data.title ? true :false}>
                                     <ul className={`${menuClass === "mm-collapse" ? "mm-show" : ""}`}>

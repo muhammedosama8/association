@@ -22,7 +22,7 @@ const Admins = () => {
   const Auth = useSelector((state) => state.auth?.auth);
   const isExist = (data) => Auth?.admin?.admin_roles?.includes(data);
   const lang = useSelector((state) => state.auth?.lang);
-
+  console.log(admins)
   return (
     <div className="admin">
       {/* <div className="tabs-div">

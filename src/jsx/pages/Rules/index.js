@@ -30,7 +30,7 @@ const Permission = () => {
     setLoading(true);
     adminService.getList().then((res) => {
       if (res?.status === 200) {
-        let admins = res.data?.meta?.data?.map((admin) => {
+        let admins = res.data?.data?.data?.map((admin) => {
           let adminRes = {
             id: admin.id,
             value: admin.id,

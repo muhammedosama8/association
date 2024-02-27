@@ -19,7 +19,7 @@ const Header = ({ onNote }) => {
   var name = path[path.length - 1].split("-");
   var filterName = name.length >= 3 ? name.filter((n, i) => i > 0) : name;
   var finalName = filterName;
-  console.log(finalName);
+
   return (
     <div className="header">
       <div className="header-content">

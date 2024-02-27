@@ -10,5 +10,5 @@ export const SocialMediaLinks =[
     {label: 'App Store', value: 'app_store'},
     {label: 'Play Store', value: 'play_store'},
     {label: 'Call Us', value: 'call_us'},
-    
+    {label: 'Youtube', value: 'you_tube'},
 ] 
