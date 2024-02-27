@@ -48,7 +48,7 @@ const AddNewsModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
  
         if (filesData.length) {
             new BaseService().postUpload(filesData[0]).then(res=>{
-                if(res.data.status){
+                if(res?.data?.status){
                     setFormData({...formData, img: res.data.url})
                     setFiles(filesData[0])
                 }
@@ -59,6 +59,7 @@ const AddNewsModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
 
     const submit = () =>{
         if(!formData?.img){
+            toast.error('Upload Image First')
             return
         }
         let data ={
@@ -66,6 +67,7 @@ const AddNewsModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
             name_ar: formData?.ar,
             image: formData?.img
         }
+        toast.success('Brand Added Successfully')
         if(isAdd){
             brandsService.create(data)?.then(res=>{
                 if(res && res?.status === 201){
@@ -159,12 +161,18 @@ const AddNewsModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
                         </Col>
 
                         <Col md={12}>
-                            <AvField
-                                label={Translate[lang]?.description}
+                            <label className="d-block">{Translate[lang]?.description}</label>
+                            <textarea
                                 type='text'
                                 placeholder={Translate[lang]?.description}
                                 value={formData.ar}
                                 name='description'
+                                className="w-100 p-2"
+                                style={{
+                                    border: '1px solid hsl(0, 0%, 80%)',
+                                    borderRadius: '0.3rem',
+                                }}
+                                required
                                 validate={{
                                     required: {
                                         value:true,
