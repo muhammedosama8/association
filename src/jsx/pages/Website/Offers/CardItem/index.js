@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Dropdown } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import BoardOfDirectorsService from "../../../../../services/BoardOfDirectorsService";
+import BrandsService from "../../../../../services/BrandsService";
 import DeleteModal from "../../../../common/DeleteModal";
 import { Translate } from "../../../../Enums/Tranlate";
 
@@ -10,7 +10,7 @@ const CardItem = ({item, setItem, index, setAddModal, setShouldUpdate}) =>{
     const Auth = useSelector(state=> state.auth?.auth)
     const lang = useSelector(state=> state.auth?.lang)
     const isExist = (data)=> Auth?.admin?.admin_roles?.includes(data)
-    const boardOfDirectorsService = new BoardOfDirectorsService()
+    const brandsService = new BrandsService()
 
     return(
         <tr key={index} className='text-center'>
@@ -19,15 +19,14 @@ const CardItem = ({item, setItem, index, setAddModal, setShouldUpdate}) =>{
             </td>
             <td>
                         <img
-                          src={item?.image}
+                          src={item?.img}
                           className="rounded-lg"
                           width="40"
                           height="40"
                           alt={item.id}
                         />
                     </td>
-            <td>{item.name}</td>
-            <td>{item.job_title}</td>
+            <td>{item.title}</td>
             <td>
                 {isExist('website') && <Dropdown>
                     <Dropdown.Toggle
@@ -46,9 +45,9 @@ const CardItem = ({item, setItem, index, setAddModal, setShouldUpdate}) =>{
             </td>
             {deleteModal && <DeleteModal
                       open={deleteModal}
-                      titleMsg={item.name}
+                      titleMsg={lang==='en' ? item.name_en : item.name_ar}
                       deletedItem={item}
-                      modelService={boardOfDirectorsService}
+                      modelService={brandsService}
                       onCloseModal={setDeleteModal}
                       setShouldUpdate={setShouldUpdate}
                     />}

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Dropdown } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import BrandsService from "../../../../../services/BrandsService";
+import ActivitiesAndEventsService from "../../../../../services/ActivitiesAndEventsService";
 import DeleteModal from "../../../../common/DeleteModal";
 import { Translate } from "../../../../Enums/Tranlate";
 
@@ -10,7 +10,7 @@ const CardItem = ({item, setItem, index, setAddModal, setShouldUpdate}) =>{
     const Auth = useSelector(state=> state.auth?.auth)
     const lang = useSelector(state=> state.auth?.lang)
     const isExist = (data)=> Auth?.admin?.admin_roles?.includes(data)
-    const brandsService = new BrandsService()
+    const activitiesAndEventsService = new ActivitiesAndEventsService()
 
     return(
         <tr key={index} className='text-center'>
@@ -19,7 +19,7 @@ const CardItem = ({item, setItem, index, setAddModal, setShouldUpdate}) =>{
             </td>
             <td>
                         <img
-                          src={item?.logo}
+                          src={item?.image}
                           className="rounded-lg"
                           width="40"
                           height="40"
@@ -46,9 +46,9 @@ const CardItem = ({item, setItem, index, setAddModal, setShouldUpdate}) =>{
             </td>
             {deleteModal && <DeleteModal
                       open={deleteModal}
-                      titleMsg={lang==='en' ? item.name_en : item.name_ar}
+                      titleMsg={item?.title}
                       deletedItem={item}
-                      modelService={brandsService}
+                      modelService={activitiesAndEventsService}
                       onCloseModal={setDeleteModal}
                       setShouldUpdate={setShouldUpdate}
                     />}

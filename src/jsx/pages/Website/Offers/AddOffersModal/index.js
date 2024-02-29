@@ -4,21 +4,20 @@ import {AvField, AvForm} from "availity-reactstrap-validation";
 import { toast } from "react-toastify";
 import uploadImg from '../../../../../images/upload-img.png';
 import BaseService from "../../../../../services/BaseService";
+import BrandsService from "../../../../../services/BrandsService";
 import Loader from "../../../../common/Loader";
 import { useSelector } from "react-redux";
 import { Translate } from "../../../../Enums/Tranlate";
-import ActivitiesAndEventsService from "../../../../../services/ActivitiesAndEventsService";
 
-const AddActivitiesModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
+const AddOffersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
     const [files, setFiles] = useState([])
     const [formData, setFormData] = useState({
         title: '',
-        description: '',
-        img: ''
+        pdf: ''
     })
     const [isAdd, setIsAdd] = useState(false)
     const [loading, setLoading] = useState(false)
-    const activitiesAndEventsService = new ActivitiesAndEventsService()
+    const brandsService = new BrandsService()
     const lang = useSelector(state=> state.auth.lang)
 
     useEffect(() => {
@@ -28,58 +27,61 @@ const AddActivitiesModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
             setIsAdd(false)
             setFormData({
                 id: item?.id,
-                title: item?.title,
-                description: item?.description,
+                ar: item?.name_ar,
+                en: item?.name_en,
                 img: item?.image,
             })
         }
     },[item])
 
     const fileHandler = (e) => {
+        // setFiles([e.target.files[0]])
+		// setTimeout(function(){
+		// 	var src = document.getElementById(`saveImageFile`)?.getAttribute("src");
+		// 	setFormData({...formData, img: {id: '', path: src}})
+		// }, 200);
+
+        setLoading(true)
         let files = e.target.files
         const filesData = Object.values(files)
  
         if (filesData.length) {
-            setLoading(true)
             new BaseService().postUpload(filesData[0]).then(res=>{
-                if(res.data.status){
-                    setFormData({...formData, img: res.data.url})
+                if(res?.data?.status){
+                    setFormData({...formData, pdf: res.data.url})
                     setFiles(filesData[0])
                 }
                 setLoading(false)
-            }).catch(e=> {
-                // console.error(e)
             })
         }
     }
 
     const submit = () =>{
-        if(!formData?.img){
+        if(!formData?.pdf){
+            toast.error('Upload Pdf First')
             return
         }
         let data ={
-            title: formData?.title,
-            description: formData?.description,
+            name_en: formData?.en,
+            name_ar: formData?.ar,
             image: formData?.img
         }
-        setLoading(true)
+        toast.success('Brand Added Successfully')
         if(isAdd){
-            activitiesAndEventsService.create(data)?.then(res=>{
+            brandsService.create(data)?.then(res=>{
                 if(res && res?.status === 201){
-                    toast.success('Activity Added Successfully')
+                    toast.success('Brand Added Successfully')
                     setShouldUpdate(prev=> !prev)
                     setAddModal()
                 }
-                setLoading(false)
             })
         } else {
-            activitiesAndEventsService.update(formData?.id, data)?.then(res=>{
+            brandsService.update(formData?.id, data)?.then(res=>{
                 if(res && res?.status === 200){
-                    toast.success('Activity Updated Successfully')
+                    toast.success('Brand Updated Successfully')
                     setShouldUpdate(prev=> !prev)
                     setAddModal()
                 }
-                setLoading(false)
             })
         }
     }
@@ -106,38 +108,38 @@ const AddActivitiesModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
             </Modal.Header>
             <Modal.Body>
                     <Row>
-                    <Col md={12}>
-                        <div className='form-group w-100'>
-                            <label className="m-0">{Translate[lang]?.image}</label>
-                            <div className="image-placeholder">	
-                                        <div className="avatar-edit">
-                                            <input type="file" onChange={(e) => fileHandler(e)} id={`imageUpload`} /> 					
-                                            <label htmlFor={`imageUpload`}  name=''></label>
-                                        </div>
-                                        <div className="avatar-preview2 m-auto">
-                                            <div id={`imagePreview`}>
-                                            {!!formData?.img && 
-                                                <img alt='icon'
-                                                    id={`saveImageFile`} 
-                                                    className='w-100 h-100' 
-                                                    style={{borderRadius: '30px'}} 
-                                                    src={formData?.img|| URL.createObjectURL(files)}
-                                                />}
-                                            {/* {files[0]?.name && <img id={`saveImageFile`} className='w-100 h-100' style={{borderRadius: '30px'}} src={URL.createObjectURL(files[0])} alt='icon' />} */}
-                                            {(!formData?.img && !loading) && 
-                                                <img 
-                                                    id={`saveImageFile`} 
-                                                    src={uploadImg} alt='icon'
-                                                    style={{
-                                                        width: '80px',
-                                                        height: '80px',
-                                                    }}
-                                                />}
-                                                {(!formData?.img && loading) && <Loader />}
+                        <Col md={12}>
+                            <div className='form-group w-100'>
+                                <label className="m-0">{Translate[lang]?.offer}</label>
+                                <div className="image-placeholder">	
+                                            <div className="avatar-edit">
+                                                <input type="file" accept=".pdf" onChange={(e) => fileHandler(e)} id={`imageUpload`} /> 					
+                                                <label htmlFor={`imageUpload`}  name=''></label>
+                                            </div>
+                                            <div className="avatar-preview2 m-auto">
+                                                <div id={`imagePreview`}>
+                                                {!!formData?.pdf && 
+                                                    <i //alt='icon'
+                                                        id={`saveImageFile`} 
+                                                        className='la la-check w-100 h-100' 
+                                                        style={{borderRadius: '30px'}} 
+                                                        // src={formData?.pdf|| URL.createObjectURL(files)}
+                                                    />}
+                                                {/* {files[0]?.name && <img id={`saveImageFile`} className='w-100 h-100' style={{borderRadius: '30px'}} src={URL.createObjectURL(files[0])} alt='icon' />} */}
+                                                {(!formData?.pdf && !loading) && 
+                                                    <img 
+                                                        id={`saveImageFile`} 
+                                                        src={uploadImg} alt='icon'
+                                                        style={{
+                                                            width: '80px',
+                                                            height: '80px',
+                                                        }}
+                                                    />}
+                                                    {(!formData?.pdf && loading) && <Loader />}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                         </Col>
                         <Col md={12}>
                             <AvField
@@ -156,23 +158,6 @@ const AddActivitiesModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
                                 onChange={(e) => setFormData({...formData, title: e.target.value})}
                             />
                         </Col>
-
-                        <Col md={12}>
-                            <AvField
-                                label={Translate[lang]?.description}
-                                type='text'
-                                placeholder={Translate[lang]?.description}
-                                value={formData.description}
-                                name='description'
-                                validate={{
-                                    required: {
-                                        value:true,
-                                        errorMessage: Translate[lang].field_required
-                                    }
-                                }}
-                                onChange={(e) => setFormData({...formData, description: e.target.value})}
-                            />
-                        </Col>
                     </Row>
             </Modal.Body>
             <Modal.Footer>
@@ -189,4 +174,4 @@ const AddActivitiesModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
         </Modal>)
 }
 
-export default AddActivitiesModal;
+export default AddOffersModal;

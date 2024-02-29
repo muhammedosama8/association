@@ -65,6 +65,12 @@ export const MenuList = [
             rule: 'website',
         },
         {
+            title:'Offers',
+            text:'offers',
+            to: 'offers',
+            rule: 'website',
+        },
+        {
             title:'Members',
             text:'members',
             to: 'members',

@@ -114,6 +114,7 @@ export const English = {
   best_seller: "Best Seller",
   new_in: "New In",
   offer: "Offer",
+  offers: "Offers",
   images: "Images",
   create: "Create",
   types_by_english: "Types by English",

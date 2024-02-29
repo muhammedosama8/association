@@ -9,6 +9,7 @@ import Loader from "../../../../common/Loader";
 import { useSelector } from "react-redux";
 import { Translate } from "../../../../Enums/Tranlate";
 import '../style.scss'
+import BranchesAndMarketsService from "../../../../../services/BranchesAndMarketsService";
 
 const AddBranchesModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
     const [files, setFiles] = useState([])
@@ -21,7 +22,7 @@ const AddBranchesModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
     })
     const [isAdd, setIsAdd] = useState(false)
     const [loading, setLoading] = useState(false)
-    const brandsService = new BrandsService()
+    const branchesAndMarketsService = new BranchesAndMarketsService()
     const lang = useSelector(state=> state.auth.lang)
 
     useEffect(() => {
@@ -33,25 +34,19 @@ const AddBranchesModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
                 id: item?.id,
                 phone: item?.phone,
                 title: item?.title,
-                location: item?.location,
-                img: item?.img,
-                works_hours: item?.hours,
+                location: item?.address,
+                img: item?.image,
+                works_hours: item?.work_time,
             })
         }
     },[item])
 
     const fileHandler = (e) => {
-        // setFiles([e.target.files[0]])
-		// setTimeout(function(){
-		// 	var src = document.getElementById(`saveImageFile`)?.getAttribute("src");
-		// 	setFormData({...formData, img: {id: '', path: src}})
-		// }, 200);
-
-        setLoading(true)
         let files = e.target.files
         const filesData = Object.values(files)
  
         if (filesData.length) {
+            setLoading(true)
             new BaseService().postUpload(filesData[0]).then(res=>{
                 if(res.data.status){
                     setFormData({...formData, img: res.data.url})
@@ -64,29 +59,35 @@ const AddBranchesModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
 
     const submit = () =>{
         if(!formData?.img){
+            toast.error('Upload Image First')
             return
         }
         let data ={
-            name_en: formData?.en,
-            name_ar: formData?.ar,
-            image: formData?.img
+            image: formData?.img,
+            work_time: formData?.works_hours,
+            title: formData?.title,
+            address: formData?.location,
+            phone: formData?.phone,
         }
+        setLoading(true)
         if(isAdd){
-            // brandsService.create(data)?.then(res=>{
-            //     if(res && res?.status === 201){
-            //         toast.success('Brand Added Successfully')
-            //         setShouldUpdate(prev=> !prev)
-            //         setAddModal()
-            //     }
-            // })
+            branchesAndMarketsService.create(data)?.then(res=>{
+                if(res && res?.status === 201){
+                    toast.success('Branche Added Successfully')
+                    setShouldUpdate(prev=> !prev)
+                    setAddModal()
+                }
+                setLoading(false)
+            })
         } else {
-            // brandsService.update(formData?.id, data)?.then(res=>{
-            //     if(res && res?.status === 200){
-            //         toast.success('Brand Updated Successfully')
-            //         setShouldUpdate(prev=> !prev)
-            //         setAddModal()
-            //     }
-            // })
+            branchesAndMarketsService.update(formData?.id, data)?.then(res=>{
+                if(res && res?.status === 200){
+                    toast.success('Branche Updated Successfully')
+                    setShouldUpdate(prev=> !prev)
+                    setAddModal()
+                }
+                setLoading(false)
+            })
         }
     }
 

@@ -13,23 +13,29 @@ import Loader from "../../../common/Loader";
 import NoData from "../../../common/NoData";
 import Pagination from "../../../common/Pagination/Pagination";
 import { Translate } from "../../../Enums/Tranlate";
-import AddActivitiesModal from "./AddActivitiesModal";
+import AddOffersModal from "./AddOffersModal";
 import CardItem from "./CardItem";
-import activityLogo from "../../../../images/activityLogo.svg"
+import header from "../../../../images/header.jpeg"
 import './style.scss'
-import ActivitiesAndEventsService from "../../../../services/ActivitiesAndEventsService";
 
-const Activities = () => {
-    const [data, setData] = useState([])
+const Offers = () => {
+    const [data, setData] = useState([
+      {id: 1, img: header, title: 'تهنئة بتجديد الثقه لمعالي وزير الشؤن الاجتماعيه',},
+      {id: 1, img: header, title: 'تهنئة بتجديد الثقه لمعالي وزير الشؤن الاجتماعيه',},
+      {id: 1, img: header, title: 'تهنئة بتجديد الثقه لمعالي وزير الشؤن الاجتماعيه',},
+      {id: 1, img: header, title: 'تهنئة بتجديد الثقه لمعالي وزير الشؤن الاجتماعيه',},
+      {id: 1, img: header, title: 'تهنئة بتجديد الثقه لمعالي وزير الشؤن الاجتماعيه',},
+            
+    ])
     const [addModal, setAddModal] = useState(false)
     const [item, setItem] = useState({})
-    const [hasData, setHasData] = useState(null)
+    const [hasData, setHasData] = useState(1)//null
     const [search, setSearch] = useState(null)
     const [loading, setLoading] = useState(false)
     const [shouldUpdate, setShouldUpdate] = useState(false)
     const Auth = useSelector(state=> state.auth?.auth)
     const lang = useSelector(state=> state.auth?.lang)
-    const activitiesAndEventsService = new ActivitiesAndEventsService()
+    const brandsService = new BrandsService()
     const isExist = (data)=> Auth?.admin?.admin_roles?.includes(data)
 
   return (
@@ -55,7 +61,7 @@ const Activities = () => {
               setItem({})
               setAddModal(true) }}>
               <i className="la la-plus mx-1"></i>
-              {Translate[lang]?.add} {Translate[lang]?.activity}
+              {Translate[lang]?.add} {Translate[lang]?.offer}
           </Button>}
         </Card.Body >
       </Card>
@@ -79,9 +85,6 @@ const Activities = () => {
                     <th>
                       <strong>{Translate[lang]?.title}</strong>
                     </th>
-                    <th>
-                      <strong>{Translate[lang]?.description}</strong>
-                    </th>
                     <th></th>
                   </tr>
                 </thead>
@@ -100,21 +103,21 @@ const Activities = () => {
                 </tbody>
               </Table>}
               {hasData === 0 && <NoData />}
-              <Pagination
-                  setData={setData}
-                  service={activitiesAndEventsService}
+              {/* <Pagination
+                  setData={setBrands}
+                  service={brandsService}
                   shouldUpdate={shouldUpdate}
                   setHasData={setHasData}
                   setLoading={setLoading}
                   search={search}
-              />
+              /> */}
             </Card.Body>
           </Card>
         </Col>
       </Row>
 
       {addModal && 
-        <AddActivitiesModal
+        <AddOffersModal
           item={item} 
           addModal={addModal} 
           setShouldUpdate={setShouldUpdate}
@@ -124,4 +127,4 @@ const Activities = () => {
   );
 };
 
-export default Activities;
+export default Offers;

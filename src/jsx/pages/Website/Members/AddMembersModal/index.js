@@ -4,11 +4,11 @@ import {AvField, AvForm} from "availity-reactstrap-validation";
 import { toast } from "react-toastify";
 import uploadImg from '../../../../../images/upload-img.png';
 import BaseService from "../../../../../services/BaseService";
-import BrandsService from "../../../../../services/BrandsService";
 import Loader from "../../../../common/Loader";
 import { useSelector } from "react-redux";
 import { Translate } from "../../../../Enums/Tranlate";
 import "../style.scss"
+import BoardOfDirectorsService from "../../../../../services/BoardOfDirectorsService";
 
 const AddMembersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
     const [files, setFiles] = useState([])
@@ -19,7 +19,7 @@ const AddMembersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
     })
     const [isAdd, setIsAdd] = useState(false)
     const [loading, setLoading] = useState(false)
-    const brandsService = new BrandsService()
+    const boardOfDirectorsService = new BoardOfDirectorsService()
     const lang = useSelector(state=> state.auth.lang)
 
     useEffect(() => {
@@ -30,24 +30,18 @@ const AddMembersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
             setFormData({
                 id: item?.id,
                 name: item?.name,
-                job: item?.jop,
-                img: item?.img
+                job: item?.job_title,
+                img: item?.image
             })
         }
     },[item])
 
     const fileHandler = (e) => {
-        // setFiles([e.target.files[0]])
-		// setTimeout(function(){
-		// 	var src = document.getElementById(`saveImageFile`)?.getAttribute("src");
-		// 	setFormData({...formData, img: {id: '', path: src}})
-		// }, 200);
-
-        setLoading(true)
         let files = e.target.files
         const filesData = Object.values(files)
  
         if (filesData.length) {
+            setLoading(true)
             new BaseService().postUpload(filesData[0]).then(res=>{
                 if(res.data.status){
                     setFormData({...formData, img: res.data.url})
@@ -63,25 +57,28 @@ const AddMembersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
             return
         }
         let data ={
-            name_en: formData?.en,
-            name_ar: formData?.ar,
+            name: formData?.name,
+            job_title: formData?.job,
             image: formData?.img
         }
+        setLoading(true)
         if(isAdd){
-            brandsService.create(data)?.then(res=>{
+            boardOfDirectorsService.create(data)?.then(res=>{
                 if(res && res?.status === 201){
-                    toast.success('Brand Added Successfully')
+                    toast.success('Board Added Successfully')
                     setShouldUpdate(prev=> !prev)
                     setAddModal()
                 }
+                setLoading(false)
             })
         } else {
-            brandsService.update(formData?.id, data)?.then(res=>{
+            boardOfDirectorsService.update(formData?.id, data)?.then(res=>{
                 if(res && res?.status === 200){
-                    toast.success('Brand Updated Successfully')
+                    toast.success('Board Updated Successfully')
                     setShouldUpdate(prev=> !prev)
                     setAddModal()
                 }
+                setLoading(false)
             })
         }
     }

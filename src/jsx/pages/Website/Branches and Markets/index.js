@@ -8,7 +8,6 @@ import {
   Button,
 } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import BrandsService from "../../../../services/BrandsService";
 import Loader from "../../../common/Loader";
 import NoData from "../../../common/NoData";
 import Pagination from "../../../common/Pagination/Pagination";
@@ -17,16 +16,17 @@ import AddActivitiesModal from "./AddBranchesModal";
 import CardItem from "./CardItem";
 import header from "../../../../images/header.jpeg"
 import './style.scss'
+import BranchesAndMarketsService from "../../../../services/BranchesAndMarketsService";
 
 const BranchesAndMarkets = () => {
     const [data, setData] = useState([
-      {id: 1,img: header, title: 'اسم السوق او الفرع', location: 'شارع الهوارى' , hours: 5, phone: '12333222'},
-      {id: 1,img: header, title: 'اسم السوق او الفرع', location: 'شارع الهوارى' , hours: 4, phone: '12333222'},
-      {id: 1,img: header, title: 'اسم السوق او الفرع', location: 'شارع الهوارى' , hours: 2, phone: '12333222'},
-      {id: 1,img: header, title: 'اسم السوق او الفرع', location: 'شارع الهوارى' , hours: 3, phone: '12333222'},
-      {id: 1,img: header, title: 'اسم السوق او الفرع', location: 'شارع الهوارى' , hours: 6, phone: '12333222'},
-      {id: 1,img: header, title: 'اسم السوق او الفرع', location: 'شارع الهوارى' , hours: 7, phone: '12333222'},
-      {id: 1,img: header, title: 'اسم السوق او الفرع', location: 'شارع الهوارى' , hours: 8, phone: '12333222'}, 
+      // {id: 1,img: header, title: 'اسم السوق او الفرع', location: 'شارع الهوارى' , hours: 5, phone: '12333222'},
+      // {id: 1,img: header, title: 'اسم السوق او الفرع', location: 'شارع الهوارى' , hours: 4, phone: '12333222'},
+      // {id: 1,img: header, title: 'اسم السوق او الفرع', location: 'شارع الهوارى' , hours: 2, phone: '12333222'},
+      // {id: 1,img: header, title: 'اسم السوق او الفرع', location: 'شارع الهوارى' , hours: 3, phone: '12333222'},
+      // {id: 1,img: header, title: 'اسم السوق او الفرع', location: 'شارع الهوارى' , hours: 6, phone: '12333222'},
+      // {id: 1,img: header, title: 'اسم السوق او الفرع', location: 'شارع الهوارى' , hours: 7, phone: '12333222'},
+      // {id: 1,img: header, title: 'اسم السوق او الفرع', location: 'شارع الهوارى' , hours: 8, phone: '12333222'}, 
     ])
     const [addModal, setAddModal] = useState(false)
     const [item, setItem] = useState({})
@@ -36,7 +36,7 @@ const BranchesAndMarkets = () => {
     const [shouldUpdate, setShouldUpdate] = useState(false)
     const Auth = useSelector(state=> state.auth?.auth)
     const lang = useSelector(state=> state.auth?.lang)
-    const brandsService = new BrandsService()
+    const branchesAndMarketsService = new BranchesAndMarketsService()
     const isExist = (data)=> Auth?.admin?.admin_roles?.includes(data)
 
   return (
@@ -113,14 +113,14 @@ const BranchesAndMarkets = () => {
                 </tbody>
               </Table>}
               {hasData === 0 && <NoData />}
-              {/* <Pagination
+              <Pagination
                   setData={setData}
-                  service={brandsService}
+                  service={branchesAndMarketsService}
                   shouldUpdate={shouldUpdate}
                   setHasData={setHasData}
                   setLoading={setLoading}
                   search={search}
-              /> */}
+              />
             </Card.Body>
           </Card>
         </Col>

@@ -46,6 +46,7 @@ import Members from "./pages/Website/Members";
 import BranchesAndMarkets from "./pages/Website/Branches and Markets"
 import Activities from "./pages/Website/Activities"
 import News from "./pages/Website/News"
+import Offers from "./pages/Website/Offers";
 
 const Markup = () => {
   const allroutes = [
@@ -70,6 +71,7 @@ const Markup = () => {
     { url: "activities", component: <Activities /> },
     { url: "members", component: <Members /> },
     { url: "news", component: <News /> },
+    { url: "offers", component: <Offers /> },
 
     // Promo Codes
     { url: "promo-codes", component: <PromCodes /> },

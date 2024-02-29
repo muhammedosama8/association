@@ -8,7 +8,6 @@ import {
   Button,
 } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import BrandsService from "../../../../services/BrandsService";
 import { Translate } from "../../../Enums/Tranlate";
 import Loader from "../../../common/Loader";
 import NoData from "../../../common/NoData";
@@ -17,25 +16,19 @@ import AddMembersModal from "./AddMembersModal";
 import CardItem from "./CardItem";
 import header from "../../../../images/user.jpeg"
 import './style.scss'
+import BoardOfDirectorsService from "../../../../services/BoardOfDirectorsService";
 
 const Members = () => {
-    const [data, setData] = useState([
-      {id: 1, img: header, name: 'سلطان الأحمدي', jop: 'رئيس مجل الادارة'},
-      {id: 1, img: header, name: 'سلطان الأحمدي', jop: 'رئيس مجل الادارة'},
-      {id: 1, img: header, name: 'سلطان الأحمدي', jop: 'رئيس مجل الادارة'},
-      {id: 1, img: header, name: 'سلطان الأحمدي', jop: 'رئيس مجل الادارة'},
-      {id: 1, img: header, name: 'سلطان الأحمدي', jop: 'رئيس مجل الادارة'},
-      {id: 1, img: header, name: 'سلطان الأحمدي', jop: 'رئيس مجل الادارة'},
-  ])
+    const [data, setData] = useState([])
     const [addModal, setAddModal] = useState(false)
     const [item, setItem] = useState({})
-    const [hasData, setHasData] = useState(1) //null
+    const [hasData, setHasData] = useState(null)
     const [search, setSearch] = useState(null)
     const [loading, setLoading] = useState(false)
     const [shouldUpdate, setShouldUpdate] = useState(false)
     const Auth = useSelector(state=> state.auth?.auth)
     const lang = useSelector(state=> state.auth?.lang)
-    const brandsService = new BrandsService()
+    const boardOfDirectorsService = new BoardOfDirectorsService()
     const isExist = (data)=> Auth?.admin?.admin_roles?.includes(data)
 
   return (
@@ -106,14 +99,14 @@ const Members = () => {
                 </tbody>
               </Table>}
               {hasData === 0 && <NoData />}
-              {/* <Pagination
-                  setData={setBrands}
-                  service={brandsService}
+              <Pagination
+                  setData={setData}
+                  service={boardOfDirectorsService}
                   shouldUpdate={shouldUpdate}
                   setHasData={setHasData}
                   setLoading={setLoading}
                   search={search}
-              /> */}
+              />
             </Card.Body>
           </Card>
         </Col>
