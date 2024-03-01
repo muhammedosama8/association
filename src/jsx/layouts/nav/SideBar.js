@@ -91,9 +91,10 @@ const SideBar = (props) => {
                                     <i 
                                       className='la angle la-angle-down'
                                       style={{
-                                        left: '0',
                                         position: 'absolute',
-                                        top: '18px'
+                                        top: '18px',
+                                        left: lang === 'en' ? 'auto' : '0',
+                                        right: lang === 'en' ? '0' : 'auto'
                                       }}
                                     ></i>
                                 </Link>
