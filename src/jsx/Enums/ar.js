@@ -116,6 +116,7 @@ export const Arabic = {
   offers: "العروض",
   images: "الصور",
   create: "إنشاء",
+  you_tube: "يوتيوب",
   types_by_english: "أنواع باللغة الإنجليزية",
   types_by_arabic: "أنواع باللغة العربية",
   add_new_value: "إضافة قيمة جديدة",

@@ -235,6 +235,7 @@ export const English = {
   static_pages: "Static Pages",
   field_required: "This Field is required",
   ordered_successfully: "Ordered Successfully",
+  you_tube: "Youtube",
   successfully: "Successfully",
   ordered_failed: "Ordered Failed",
   failed_msg: "The payment process is not complete",

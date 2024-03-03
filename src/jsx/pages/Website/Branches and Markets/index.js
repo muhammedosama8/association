@@ -14,23 +14,14 @@ import Pagination from "../../../common/Pagination/Pagination";
 import { Translate } from "../../../Enums/Tranlate";
 import AddActivitiesModal from "./AddBranchesModal";
 import CardItem from "./CardItem";
-import header from "../../../../images/header.jpeg"
 import './style.scss'
 import BranchesAndMarketsService from "../../../../services/BranchesAndMarketsService";
 
 const BranchesAndMarkets = () => {
-    const [data, setData] = useState([
-      // {id: 1,img: header, title: 'اسم السوق او الفرع', location: 'شارع الهوارى' , hours: 5, phone: '12333222'},
-      // {id: 1,img: header, title: 'اسم السوق او الفرع', location: 'شارع الهوارى' , hours: 4, phone: '12333222'},
-      // {id: 1,img: header, title: 'اسم السوق او الفرع', location: 'شارع الهوارى' , hours: 2, phone: '12333222'},
-      // {id: 1,img: header, title: 'اسم السوق او الفرع', location: 'شارع الهوارى' , hours: 3, phone: '12333222'},
-      // {id: 1,img: header, title: 'اسم السوق او الفرع', location: 'شارع الهوارى' , hours: 6, phone: '12333222'},
-      // {id: 1,img: header, title: 'اسم السوق او الفرع', location: 'شارع الهوارى' , hours: 7, phone: '12333222'},
-      // {id: 1,img: header, title: 'اسم السوق او الفرع', location: 'شارع الهوارى' , hours: 8, phone: '12333222'}, 
-    ])
+    const [data, setData] = useState([])
     const [addModal, setAddModal] = useState(false)
     const [item, setItem] = useState({})
-    const [hasData, setHasData] = useState(1) //null
+    const [hasData, setHasData] = useState(null)
     const [search, setSearch] = useState(null)
     const [loading, setLoading] = useState(false)
     const [shouldUpdate, setShouldUpdate] = useState(false)

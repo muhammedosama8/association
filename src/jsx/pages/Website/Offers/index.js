@@ -8,7 +8,6 @@ import {
   Button,
 } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import BrandsService from "../../../../services/BrandsService";
 import Loader from "../../../common/Loader";
 import NoData from "../../../common/NoData";
 import Pagination from "../../../common/Pagination/Pagination";
@@ -17,25 +16,19 @@ import AddOffersModal from "./AddOffersModal";
 import CardItem from "./CardItem";
 import header from "../../../../images/header.jpeg"
 import './style.scss'
+import OfferService from "../../../../services/OfferService";
 
 const Offers = () => {
-    const [data, setData] = useState([
-      {id: 1, img: header, title: 'تهنئة بتجديد الثقه لمعالي وزير الشؤن الاجتماعيه',},
-      {id: 1, img: header, title: 'تهنئة بتجديد الثقه لمعالي وزير الشؤن الاجتماعيه',},
-      {id: 1, img: header, title: 'تهنئة بتجديد الثقه لمعالي وزير الشؤن الاجتماعيه',},
-      {id: 1, img: header, title: 'تهنئة بتجديد الثقه لمعالي وزير الشؤن الاجتماعيه',},
-      {id: 1, img: header, title: 'تهنئة بتجديد الثقه لمعالي وزير الشؤن الاجتماعيه',},
-            
-    ])
+    const [data, setData] = useState([])
     const [addModal, setAddModal] = useState(false)
     const [item, setItem] = useState({})
-    const [hasData, setHasData] = useState(1)//null
+    const [hasData, setHasData] = useState(null)
     const [search, setSearch] = useState(null)
     const [loading, setLoading] = useState(false)
     const [shouldUpdate, setShouldUpdate] = useState(false)
     const Auth = useSelector(state=> state.auth?.auth)
     const lang = useSelector(state=> state.auth?.lang)
-    const brandsService = new BrandsService()
+    const offerService = new OfferService()
     const isExist = (data)=> Auth?.admin?.admin_roles?.includes(data)
 
   return (
@@ -83,6 +76,9 @@ const Offers = () => {
                       <strong>{Translate[lang]?.image}</strong>
                     </th>
                     <th>
+                      <strong>{Translate[lang]?.image} {Translate[lang]?.offer}</strong>
+                    </th>
+                    <th>
                       <strong>{Translate[lang]?.title}</strong>
                     </th>
                     <th></th>
@@ -103,14 +99,14 @@ const Offers = () => {
                 </tbody>
               </Table>}
               {hasData === 0 && <NoData />}
-              {/* <Pagination
-                  setData={setBrands}
-                  service={brandsService}
+              <Pagination
+                  setData={setData}
+                  service={offerService}
                   shouldUpdate={shouldUpdate}
                   setHasData={setHasData}
                   setLoading={setLoading}
                   search={search}
-              /> */}
+              />
             </Card.Body>
           </Card>
         </Col>

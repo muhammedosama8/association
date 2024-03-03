@@ -4,10 +4,10 @@ import {AvField, AvForm} from "availity-reactstrap-validation";
 import { toast } from "react-toastify";
 import uploadImg from '../../../../../images/upload-img.png';
 import BaseService from "../../../../../services/BaseService";
-import BrandsService from "../../../../../services/BrandsService";
 import Loader from "../../../../common/Loader";
 import { useSelector } from "react-redux";
 import { Translate } from "../../../../Enums/Tranlate";
+import OfferService from "../../../../../services/OfferService";
 
 const AddOffersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
     const [files, setFiles] = useState([])
@@ -17,7 +17,8 @@ const AddOffersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
     })
     const [isAdd, setIsAdd] = useState(false)
     const [loading, setLoading] = useState(false)
-    const brandsService = new BrandsService()
+    const [loadingImg, setLoadingImg] = useState(false)
+    const offerService = new OfferService()
     const lang = useSelector(state=> state.auth.lang)
 
     useEffect(() => {
@@ -27,48 +28,26 @@ const AddOffersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
             setIsAdd(false)
             setFormData({
                 id: item?.id,
-                ar: item?.name_ar,
-                en: item?.name_en,
+                title: item?.title,
                 img: item?.image,
             })
         }
     },[item])
 
-    const fileHandler = (e) => {
-        // setFiles([e.target.files[0]])
-		// setTimeout(function(){
-		// 	var src = document.getElementById(`saveImageFile`)?.getAttribute("src");
-		// 	setFormData({...formData, img: {id: '', path: src}})
-		// }, 200);
-
-        setLoading(true)
-        let files = e.target.files
-        const filesData = Object.values(files)
- 
-        if (filesData.length) {
-            new BaseService().postUpload(filesData[0]).then(res=>{
-                if(res?.data?.status){
-                    setFormData({...formData, pdf: res.data.url})
-                    setFiles(filesData[0])
-                }
-                setLoading(false)
-            })
-        }
-    }
-
     const submit = () =>{
-        if(!formData?.pdf){
-            toast.error('Upload Pdf First')
+        if(!formData?.pdf || !formData?.img){
+            toast.error(`Upload ${!formData?.pdf ? 'Offer' : ''} ${!formData?.pdf && !formData?.img ? "&" : ''} ${!formData?.img ? 'Image' : ''} First`)
             return
         }
+
         let data ={
-            name_en: formData?.en,
-            name_ar: formData?.ar,
-            image: formData?.img
+            title: formData?.title,
+            image: formData?.pdf,
+            cover_image: formData?.img
         }
-        toast.success('Brand Added Successfully')
+
         if(isAdd){
-            brandsService.create(data)?.then(res=>{
+            offerService.create(data)?.then(res=>{
                 if(res && res?.status === 201){
                     toast.success('Brand Added Successfully')
                     setShouldUpdate(prev=> !prev)
@@ -76,7 +55,7 @@ const AddOffersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
                 }
             })
         } else {
-            brandsService.update(formData?.id, data)?.then(res=>{
+            offerService.update(formData?.id, data)?.then(res=>{
                 if(res && res?.status === 200){
                     toast.success('Brand Updated Successfully')
                     setShouldUpdate(prev=> !prev)
@@ -108,12 +87,71 @@ const AddOffersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
             </Modal.Header>
             <Modal.Body>
                     <Row>
-                        <Col md={12}>
+                    <Col md={6}>
                             <div className='form-group w-100'>
-                                <label className="m-0">{Translate[lang]?.offer}</label>
+                                <label className="mx-4">{Translate[lang]?.image}</label>
                                 <div className="image-placeholder">	
                                             <div className="avatar-edit">
-                                                <input type="file" accept=".pdf" onChange={(e) => fileHandler(e)} id={`imageUpload`} /> 					
+                                                <input type="file" onChange={(e) => {
+                                                    let files = e.target.files
+                                                    const filesData = Object.values(files)
+                                                    if (filesData.length) {
+                                                        setLoadingImg(true)
+                                                        new BaseService().postUpload(filesData[0]).then(res=>{
+                                                            if(res?.data?.status){
+                                                                setFormData({...formData, img: res.data.url})
+                                                                setFiles(filesData[0])
+                                                            }
+                                                            setLoadingImg(false)
+                                                        })
+                                                    }
+                                                }} id={`imageUpload1`} /> 					
+                                                <label htmlFor={`imageUpload1`}  name=''></label>
+                                            </div>
+                                            <div className="avatar-preview2 m-auto">
+                                                <div id={`imagePreview1`}>
+                                                {!!formData?.img && 
+                                                    <img alt='icon'
+                                                        id={`saveImageFile1`} 
+                                                        className='la la-check w-100 h-100' 
+                                                        style={{borderRadius: '30px'}} 
+                                                        src={formData?.img|| URL.createObjectURL(files)}
+                                                    />}
+                                                {/* {files[0]?.name && <img id={`saveImageFile`} className='w-100 h-100' style={{borderRadius: '30px'}} src={URL.createObjectURL(files[0])} alt='icon' />} */}
+                                                {(!formData?.img && !loadingImg) && 
+                                                    <img 
+                                                        id={`saveImageFile1`} 
+                                                        src={uploadImg} alt='icon'
+                                                        style={{
+                                                            width: '80px',
+                                                            height: '80px',
+                                                        }}
+                                                    />}
+                                                    {(!formData?.img && loadingImg) && <Loader />}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                        </Col>
+                        <Col md={6}>
+                            <div className='form-group w-100'>
+                                <label className="mx-4">{Translate[lang]?.offer}</label>
+                                <div className="image-placeholder">	
+                                            <div className="avatar-edit">
+                                                <input type="file" onChange={(e) => {
+                                                    let files = e.target.files
+                                                    const filesData = Object.values(files)
+                                                    if (filesData.length) {
+                                                        setLoading(true)
+                                                        new BaseService().postUpload(filesData[0]).then(res=>{
+                                                            if(res?.data?.status){
+                                                                setFormData({...formData, pdf: res.data.url})
+                                                                setFiles(filesData[0])
+                                                            }
+                                                            setLoading(false)
+                                                        })
+                                                    }
+                                                }} id={`imageUpload`} /> 					
                                                 <label htmlFor={`imageUpload`}  name=''></label>
                                             </div>
                                             <div className="avatar-preview2 m-auto">

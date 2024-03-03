@@ -8,6 +8,7 @@ import BaseService from "../../../../services/BaseService";
 import BannerService from "../../../../services/BannerService";
 import Loader from "../../../common/Loader";
 import { Translate } from "../../../Enums/Tranlate";
+import { AvField, AvForm } from "availity-reactstrap-validation";
 
 const WebsiteBanners = () => {
   const [files, setFiles] = useState([{}, {}, {}, {}, {}]);
@@ -28,32 +29,35 @@ const WebsiteBanners = () => {
     { src: "", title: "", description: "", loading: false },
   ]);
 
-  // useEffect(() => {
-  //   bannerService?.getList()?.then((res) => {
-  //     if (res && res?.status === 200) {
-  //       if (res?.data.meta?.data?.length > 0) {
-  //         setIsAdd(false);
-  //       }
-  //       let data = res?.data.meta?.data?.map((item) => {
-  //         return {
-  //           id: item.id,
-  //           src: item?.image,
-  //           loading: false,
-  //         };
-  //       });
-  //       if (data?.length < 5) {
-  //         let complete = [];
-  //         for (let i = data?.length; i < 5; i++) {
-  //           complete.push({ src: "", loading: false });
-  //         }
-  //         setFormData([...data, ...complete]);
-  //       } else {
-  //         setFormData([...data]);
-  //       }
-  //     }
-  //     setLoading(false);
-  //   });
-  // }, [shouldUpdate]);
+  useEffect(() => {
+    bannerService?.getList()?.then((res) => {
+      if (res && res?.status === 200) {
+        if (res?.data?.data?.length > 0) {
+          setIsAdd(false);
+        }
+        let data = res?.data?.data?.map((item) => {
+          let obj = {
+            id: item.id,
+            src: item?.image,
+            title: item?.title || "",
+            description: item?.description || "",
+            loading: false,
+          }
+          return obj;
+        });
+        if (data?.length < 5) {
+          let complete = [];
+          for (let i = data?.length; i < 5; i++) {
+            complete.push({ src: "", title: "", description: "", loading: false });
+          }
+          setFormData([...data, ...complete]);
+        } else {
+          setFormData([...data]);
+        }
+      }
+      setLoading(false);
+    });
+  }, [shouldUpdate]);
 
   function updateFormData(index) {
     let update = formData?.map((item, ind) => {
@@ -114,15 +118,19 @@ const WebsiteBanners = () => {
       }
     });
   };
-
-  const onSubmit = () => {
+  console.log(formData)
+  const onSubmit = (e) => {
+    e.preventDefault();
     let data = {
       banners: formData
         ?.filter((res) => !!res.src)
         ?.map((item, index) => {
           let res = {
             image: item?.src,
+            title: item?.title,
+            description: item?.description
           };
+
           return res;
         }),
     };
@@ -153,7 +161,7 @@ const WebsiteBanners = () => {
       });
     }
   };
-console.log(formData)
+
   const deleteBannar = (index, id) => {
     if (id) {
       bannerService.remove(id).then((res) => {
@@ -177,7 +185,7 @@ console.log(formData)
     );
   }
   return (
-    <>
+    <AvForm onValidSubmit={onSubmit}>
       {formData?.map((data, index) => {
         return (
           <Card className="p-4" key={index}>
@@ -236,18 +244,19 @@ console.log(formData)
                 </div>
               </Col>
               <Col md={6} className='mb-2'>
-                <div>
-                  <label>{Translate[lang].title}</label>
-                  <input 
+                  <AvField
+                    label={Translate[lang].title}
                     type='text'
                     name={`title${index}`}
                     className='w-100'
                     placeholder={Translate[lang].title}
-                    style={{
-                      border:'1px solid #dedede', 
-                      borderRadius: '5px',
-                      padding: '8px'
+                    validate={{
+                      required: {
+                        value: !!data?.src,
+                        errorMessage: Translate[lang].field_required
+                      },
                     }}
+                    value={data?.title}
                     onChange={(e)=>{
                       let update = formData?.map((res, ind)=>{
                         if(ind === index){
@@ -262,20 +271,20 @@ console.log(formData)
                       setFormData(update)
                     }}
                   />
-                </div>
               </Col>
               <Col md={12}>
-                <div>
-                <label>{Translate[lang].description}</label>
-                  <input 
+                  <AvField
+                    label={Translate[lang].description}
                     type='text'
-                    name={`title${index}`}
+                    name={`description${index}`}
                     className='w-100'
                     placeholder={Translate[lang].description}
-                    style={{
-                      border:'1px solid #dedede', 
-                      borderRadius: '5px',
-                      padding: '8px'
+                    value={data?.description}
+                    validate={{
+                      required: {
+                        value: !!data?.src,
+                        errorMessage: Translate[lang].field_required
+                      },
                     }}
                     onChange={(e)=>{
                       let update = formData?.map((res, ind)=>{
@@ -291,7 +300,6 @@ console.log(formData)
                       setFormData(update)
                     }}
                   />
-                </div>
               </Col>
             </Row>
           </Card>
@@ -303,13 +311,13 @@ console.log(formData)
             variant="primary"
             className="px-5"
             disabled={submitLoading}
-            onClick={() => onSubmit()}
+            type='submit'
           >
             {Translate[lang].submit}
           </Button>
         </div>
       )}
-    </>
+    </AvForm>
   );
 };
 export default WebsiteBanners;

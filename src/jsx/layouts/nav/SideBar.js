@@ -75,7 +75,6 @@ const SideBar = (props) => {
                           <li className={menuClass}  key={index} >{data.title}</li>
                       )
                     }else{
-                      {console.log(data, data.content)}
                       return(				
                         <li className={` ${ state.active === data.title ? 'mm-active' : ''}`}
                           key={index} 

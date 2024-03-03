@@ -17,25 +17,19 @@ import AddNewsModal from "./AddNewsModal";
 import CardItem from "./CardItem";
 import header from "../../../../images/header.jpeg"
 import './style.scss'
+import NewsService from "../../../../services/NewsService";
 
 const News = () => {
-    const [data, setData] = useState([
-      {id: 1, img: header, title: 'تهنئة بتجديد الثقه لمعالي وزير الشؤن الاجتماعيه', description: ' طريقة لكتابة النصوص في النشر والتصميم الجرافيكي تستخدم بشكل شائع لتوضيح الشكل المرئي للمستند أو الخط دون الاعتماد على محتوى ذي'},
-      {id: 1, img: header, title: 'تهنئة بتجديد الثقه لمعالي وزير الشؤن الاجتماعيه', description: ' طريقة لكتابة النصوص في النشر والتصميم الجرافيكي تستخدم بشكل شائع لتوضيح الشكل المرئي للمستند أو الخط دون الاعتماد على محتوى ذي'},
-      {id: 1, img: header, title: 'تهنئة بتجديد الثقه لمعالي وزير الشؤن الاجتماعيه', description: ' طريقة لكتابة النصوص في النشر والتصميم الجرافيكي تستخدم بشكل شائع لتوضيح الشكل المرئي للمستند أو الخط دون الاعتماد على محتوى ذي'},
-      {id: 1, img: header, title: 'تهنئة بتجديد الثقه لمعالي وزير الشؤن الاجتماعيه', description: ' طريقة لكتابة النصوص في النشر والتصميم الجرافيكي تستخدم بشكل شائع لتوضيح الشكل المرئي للمستند أو الخط دون الاعتماد على محتوى ذي'},
-      {id: 1, img: header, title: 'تهنئة بتجديد الثقه لمعالي وزير الشؤن الاجتماعيه', description: ' طريقة لكتابة النصوص في النشر والتصميم الجرافيكي تستخدم بشكل شائع لتوضيح الشكل المرئي للمستند أو الخط دون الاعتماد على محتوى ذي'},
-            
-    ])
+    const [data, setData] = useState([])
     const [addModal, setAddModal] = useState(false)
     const [item, setItem] = useState({})
-    const [hasData, setHasData] = useState(1)//null
+    const [hasData, setHasData] = useState(null)
     const [search, setSearch] = useState(null)
     const [loading, setLoading] = useState(false)
     const [shouldUpdate, setShouldUpdate] = useState(false)
     const Auth = useSelector(state=> state.auth?.auth)
     const lang = useSelector(state=> state.auth?.lang)
-    const brandsService = new BrandsService()
+    const newsService = new NewsService()
     const isExist = (data)=> Auth?.admin?.admin_roles?.includes(data)
 
   return (
@@ -106,14 +100,14 @@ const News = () => {
                 </tbody>
               </Table>}
               {hasData === 0 && <NoData />}
-              {/* <Pagination
-                  setData={setBrands}
-                  service={brandsService}
+              <Pagination
+                  setData={setData}
+                  service={newsService}
                   shouldUpdate={shouldUpdate}
                   setHasData={setHasData}
                   setLoading={setLoading}
                   search={search}
-              /> */}
+              />
             </Card.Body>
           </Card>
         </Col>
