@@ -46,7 +46,7 @@ const Static = () =>{
     }
 
     useEffect(()=>{
-        let params = {type: window.location.pathname.split('/')[2] === 'privacy' ? 'Privacy' : window.location.pathname.split('/')[2]}
+        let params = {type: window.location.pathname.split('/')[1] === 'privacy' ? 'Privacy' : window.location.pathname.split('/')[1]}
         setLoading(true)
         staticPagesServices.getList(params).then(res=>{
             if(res?.status === 200){
@@ -70,7 +70,7 @@ const Static = () =>{
     },[])
     const submit = () =>{
         let data ={
-            type: window.location.pathname.split('/')[2],
+            type: window.location.pathname.split('/')[1] === 'privacy' ? 'Privacy' : window.location.pathname.split('/')[1],
             static_page: formData.map(res=>{
                 let en = draftToHtml(convertToRaw(res.description_en.getCurrentContent()))
                 let ar = draftToHtml(convertToRaw(res.description_ar.getCurrentContent()))

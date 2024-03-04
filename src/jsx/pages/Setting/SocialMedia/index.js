@@ -40,13 +40,6 @@ const SocialMedia = ()=>{
 
     const onSubmit = (e)=> {
         e.preventDefault()
-        // const result = areAllValuesFilled(links);
-        // if(result) return
-        // if(!links.facebook && !links.instagram && !links.snapchat && !links.tiktok
-        //     && !links.twitter && !links.whatsapp){
-        //         toast.error('Enter Value')
-        //         return
-        // }
         let data = {}
         if(!!links.facebook) data['facebook'] = links.facebook
         if(!!links.instagram) data['instagram'] = links.instagram
@@ -59,6 +52,8 @@ const SocialMedia = ()=>{
         if(!!links.play_store) data['play_store'] = links.play_store
         if(!!links.app_store) data['app_store'] = links.app_store
         if(!!links.call_us) data['call_us'] = links.call_us
+        if(!!links.talabat) data['talabat'] = links.talabat
+        if(!!links.you_tube) data['you_tube'] = links.you_tube
 
         setLoading(true)
         socialMediaService?.create(data)?.then(res=>{
@@ -89,24 +84,6 @@ const SocialMedia = ()=>{
                 {SocialMediaLinks?.map((link, index)=>{
                     return <Col md={6} className='mb-3' key={index}>
                         <label className="text-label">
-                            {/* <input
-                                type='checkbox'
-                                className="mr-2"
-                                name='social'
-                                disabled={(!selectedSocial.includes(link.label) && selectedSocial?.length === 5) || !isAdd }
-                                // value={selectedSocial.includes[link.label}
-                                onChange={(e)=> {
-                                    if(e.target.checked){
-                                        if(selectedSocial?.length === 5) {
-                                            return
-                                        }
-                                        setSelectedSocial([...selectedSocial, link.label])
-                                    } else {
-                                        let update= selectedSocial?.filter(res=> res !== link.label)
-                                        setSelectedSocial(update)
-                                    }
-                                }}
-                            /> */}
                             {Translate[lang][link.value]} :
                         </label>
                         <input
@@ -117,7 +94,7 @@ const SocialMedia = ()=>{
                                 background: !isAdd ? 'rgb(238 238 238)' : '#fff'
                             }}
                             className="form-control"
-                            placeholder={`${Translate[lang][link.value]} Link`}
+                            placeholder={`${Translate[lang].link} ${Translate[lang][link.value]}`}
                             value={links[link?.value]}
                             onChange={(e)=> inputHandler(e)}
                         />

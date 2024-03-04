@@ -47,6 +47,7 @@ import BranchesAndMarkets from "./pages/Website/Branches and Markets"
 import Activities from "./pages/Website/Activities"
 import News from "./pages/Website/News"
 import Offers from "./pages/Website/Offers";
+import ContactUs from "./pages/Website/ContactUs";
 
 const Markup = () => {
   const allroutes = [
@@ -72,6 +73,7 @@ const Markup = () => {
     { url: "members", component: <Members /> },
     { url: "news", component: <News /> },
     { url: "offers", component: <Offers /> },
+    { url: "contact-us", component: <ContactUs /> },
 
     // Promo Codes
     { url: "promo-codes", component: <PromCodes /> },
@@ -108,9 +110,9 @@ const Markup = () => {
     { url: "social", component: <SocialMedia /> },
     { url: "currency", component: <Currency /> },
     { url: "pages", component: <StaticPages /> },
-    { url: "pages/about", component: <Static /> },
-    { url: "pages/privacy", component: <Static /> },
-    { url: "pages/faqs", component: <Static /> },
+    { url: "about", component: <Static /> },
+    { url: "privacy", component: <Static /> },
+    { url: "faqs", component: <Static /> },
     { url: "delivery", component: <Delivery /> },
     { url: "payment", component: <Payment /> },
 

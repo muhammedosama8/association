@@ -37,7 +37,7 @@ const Users = () => {
             className="flaticon-381-search-2"
             style={{
               position: "absolute",
-              zIndex: "99",
+              zIndex: "1",
               right: lang === "en" && "16px",
               left: lang === "ar" && "16px",
               top: "50%",
@@ -46,14 +46,6 @@ const Users = () => {
           ></div>
         </div>
       </Card>
-      {/* <div className="d-flex align-items-center mb-3 ">
-          <Button variant={isDeleted ? 'secondary' : 'primary'} className='mr-2' onClick={()=> setIsDeleted(false)}>
-            Active
-          </Button>
-          <Button variant={!isDeleted ? 'secondary' : 'primary'} onClick={()=> setIsDeleted(true)}>
-            Not-Active
-          </Button>
-        </div> */}
       <Card>
         <Card.Body className={`${hasData === 0 && "text-center"} `}>
           {loading && (

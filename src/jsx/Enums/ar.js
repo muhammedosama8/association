@@ -114,6 +114,8 @@ export const Arabic = {
   new_in: "الجديد في",
   offer: "عرض",
   offers: "العروض",
+  contact_us: "تواصل معنا",
+  talabat: "طلبات",
   images: "الصور",
   create: "إنشاء",
   you_tube: "يوتيوب",

@@ -39,7 +39,7 @@ export const MenuList = [
     to: "users",
     text: "users",
   },
-  //Setting
+  // Setting
   {
     title:'Website',
     text:'website',
@@ -47,44 +47,54 @@ export const MenuList = [
     iconStyle: <i className='la la-desktop'></i>,
     content : [
         {
-            title:'Banners',
-            text:'banners',
-            to: 'website-banners',
-            rule: 'website',
-        },
-        {
-            title:'Activities',
-            text:'activities',
-            to: 'activities',
-            rule: 'activities',
-        },
-        {
-            title:'Branches and Markets',
-            text:'branches_and_markets',
-            to: 'branches-and-markets',
-            rule: 'website',
-        },
-        {
-            title:'Offers',
-            text:'offers',
-            to: 'offers',
-            rule: 'website',
-        },
-        {
-            title:'Members',
-            text:'members',
-            to: 'members',
-            rule: 'website',
-        },
-        {
-            title:'News',
-            text:'news',
-            to: 'news',
-            rule: 'website',
+          title:'Banners',
+          text:'banners',
+          to: 'website-banners',
+          rule: 'website',
+        }, {
+          title:'Activities',
+          text:'activities',
+          to: 'activities',
+          rule: 'activities',
+        }, {
+          title:'Branches and Markets',
+          text:'branches_and_markets',
+          to: 'branches-and-markets',
+          rule: 'website',
+        }, {
+          title:'Offers',
+          text:'offers',
+          to: 'offers',
+          rule: 'website',
+        }, {
+          title:'Members',
+          text:'members',
+          to: 'members',
+          rule: 'website',
+        }, {
+          title:'News',
+          text:'news',
+          to: 'news',
+          rule: 'website',
+        }, {
+          title:'Contact Us',
+          text:'contact_us',
+          to: 'contact-us',
+          rule: 'website',
+        },{
+          title:'Social Media',
+          text:'social_media',
+          to: 'social',
+          rule: 'website',
+        },{
+          title:'Privacy',
+          text:'privacy',
+          to: 'privacy',
+          rule: 'website',
         },
     ]
 },
-  // //Tankers
+  // Tankers
   // {
   //   title: "Tankers",
   //   classsChange: "mm-collapse",
@@ -92,7 +102,7 @@ export const MenuList = [
   //   to: "tankers",
   //   text: "tankers",
   // },
-  //Wallet Management
+  // Wallet Management
   // {
   //     title:'Wallet Management',
   //     classsChange: 'mm-collapse',
@@ -100,7 +110,7 @@ export const MenuList = [
   //     to: 'wallet-management',
   //     text: 'wallet_management',
   // },
-  //Time Slot
+  // Time Slot
   // {
   //     title:'Time Slot',
   //     classsChange: 'mm-collapse',
@@ -108,7 +118,7 @@ export const MenuList = [
   //     to: 'time-slot',
   //     text: 'time_slot',
   // },
-  //KYC Requests
+  // KYC Requests
   // {
   //   title: "KYC Requests",
   //   classsChange: "mm-collapse",
@@ -156,7 +166,7 @@ export const MenuList = [
   //     to: 'notification',
   //     text: 'notification',
   // },
-  //Setting
+  // Setting
   {
       title:'Setting',
       text:'setting',

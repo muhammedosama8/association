@@ -22,7 +22,6 @@ const AdScreen = () => {
   useEffect(() => {
     // setLoading(true)
     screenService?.getList()?.then((res) => {
-      console.log(res);
       if (res?.status === 200) {
         if (res.data?.meta?.data?.length === 0) {
           return;

@@ -62,7 +62,6 @@ export default class BaseService {
   postUpload(file) {
     const formData = new FormData();
     formData.append("img", file);
-    console.log(formData, file);
     return http.post(apiUploadEndpoint, formData);
   }
 }

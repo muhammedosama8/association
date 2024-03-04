@@ -118,7 +118,7 @@ const WebsiteBanners = () => {
       }
     });
   };
-  console.log(formData)
+
   const onSubmit = (e) => {
     e.preventDefault();
     let data = {
