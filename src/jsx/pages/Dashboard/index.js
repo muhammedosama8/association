@@ -6,19 +6,7 @@ import "./style.scss";
 import { Translate } from "../../Enums/Tranlate";
 
 const Home = () => {
-  const [formData, setFormData] = useState({
-    totalUsers: "",
-    totalAdmins: "",
-    totalCategories: "",
-    totalSubCategories: "",
-    totalBrands: "",
-    totalOrders: "",
-    ordersOnTheWay: "",
-    ordersCanceled: "",
-    ordersDelivered: "",
-    totalSales: "",
-    salesDaily: "",
-  });
+  const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
   const adminService = new AdminService();
   const lang = useSelector((state) => state.auth.lang);

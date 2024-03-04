@@ -31,16 +31,6 @@ import AddNotification from "./pages/Notification/AddNotification";
 import Static from "./pages/Setting/StaticPages/Static";
 import Delivery from "./pages/Setting/Delivery";
 import Payment from "./pages/Setting/Payment";
-import OrderSuccessful from "./common/OrderSuccessful";
-import OrderFailed from "./common/OrderFailed";
-import BiddingManagement from "./pages/BiddingManagement";
-import KYCRequests from "./pages/KYCRequests";
-import TimeManagement from "./pages/TimeManagement";
-import WalletManagement from "./pages/WalletManagement";
-import PromCodes from "./pages/PromoCodes";
-import AddPromoCodes from "./pages/PromoCodes/AddPromoCodes";
-import TimeSlot from "./pages/TimeSlot";
-import SpecificBlock from "./pages/TimeSlot/SpecificBlock";
 import WebsiteBanners from "./pages/Website/Banners";
 import Members from "./pages/Website/Members";
 import BranchesAndMarkets from "./pages/Website/Branches and Markets"
@@ -75,32 +65,11 @@ const Markup = () => {
     { url: "offers", component: <Offers /> },
     { url: "contact-us", component: <ContactUs /> },
 
-    // Promo Codes
-    // { url: "promo-codes", component: <PromCodes /> },
-    // { url: "promo-codes/add-promo-codes", component: <AddPromoCodes /> },
-    // { url: "promo-codes/edit-promo-codes", component: <AddPromoCodes /> },
-
-    // Time Slot
-    // { url: "time-slot", component: <TimeSlot /> },
-    // { url: "time-slot/specific-block", component: <SpecificBlock /> },
-
     // Ad Screen
     // { url: "ad-screen", component: <AdScreen /> },
 
     // Users
     { url: "users", component: <Users /> },
-
-    // Bidding Management
-    // { url: "bidding-management", component: <BiddingManagement /> },
-
-    // KYCRequests
-    // { url: "kyc-requests", component: <KYCRequests /> },
-
-    // TimeManagement
-    // { url: "time-management", component: <TimeManagement /> },
-
-    // WalletManagement
-    // { url: "wallet-management", component: <WalletManagement /> },
 
     // Notification
     // { url: "notification", component: <Notification /> },
@@ -118,9 +87,6 @@ const Markup = () => {
 
     //Profile
     { url: "profile", component: <Profile /> },
-
-    // { url: "admin/successful", component: <OrderSuccessful /> },
-    // { url: "admin/failed", component: <OrderFailed /> },
 
     // Error
     { url: "*", component: <Error404 /> },

@@ -23,14 +23,6 @@ export const MenuList = [
     to: "rules",
     text: "rules",
   },
-  // Promo Code
-  // {
-  //   title: "Promo Codes",
-  //   classsChange: "mm-collapse",
-  //   iconStyle: <i className="flaticon-381-notepad" />,
-  //   to: "promo-codes",
-  //   text: "promo_codes",
-  // },
   // Users
   {
     title: "Users",
@@ -117,14 +109,6 @@ export const MenuList = [
   //     iconStyle: <i className='la la-clock'></i>,
   //     to: 'time-slot',
   //     text: 'time_slot',
-  // },
-  // KYC Requests
-  // {
-  //   title: "KYC Requests",
-  //   classsChange: "mm-collapse",
-  //   iconStyle: <i className="la la-simplybuilt" />,
-  //   to: "kyc-requests",
-  //   text: "kyc_requests",
   // },
   // Banners
   // {
