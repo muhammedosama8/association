@@ -76,35 +76,35 @@ const Markup = () => {
     { url: "contact-us", component: <ContactUs /> },
 
     // Promo Codes
-    { url: "promo-codes", component: <PromCodes /> },
-    { url: "promo-codes/add-promo-codes", component: <AddPromoCodes /> },
-    { url: "promo-codes/edit-promo-codes", component: <AddPromoCodes /> },
+    // { url: "promo-codes", component: <PromCodes /> },
+    // { url: "promo-codes/add-promo-codes", component: <AddPromoCodes /> },
+    // { url: "promo-codes/edit-promo-codes", component: <AddPromoCodes /> },
 
     // Time Slot
-    { url: "time-slot", component: <TimeSlot /> },
-    { url: "time-slot/specific-block", component: <SpecificBlock /> },
+    // { url: "time-slot", component: <TimeSlot /> },
+    // { url: "time-slot/specific-block", component: <SpecificBlock /> },
 
     // Ad Screen
-    { url: "ad-screen", component: <AdScreen /> },
+    // { url: "ad-screen", component: <AdScreen /> },
 
     // Users
     { url: "users", component: <Users /> },
 
     // Bidding Management
-    { url: "bidding-management", component: <BiddingManagement /> },
+    // { url: "bidding-management", component: <BiddingManagement /> },
 
     // KYCRequests
-    { url: "kyc-requests", component: <KYCRequests /> },
+    // { url: "kyc-requests", component: <KYCRequests /> },
 
     // TimeManagement
-    { url: "time-management", component: <TimeManagement /> },
+    // { url: "time-management", component: <TimeManagement /> },
 
     // WalletManagement
-    { url: "wallet-management", component: <WalletManagement /> },
+    // { url: "wallet-management", component: <WalletManagement /> },
 
     // Notification
-    { url: "notification", component: <Notification /> },
-    { url: "notification/add-notification", component: <AddNotification /> },
+    // { url: "notification", component: <Notification /> },
+    // { url: "notification/add-notification", component: <AddNotification /> },
 
     //Setting
     { url: "social", component: <SocialMedia /> },
@@ -119,8 +119,8 @@ const Markup = () => {
     //Profile
     { url: "profile", component: <Profile /> },
 
-    { url: "admin/successful", component: <OrderSuccessful /> },
-    { url: "admin/failed", component: <OrderFailed /> },
+    // { url: "admin/successful", component: <OrderSuccessful /> },
+    // { url: "admin/failed", component: <OrderFailed /> },
 
     // Error
     { url: "*", component: <Error404 /> },

@@ -157,11 +157,11 @@ const AddOffersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
                                             <div className="avatar-preview2 m-auto">
                                                 <div id={`imagePreview`}>
                                                 {!!formData?.pdf && 
-                                                    <i //alt='icon'
+                                                    <img alt='icon'
                                                         id={`saveImageFile`} 
                                                         className='la la-check w-100 h-100' 
                                                         style={{borderRadius: '30px'}} 
-                                                        // src={formData?.pdf|| URL.createObjectURL(files)}
+                                                        src={formData?.pdf|| URL.createObjectURL(files)}
                                                     />}
                                                 {/* {files[0]?.name && <img id={`saveImageFile`} className='w-100 h-100' style={{borderRadius: '30px'}} src={URL.createObjectURL(files[0])} alt='icon' />} */}
                                                 {(!formData?.pdf && !loading) && 

@@ -21,7 +21,7 @@ const SocialMedia = ()=>{
     useEffect(()=>{
         setLoadingData(true)
         socialMediaService?.getList()?.then(res=>{
-            if(res.status === 200 && res.data?.data){
+            if(res?.status === 200 && res?.data?.data){
                 setLinks({...res.data?.data})
                 setIsAdd(false)
             } else{
@@ -54,6 +54,8 @@ const SocialMedia = ()=>{
         if(!!links.call_us) data['call_us'] = links.call_us
         if(!!links.talabat) data['talabat'] = links.talabat
         if(!!links.you_tube) data['you_tube'] = links.you_tube
+        if(!!links.gmail) data['gmail'] = links.gmail
+        if(!!links.address) data['address'] = links.address
 
         setLoading(true)
         socialMediaService?.create(data)?.then(res=>{

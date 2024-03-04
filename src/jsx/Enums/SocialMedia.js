@@ -12,4 +12,6 @@ export const SocialMediaLinks =[
     {label: 'Talabat', value: 'talabat'},
     {label: 'Call Us', value: 'call_us'},
     {label: 'Youtube', value: 'you_tube'},
+    {label: 'Gmail', value: 'gmail'},
+    {label: 'Address', value: 'address'},
 ] 

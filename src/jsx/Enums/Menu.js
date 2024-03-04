@@ -127,13 +127,13 @@ export const MenuList = [
   //   text: "kyc_requests",
   // },
   // Banners
-  {
-    title: "Banners",
-    classsChange: "mm-collapse",
-    iconStyle: <i class="las la-image"></i>,
-    to: "banners",
-    text: "banners",
-  },
+  // {
+  //   title: "Banners",
+  //   classsChange: "mm-collapse",
+  //   iconStyle: <i class="las la-image"></i>,
+  //   to: "banners",
+  //   text: "banners",
+  // },
   // Activities
   // {
   //   title: "Activities",

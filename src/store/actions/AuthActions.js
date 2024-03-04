@@ -39,7 +39,7 @@ export function loginAction(email, password, navigate) {
           dispatch(loginFn({ email, password: "" }));
           saveTokenInLocalStorage(response.data);
           dispatch(loginConfirmedAction(response.data));
-          navigate("/admins");
+          navigate("/");
         }
         dispatch(loadingToggleAction(false));
       })
