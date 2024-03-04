@@ -34,6 +34,7 @@ export const English = {
   setting: "Setting",
   delivery: "Delivery",
   social_media: "Social Media",
+  social: "Social Media",
   website: "Website",
   currency: "Currency",
   payment: "Payment",
@@ -249,5 +250,5 @@ export const English = {
   brand_management: "Brand Management",
   kyc_requests: "KYC Requests",
   time_management: "Time Management",
-  location: "Location"
+  location: "Location",
 };

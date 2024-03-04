@@ -30,6 +30,7 @@ export const Arabic = {
   setting: "اعدادات",
   delivery: "توصيل",
   social_media: "وسائل التواصل",
+  social: "وسائل التواصل",
   currency: "العمله",
   payment: "الدفع",
   pages: "الصفحات",
