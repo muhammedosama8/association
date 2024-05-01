@@ -13,7 +13,8 @@ const AddOffersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
     const [files, setFiles] = useState([])
     const [formData, setFormData] = useState({
         title: '',
-        pdf: ''
+        image: '',
+        cover_image: ""
     })
     const [isAdd, setIsAdd] = useState(false)
     const [loading, setLoading] = useState(false)
@@ -29,21 +30,22 @@ const AddOffersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
             setFormData({
                 id: item?.id,
                 title: item?.title,
-                img: item?.image,
+                image: item?.image,
+                cover_image: item?.cover_image,
             })
         }
     },[item])
 
     const submit = () =>{
-        if(!formData?.pdf || !formData?.img){
-            toast.error(`Upload ${!formData?.pdf ? 'Offer' : ''} ${!formData?.pdf && !formData?.img ? "&" : ''} ${!formData?.img ? 'Image' : ''} First`)
-            return
-        }
+        // if(!formData?.pdf || !formData?.img){
+        //     toast.error(`Upload ${!formData?.pdf ? 'Offer' : ''} ${!formData?.pdf && !formData?.img ? "&" : ''} ${!formData?.img ? 'Image' : ''} First`)
+        //     return
+        // }
 
         let data ={
             title: formData?.title,
-            image: formData?.pdf,
-            cover_image: formData?.img
+            image: formData?.image,
+            cover_image: formData?.cover_image
         }
 
         if(isAdd){
@@ -99,7 +101,7 @@ const AddOffersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
                                                         setLoadingImg(true)
                                                         new BaseService().postUpload(filesData[0]).then(res=>{
                                                             if(res?.data?.status){
-                                                                setFormData({...formData, img: res.data.url})
+                                                                setFormData({...formData, image: res.data.url})
                                                                 setFiles(filesData[0])
                                                             }
                                                             setLoadingImg(false)
@@ -110,15 +112,15 @@ const AddOffersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
                                             </div>
                                             <div className="avatar-preview2 m-auto">
                                                 <div id={`imagePreview1`}>
-                                                {!!formData?.img && 
+                                                {!!formData?.image && 
                                                     <img alt='icon'
                                                         id={`saveImageFile1`} 
                                                         className='la la-check w-100 h-100' 
                                                         style={{borderRadius: '30px'}} 
-                                                        src={formData?.img|| URL.createObjectURL(files)}
+                                                        src={formData?.image}
                                                     />}
                                                 {/* {files[0]?.name && <img id={`saveImageFile`} className='w-100 h-100' style={{borderRadius: '30px'}} src={URL.createObjectURL(files[0])} alt='icon' />} */}
-                                                {(!formData?.img && !loadingImg) && 
+                                                {(!formData?.image && !loadingImg) && 
                                                     <img 
                                                         id={`saveImageFile1`} 
                                                         src={uploadImg} alt='icon'
@@ -138,14 +140,14 @@ const AddOffersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
                                 <label className="mx-4">{Translate[lang]?.offer}</label>
                                 <div className="image-placeholder">	
                                             <div className="avatar-edit">
-                                                <input type="file" onChange={(e) => {
+                                                <input type="file" accept=".pdf, .txt,.doc, .docx" onChange={(e) => {
                                                     let files = e.target.files
                                                     const filesData = Object.values(files)
                                                     if (filesData.length) {
                                                         setLoading(true)
                                                         new BaseService().postUpload(filesData[0]).then(res=>{
                                                             if(res?.data?.status){
-                                                                setFormData({...formData, pdf: res.data.url})
+                                                                setFormData({...formData, cover_image: res.data.url})
                                                                 setFiles(filesData[0])
                                                             }
                                                             setLoading(false)
@@ -155,16 +157,9 @@ const AddOffersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
                                                 <label htmlFor={`imageUpload`}  name=''></label>
                                             </div>
                                             <div className="avatar-preview2 m-auto">
-                                                <div id={`imagePreview`}>
-                                                {!!formData?.pdf && 
-                                                    <img alt='icon'
-                                                        id={`saveImageFile`} 
-                                                        className='la la-check w-100 h-100' 
-                                                        style={{borderRadius: '30px'}} 
-                                                        src={formData?.pdf|| URL.createObjectURL(files)}
-                                                    />}
-                                                {/* {files[0]?.name && <img id={`saveImageFile`} className='w-100 h-100' style={{borderRadius: '30px'}} src={URL.createObjectURL(files[0])} alt='icon' />} */}
-                                                {(!formData?.pdf && !loading) && 
+                                                <div id={`imagePreview`} className='d-flex align-items-center justify-content-center' style={{fontSize: '61px', color: '#03447b'}}>
+                                                {!!formData?.cover_image &&  <i className="la la-check-circle" />}
+                                                {(!formData?.cover_image && !loading) && 
                                                     <img 
                                                         id={`saveImageFile`} 
                                                         src={uploadImg} alt='icon'

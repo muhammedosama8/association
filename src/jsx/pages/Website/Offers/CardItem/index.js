@@ -27,13 +27,9 @@ const CardItem = ({item, setItem, index, setAddModal, setShouldUpdate}) =>{
                 />
             </td>
             <td>
-                <img
-                    src={item?.cover_image}
-                    className="rounded-lg"
-                    width="40"
-                    height="40"
-                    alt={item.id}
-                />
+                <a href={item?.cover_image} target="_blank">
+                    <i className="la la-file-pdf" style={{fontSize: "35px", color: '#03447b'}}/>
+                </a>
             </td>
             <td>{item.title}</td>
             <td>

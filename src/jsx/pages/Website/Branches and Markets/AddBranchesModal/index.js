@@ -16,9 +16,10 @@ const AddBranchesModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
     const [formData, setFormData] = useState({
         title: '',
         phone: '',
-        location: '',
+        address: '',
         img: '',
-        works_hours: ''
+        work_time: '',
+        address_link: ""
     })
     const [isAdd, setIsAdd] = useState(false)
     const [loading, setLoading] = useState(false)
@@ -34,9 +35,10 @@ const AddBranchesModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
                 id: item?.id,
                 phone: item?.phone,
                 title: item?.title,
-                location: item?.address,
+                address: item?.address,
                 img: item?.image,
-                works_hours: item?.work_time,
+                work_time: item?.work_time,
+                address_link: item.address_link
             })
         }
     },[item])
@@ -64,10 +66,11 @@ const AddBranchesModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
         }
         let data ={
             image: formData?.img,
-            work_time: formData?.works_hours,
+            work_time: formData?.work_time,
             title: formData?.title,
-            address: formData?.location,
+            address: formData?.address,
             phone: formData?.phone,
+            address_link: formData.address_link
         }
         setLoading(true)
         if(isAdd){
@@ -165,18 +168,34 @@ const AddBranchesModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
                     </Col>
                     <Col md={12}>
                         <AvField
-                            label={Translate[lang]?.location}
+                            label={Translate[lang]?.address}
                             type='text'
-                            placeholder={Translate[lang]?.location}
-                            value={formData.location}
-                            name='location'
+                            placeholder={Translate[lang]?.address}
+                            value={formData.address}
+                            name='address'
                             validate={{
                                 required: {
                                     value:true,
                                     errorMessage: Translate[lang].field_required
                                 }
                             }}
-                            onChange={(e) => setFormData({...formData, location: e.target.value})}
+                            onChange={(e) => setFormData({...formData, address: e.target.value})}
+                        />
+                    </Col>
+                    <Col md={12}>
+                        <AvField
+                            label={`${Translate[lang]?.address_link}`}
+                            type='text'
+                            placeholder={`${Translate[lang]?.address_link}`}
+                            value={formData.address_link}
+                            name='address_link'
+                            validate={{
+                                required: {
+                                    value:true,
+                                    errorMessage: Translate[lang].field_required
+                                }
+                            }}
+                            onChange={(e) => setFormData({...formData, address_link: e.target.value})}
                         />
                     </Col>
                     <Col md={6}>
@@ -200,15 +219,15 @@ const AddBranchesModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
                             label={Translate[lang]?.works_hours}
                             type='text'
                             placeholder={Translate[lang]?.works_hours}
-                            value={formData.works_hours}
-                            name='works_hours'
+                            value={formData.work_time}
+                            name='work_time'
                             validate={{
                                 required: {
                                     value:true,
                                     errorMessage: Translate[lang].field_required
                                 }
                             }}
-                            onChange={(e) => setFormData({...formData, works_hours: e.target.value})}
+                            onChange={(e) => setFormData({...formData, work_time: e.target.value})}
                         />
                     </Col>
                 </Row>

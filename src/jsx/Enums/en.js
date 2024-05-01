@@ -63,6 +63,7 @@ export const English = {
   last_name: "Last Name",
   email: "Email",
   address: "Address",
+  address_link: "Address Link",
   password: "Password",
   phone: "Phone",
   country_code: "Country Code",
