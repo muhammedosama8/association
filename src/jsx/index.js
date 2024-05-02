@@ -23,11 +23,9 @@ import Home from "./pages/Dashboard";
 import AdScreen from "./pages/AdScreen";
 import SocialMedia from "./pages/Setting/SocialMedia";
 import Permission from "./pages/Rules";
-import Notification from "./pages/Notification";
 import Profile from "./pages/Profile";
 import Currency from "./pages/Setting/Currency";
 import StaticPages from "./pages/Setting/StaticPages";
-import AddNotification from "./pages/Notification/AddNotification";
 import Static from "./pages/Setting/StaticPages/Static";
 import Delivery from "./pages/Setting/Delivery";
 import Payment from "./pages/Setting/Payment";
@@ -37,7 +35,11 @@ import BranchesAndMarkets from "./pages/Website/Branches and Markets"
 import Activities from "./pages/Website/Activities"
 import News from "./pages/Website/News"
 import Offers from "./pages/Website/Offers";
+import Shareholders from "./pages/Website/Shareholders";
 import ContactUs from "./pages/Website/ContactUs";
+import Notification from "./pages/Website/Notification";
+import AddNotification from "./pages/Website/Notification/AddNotification";
+import Diwans from "./pages/Website/Diwans";
 
 const Markup = () => {
   const allroutes = [
@@ -61,19 +63,19 @@ const Markup = () => {
     { url: "branches-and-markets", component: <BranchesAndMarkets /> },
     { url: "activities", component: <Activities /> },
     { url: "members", component: <Members /> },
+    { url: "shareholders", component: <Shareholders /> },
     { url: "news", component: <News /> },
+    { url: "diwans", component: <Diwans /> },
     { url: "offers", component: <Offers /> },
     { url: "contact-us", component: <ContactUs /> },
+    { url: "notification", component: <Notification /> },
+    { url: "notification/add-notification", component: <AddNotification /> },
 
     // Ad Screen
     // { url: "ad-screen", component: <AdScreen /> },
 
     // Users
     { url: "users", component: <Users /> },
-
-    // Notification
-    // { url: "notification", component: <Notification /> },
-    // { url: "notification/add-notification", component: <AddNotification /> },
 
     //Setting
     { url: "social", component: <SocialMedia /> },

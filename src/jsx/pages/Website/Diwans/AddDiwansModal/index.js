@@ -4,26 +4,21 @@ import {AvField, AvForm} from "availity-reactstrap-validation";
 import { toast } from "react-toastify";
 import uploadImg from '../../../../../images/upload-img.png';
 import BaseService from "../../../../../services/BaseService";
-import BrandsService from "../../../../../services/BrandsService";
 import Loader from "../../../../common/Loader";
 import { useSelector } from "react-redux";
 import { Translate } from "../../../../Enums/Tranlate";
-import '../style.scss'
-import BranchesAndMarketsService from "../../../../../services/BranchesAndMarketsService";
+import DiwansService from "../../../../../services/DiwansService";
 
-const AddBranchesModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
+const AddDiwansModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
     const [files, setFiles] = useState([])
     const [formData, setFormData] = useState({
         title: '',
-        phone: '',
-        address: '',
-        img: '',
-        work_time: '',
-        address_link: ""
+        description: '',
+        img: ''
     })
     const [isAdd, setIsAdd] = useState(false)
     const [loading, setLoading] = useState(false)
-    const branchesAndMarketsService = new BranchesAndMarketsService()
+    const diwansService = new DiwansService()
     const lang = useSelector(state=> state.auth.lang)
 
     useEffect(() => {
@@ -33,12 +28,9 @@ const AddBranchesModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
             setIsAdd(false)
             setFormData({
                 id: item?.id,
-                phone: item?.phone,
                 title: item?.title,
-                address: item?.address,
+                description: item?.description,
                 img: item?.image,
-                work_time: item?.work_time,
-                address_link: item.address_link
             })
         }
     },[item])
@@ -50,7 +42,7 @@ const AddBranchesModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
         if (filesData.length) {
             setLoading(true)
             new BaseService().postUpload(filesData[0]).then(res=>{
-                if(res.data.status){
+                if(res?.data?.status){
                     setFormData({...formData, img: res.data.url})
                     setFiles(filesData[0])
                 }
@@ -65,37 +57,32 @@ const AddBranchesModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
             return
         }
         let data ={
-            image: formData?.img,
-            work_time: formData?.work_time,
             title: formData?.title,
-            address: formData?.address,
-            phone: formData?.phone,
-            address_link: formData.address_link
+            description: formData?.description,
+            image: formData?.img
         }
-        setLoading(true)
+
         if(isAdd){
-            branchesAndMarketsService.create(data)?.then(res=>{
+            diwansService.create(data)?.then(res=>{
                 if(res && res?.status === 201){
-                    toast.success('Branche Added Successfully')
+                    toast.success('Diwan Added Successfully')
                     setShouldUpdate(prev=> !prev)
                     setAddModal()
                 }
-                setLoading(false)
             })
         } else {
-            branchesAndMarketsService.update(formData?.id, data)?.then(res=>{
+            diwansService.update(formData?.id, data)?.then(res=>{
                 if(res && res?.status === 200){
-                    toast.success('Branche Updated Successfully')
+                    toast.success('Diwan Updated Successfully')
                     setShouldUpdate(prev=> !prev)
                     setAddModal()
                 }
-                setLoading(false)
             })
         }
     }
 
     return(
-        <Modal className={lang === 'en' ? "en fade addBranch" : "ar fade addBranch"} style={{textAlign: lang === 'en' ? 'left' : 'right'}} show={addModal} onHide={()=>{
+        <Modal className={lang === 'en' ? "en fade addActivity" : "ar fade addActivity"} style={{textAlign: lang === 'en' ? 'left' : 'right'}} show={addModal} onHide={()=>{
             setAddModal()
             }}>
                 <AvForm
@@ -148,8 +135,8 @@ const AddBranchesModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
                                         </div>
                                     </div>
                                 </div>
-                    </Col>
-                    <Col md={12}>
+                        </Col>
+                        <Col md={12}>
                             <AvField
                                 label={Translate[lang]?.title}
                                 type='text'
@@ -165,66 +152,31 @@ const AddBranchesModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
                                 value={formData.title}
                                 onChange={(e) => setFormData({...formData, title: e.target.value})}
                             />
-                    </Col>
-                    <Col md={12}>
-                        <AvField
-                            label={Translate[lang]?.address}
-                            type='text'
-                            placeholder={Translate[lang]?.address}
-                            value={formData.address}
-                            name='address'
-                            validate={{
-                                required: {
-                                    value:true,
-                                    errorMessage: Translate[lang].field_required
-                                }
-                            }}
-                            onChange={(e) => setFormData({...formData, address: e.target.value})}
-                        />
-                    </Col>
-                    <Col md={12}>
-                        <AvField
-                            label={`${Translate[lang]?.address_link}`}
-                            type='text'
-                            placeholder={`${Translate[lang]?.address_link}`}
-                            value={formData.address_link}
-                            name='address_link'
-                            onChange={(e) => setFormData({...formData, address_link: e.target.value})}
-                        />
-                    </Col>
-                    <Col md={6}>
-                        <AvField
-                            label={Translate[lang]?.phone}
-                            type='text'
-                            placeholder={Translate[lang]?.phone}
-                            value={formData.phone}
-                            name='phone'
-                            validate={{
-                                required: {
-                                    value:true,
-                                    errorMessage: Translate[lang].field_required
-                                }
-                            }}
-                            onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                        />
-                    </Col>
-                    <Col md={6}>
-                        <AvField
-                            label={Translate[lang]?.works_hours}
-                            type='text'
-                            placeholder={Translate[lang]?.works_hours}
-                            value={formData.work_time}
-                            name='work_time'
-                            validate={{
-                                required: {
-                                    value:true,
-                                    errorMessage: Translate[lang].field_required
-                                }
-                            }}
-                            onChange={(e) => setFormData({...formData, work_time: e.target.value})}
-                        />
-                    </Col>
-                </Row>
+                        </Col>
+
+                        <Col md={12}>
+                            <label className="d-block">{Translate[lang]?.description}</label>
+                            <textarea
+                                type='text'
+                                placeholder={Translate[lang]?.description}
+                                value={formData.description}
+                                name='description'
+                                className="w-100 p-2"
+                                style={{
+                                    border: '1px solid hsl(0, 0%, 80%)',
+                                    borderRadius: '0.3rem',
+                                }}
+                                required
+                                validate={{
+                                    required: {
+                                        value:true,
+                                        errorMessage: Translate[lang].field_required
+                                    }
+                                }}
+                                onChange={(e) => setFormData({...formData, description: e.target.value})}
+                            />
+                        </Col>
+                    </Row>
             </Modal.Body>
             <Modal.Footer>
             <Button onClick={setAddModal} variant="danger light">
@@ -240,4 +192,4 @@ const AddBranchesModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
         </Modal>)
 }
 
-export default AddBranchesModal;
+export default AddDiwansModal;

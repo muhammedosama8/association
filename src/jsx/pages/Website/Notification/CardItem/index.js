@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Dropdown } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import NotificationService from "../../../../services/NotificationService";
-import DeleteModal from "../../../common/DeleteModal";
-import { Translate } from "../../../Enums/Tranlate";
+import NotificationService from "../../../../../services/NotificationService";
+import DeleteModal from "../../../../common/DeleteModal";
+import { Translate } from "../../../../Enums/Tranlate";
 import SendModal from "../SendModal";
 
 const CardItem = ({item, index, setShouldUpdate}) =>{
@@ -24,7 +24,7 @@ const CardItem = ({item, index, setShouldUpdate}) =>{
                 {lang==='en' ? item.description_en : item.description_ar}
             </td>
             <td>
-                {isExist('notification') && <Dropdown>
+                {isExist('website') && <Dropdown>
                     <Dropdown.Toggle
                         // variant="success"
                         className="light sharp i-false"

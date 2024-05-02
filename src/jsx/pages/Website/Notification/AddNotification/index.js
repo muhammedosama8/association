@@ -3,9 +3,9 @@ import { Button, Card, Col, Modal, Row } from "react-bootstrap"
 import {AvField, AvForm} from "availity-reactstrap-validation";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import NotificationService from "../../../../services/NotificationService";
+import NotificationService from "../../../../../services/NotificationService";
 import { useSelector } from "react-redux";
-import { Translate } from "../../../Enums/Tranlate";
+import { Translate } from "../../../../Enums/Tranlate";
 
 const AddNotification = ()=>{
     const [formData, setFormData] = useState({

@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { Button, Col, Modal, Row } from "react-bootstrap"
 import {AvField, AvForm} from "availity-reactstrap-validation";
 import { toast } from "react-toastify";
-import NotificationService from "../../../../services/NotificationService";
+import NotificationService from "../../../../../services/NotificationService";
 import { useSelector } from "react-redux";
-import { Translate } from "../../../Enums/Tranlate";
+import { Translate } from "../../../../Enums/Tranlate";
 
 const SendModal = ({modal, setModal, item})=>{
     const [loading, setLoading]= useState()

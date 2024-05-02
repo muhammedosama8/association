@@ -33,8 +33,8 @@ export const MenuList = [
   },
   // Setting
   {
-    title:'Website',
-    text:'website',
+    title:'control',
+    text:'control',
     classsChange: 'mm-collapse',
     iconStyle: <i className='la la-desktop'></i>,
     content : [
@@ -64,14 +64,29 @@ export const MenuList = [
           to: 'members',
           rule: 'website',
         }, {
+          title:'Shareholders',
+          text:'shareholders',
+          to: 'shareholders',
+          rule: 'website',
+        }, {
           title:'News',
           text:'news',
           to: 'news',
           rule: 'website',
         }, {
+          title:'Diwans',
+          text:'diwans',
+          to: 'diwans',
+          rule: 'website',
+        }, {
           title:'Contact Us',
           text:'contact_us',
           to: 'contact-us',
+          rule: 'website',
+        },{
+          title:'Notification',
+          text:'notification',
+          to: 'notification',
           rule: 'website',
         },{
           title:'Social Media',
@@ -86,6 +101,14 @@ export const MenuList = [
         },
     ]
 },
+// Notification
+  // {
+  //     title:'Notification',
+  //     classsChange: 'mm-collapse',
+  //     iconStyle: <i className='la la-bell'></i>,
+  //     to: 'notification',
+  //     text: 'notification',
+  // },
   // Tankers
   // {
   //   title: "Tankers",
@@ -141,14 +164,6 @@ export const MenuList = [
   //   iconStyle: <i className="la la-thumb-tack" />,
   //   to: "ad-screen",
   //   text: "ad_screen",
-  // },
-  // Notification
-  // {
-  //     title:'Notification',
-  //     classsChange: 'mm-collapse',
-  //     iconStyle: <i className='la la-bell'></i>,
-  //     to: 'notification',
-  //     text: 'notification',
   // },
   // Setting
   {
