@@ -96,9 +96,9 @@ function Login(props) {
                           />
                           {showPassword ? (
                             <i
-                              className="la la-eye-slash position-absolute"
+                              className="la la-eye-slash position-absolute cursor-pointer"
                               style={{
-                                top: "24px",
+                                top: "19px",
                                 right: lang === "en" ? "8%" : "auto",
                                 left: lang === "ar" ? "8%" : "auto",
                               }}
@@ -106,9 +106,9 @@ function Login(props) {
                             ></i>
                           ) : (
                             <i
-                              className="la la-eye position-absolute"
+                              className="la la-eye position-absolute cursor-pointer"
                               style={{
-                                top: "24px",
+                                top: "19px",
                                 right: lang === "en" ? "8%" : "auto",
                                 left: lang === "ar" ? "8%" : "auto",
                               }}

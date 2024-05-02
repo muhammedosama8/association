@@ -178,6 +178,7 @@ export const English = {
   send: "Send",
   delete_message:
     "Kindly note that this action can`t be undone and the details will get deleted.",
+  details: 'Details',
   welcome_back: "Welcome Back",
   sign_text: "Sign in by entering information below",
   text: "Very Good Works are Waiting for you",

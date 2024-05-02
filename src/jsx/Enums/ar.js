@@ -69,6 +69,7 @@ export const Arabic = {
   country_code: "كود الدوله",
   permissions: "الأذونات",
   status: "حالة",
+  details: 'تفاصيل',
   rule: "إذن",
   full_permissions: "أذونات كاملة",
   civil_id: "الرقم المدني",

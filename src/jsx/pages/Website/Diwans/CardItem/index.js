@@ -1,16 +1,18 @@
 import { useState } from "react";
 import { Dropdown } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import NewsService from "../../../../../services/NewsService";
+import DiwansService from "../../../../../services/DiwansService";
 import DeleteModal from "../../../../common/DeleteModal";
+import DetailsModal from "../../../../common/DetailsModal";
 import { Translate } from "../../../../Enums/Tranlate";
 
 const CardItem = ({item, setItem, index, setAddModal, setShouldUpdate}) =>{
     const [deleteModal, setDeleteModal] = useState(false)
+    const [modal, setModal] = useState(false)
     const Auth = useSelector(state=> state.auth?.auth)
     const lang = useSelector(state=> state.auth?.lang)
     const isExist = (data)=> Auth?.admin?.admin_roles?.includes(data)
-    const newsService = new NewsService()
+    const diwansService = new DiwansService()
 
     return(
         <tr key={index} className='text-center'>
@@ -28,7 +30,7 @@ const CardItem = ({item, setItem, index, setAddModal, setShouldUpdate}) =>{
                     </td>
             <td>{item.title}</td>
             <td>
-                <p>{item.description}</p>
+            <p className="cursor-pointer" onClick={()=> setModal(true)}>{item?.description?.slice(0,30)}...</p>
             </td>
             <td>
                 {isExist('website') && <Dropdown>
@@ -46,14 +48,17 @@ const CardItem = ({item, setItem, index, setAddModal, setShouldUpdate}) =>{
                     </Dropdown.Menu>
                 </Dropdown>}
             </td>
-            {deleteModal && <DeleteModal
+            {deleteModal && 
+                <DeleteModal
                       open={deleteModal}
                       titleMsg={item.title}
                       deletedItem={item}
-                      modelService={newsService}
+                      modelService={diwansService}
                       onCloseModal={setDeleteModal}
                       setShouldUpdate={setShouldUpdate}
-                    />}
+                />
+            }
+            {modal && <DetailsModal modal={modal} item={item} setModal={()=>setModal(false)} />}
             </tr>
     )
 }
