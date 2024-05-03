@@ -171,9 +171,6 @@ const AddProductsModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
                                 value={formData.code}
                                 onChange={(e) => setFormData({...formData, code: e.target.value})}
                             />
-                        </Col>
-                        <Col md={6}></Col>
-                        <Col md={6}>
                             <AvField
                                 label={Translate[lang]?.barcode}
                                 type='text'
