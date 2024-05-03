@@ -8,7 +8,6 @@ import ProductsService from "../../../../../services/ProductsService";
 import { Translate } from "../../../../Enums/Tranlate";
 import Loader from "../../../../common/Loader";
 import BaseService from "../../../../../services/BaseService";
-import Barcode from 'react-barcode';
 
 const AddProductsModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
     const [formData, setFormData] = useState({
@@ -186,7 +185,6 @@ const AddProductsModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
                                 value={formData.barcode}
                                 onChange={(e) => setFormData({...formData, barcode: e.target.value})}
                             />
-                            {formData?.barcode && <Barcode value={formData?.barcode} />}
                         </Col>
                         <Col md={6}>
                         <div className='form-group w-100'>
