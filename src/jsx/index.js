@@ -41,6 +41,8 @@ import Notification from "./pages/Website/Notification";
 import AddNotification from "./pages/Website/Notification/AddNotification";
 import Diwans from "./pages/Website/Diwans";
 import Products from "./pages/Website/Products";
+import ShareholdersRequests from "./pages/Website/ShareholdersRequests";
+import Attachments from "./pages/Website/ShareholdersRequests/Attachments";
 
 const Markup = () => {
   const allroutes = [
@@ -65,6 +67,8 @@ const Markup = () => {
     { url: "activities", component: <Activities /> },
     { url: "members", component: <Members /> },
     { url: "shareholders", component: <Shareholders /> },
+    { url: "shareholders_requests", component: <ShareholdersRequests /> },
+    { url: "shareholders_requests/attachments", component: <Attachments /> },
     { url: "products", component: <Products /> },
     { url: "news", component: <News /> },
     { url: "diwans", component: <Diwans /> },

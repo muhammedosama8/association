@@ -70,6 +70,7 @@ export const English = {
   shareholders: "Shareholders",
   import: "Import",
   shareholders_requests: "Shareholders Requests",
+  attachments: "Attachments",
   address: "Address",
   address_link: "Address Link",
   password: "Password",

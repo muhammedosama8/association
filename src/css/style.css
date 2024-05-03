@@ -12619,6 +12619,11 @@ svg.pulse-svg .third-circle {
     line-height: 15px;
   }
 }
+@media (max-width: 500px) {
+  .header-right .notification_dropdown .nav-link span{
+    display: none;
+  }
+}
 .header-right .notification_dropdown .dropdown-item:focus a,
 .header-right .notification_dropdown .dropdown-item:active a {
   color: #fff;
@@ -15750,6 +15755,12 @@ html[dir="rtl"]
     padding-left: 3.5rem;
   }
 }
+@media only screen and (max-width: 500px) {
+  .deznav .metismenu ul a {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+}
 .deznav .metismenu ul a:hover,
 .deznav .metismenu ul a:focus,
 .deznav .metismenu ul a.mm-active {
@@ -15767,6 +15778,11 @@ html[dir="rtl"]
 @media only screen and (max-width: 767px) {
   .deznav .metismenu a {
     padding: 0.625rem 1.25rem;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .deznav .metismenu a {
+    padding: 0.625rem 0;
   }
 }
 .deznav .metismenu .has-arrow:after {
@@ -16938,7 +16954,7 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
     display: none;
   }
   [data-sidebar-style="mini"] .deznav .metismenu li a {
-    padding: 0.813rem 0.875rem;
+    padding: 0.813rem 5px;
   }
   [data-sidebar-style="mini"] .deznav .metismenu li a svg {
     margin-right: 0;
@@ -16972,7 +16988,7 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
     box-shadow: -6px 6px 10px rgba(0, 0, 0, 0.15);
   }
   [data-sidebar-style="mini"] .deznav .metismenu > li {
-    padding: 2px 15px;
+    padding: 2px 0;
   }
   [data-sidebar-style="mini"] .deznav .metismenu > li > a.has-arrow:after {
     display: none;
@@ -49204,7 +49220,7 @@ html[dir="rtl"]
   top: calc(0.2rem + 2.5px);
   left: calc(-2.1rem + 2px);
 }
-@media only screen and (max-width: 500px) {
+@media (max-width: 500px) {
   table thead th {
     padding: 20px 10px !important;
     font-size: 0.9rem !important;
@@ -49213,7 +49229,7 @@ html[dir="rtl"]
     display: none;
   }
   .deznav .metismenu ul a {
-    padding-right: 3.7rem !important;
+    padding-right: 20px !important;
   }
   .pages-card h1 {
     font-size: 1.75rem !important;

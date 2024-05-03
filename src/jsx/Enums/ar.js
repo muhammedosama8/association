@@ -63,6 +63,7 @@ export const Arabic = {
   diwans: "الدواوين",
   shareholders: "المساهمين",
   shareholders_requests: "طلبات المساهمين",
+  attachments: "مرفقات",
   item_no: "رقم الصنف",
   barcode: "باركود",
   product_name: "اسم المنتج",
