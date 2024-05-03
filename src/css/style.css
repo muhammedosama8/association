@@ -49269,3 +49269,6 @@ html[dir="rtl"]
 .custom-dropdown {
   transform: translate3d(0px, 54.5px, 0px) !important;
 }
+.active-link{
+  background-color: aliceblue;
+}

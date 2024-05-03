@@ -22,6 +22,7 @@ const initialState = {
 }
 
 const SideBar = (props) => {
+  const [active, setActive] =useState('')
   const [state, setState] = useReducer(reducer, initialState);	
   const lang = useSelector(state=> state.auth?.lang)
   const Auth = useSelector(state=> state.auth?.auth)
@@ -109,7 +110,7 @@ const SideBar = (props) => {
                                                     <Link to={data.to} className={data.hasMenu ? 'has-arrow' : ''}
                                                       onClick={() => { handleSubmenuActive(data.title)}}
                                                     >
-                                                      {Translate[lang][data.text]}
+                                                      {Translate[lang][data.text]} kkk
                                                     </Link>
                                                     <Collapse in={state.activeSubmenu === data.title ? true :false}>
                                                         <ul className={`${menuClass === "mm-collapse" ? "mm-show" : ""}`}>
@@ -124,7 +125,7 @@ const SideBar = (props) => {
                                                     </Collapse>
                                                   </>
                                                 :
-                                                <Link to={data.to}>
+                                                <Link to={data.to} onClick={()=> setActive(data.text)} className={`${active === data.text ? 'active-link' : ""}`}>
                                                   {Translate[lang][data.text]}
                                                 </Link>
                                               }
