@@ -64,6 +64,8 @@ export const Arabic = {
   shareholders: "المساهمين",
   shareholders_requests: "طلبات المساهمين",
   attachments: "مرفقات",
+  number_of_people: "عدد الافراد",
+  membership_number: "رقم العضويه",
   item_no: "رقم الصنف",
   barcode: "باركود",
   product_name: "اسم المنتج",

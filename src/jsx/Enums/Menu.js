@@ -74,6 +74,11 @@ export const MenuList = [
           to: 'shareholders_requests',
           rule: 'website',
         }, {
+          title:'Family Card',
+          text:'family_card',
+          to: 'family_card',
+          rule: 'website',
+        }, {
           title:'Products',
           text:'products',
           to: 'products',

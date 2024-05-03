@@ -43,6 +43,8 @@ import Diwans from "./pages/Website/Diwans";
 import Products from "./pages/Website/Products";
 import ShareholdersRequests from "./pages/Website/ShareholdersRequests";
 import Attachments from "./pages/Website/ShareholdersRequests/Attachments";
+import FamilyCard from "./pages/Website/FamilyCard";
+import People from "./pages/Website/FamilyCard/People";
 
 const Markup = () => {
   const allroutes = [
@@ -69,6 +71,8 @@ const Markup = () => {
     { url: "shareholders", component: <Shareholders /> },
     { url: "shareholders_requests", component: <ShareholdersRequests /> },
     { url: "shareholders_requests/attachments", component: <Attachments /> },
+    { url: "family_card", component: <FamilyCard /> },
+    { url: "family_card/people", component: <People /> },
     { url: "products", component: <Products /> },
     { url: "news", component: <News /> },
     { url: "diwans", component: <Diwans /> },

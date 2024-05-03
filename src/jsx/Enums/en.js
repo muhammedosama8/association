@@ -71,6 +71,8 @@ export const English = {
   import: "Import",
   shareholders_requests: "Shareholders Requests",
   attachments: "Attachments",
+  number_of_people: "Number of People",
+  membership_number: "Membership Number",
   address: "Address",
   address_link: "Address Link",
   password: "Password",
