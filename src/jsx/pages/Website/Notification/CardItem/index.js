@@ -3,11 +3,13 @@ import { Dropdown } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import NotificationService from "../../../../../services/NotificationService";
 import DeleteModal from "../../../../common/DeleteModal";
+import DetailsModal from "../../../../common/DetailsModal";
 import { Translate } from "../../../../Enums/Tranlate";
 import SendModal from "../SendModal";
 
 const CardItem = ({item, index, setShouldUpdate}) =>{
     const [deleteModal, setDeleteModal] = useState(false)
+    const [detailsModal, setDetailsModal] = useState(false)
     const [send, setSend] = useState(false)
     const Auth = useSelector(state=> state.auth?.auth)
     const lang = useSelector(state=> state.auth?.lang)
@@ -20,8 +22,8 @@ const CardItem = ({item, index, setShouldUpdate}) =>{
                 {item.id}
             </td>
             <td>{lang==='en' ? item.title_en : item.title_ar}</td>
-            <td>
-                {lang==='en' ? item.description_en : item.description_ar}
+            <td onClick={()=> setDetailsModal(true)} className='cursor-pointer'>
+                {lang==='en' ? item.description_en?.slice(0, 30) : item.description_ar?.slice(0, 30)}...
             </td>
             <td>
                 {isExist('website') && <Dropdown>
@@ -52,6 +54,16 @@ const CardItem = ({item, index, setShouldUpdate}) =>{
                 setModal={()=> setSend(false)}
                 item={item}
             />}
+            {detailsModal && 
+                <DetailsModal 
+                    modal={detailsModal} 
+                    setModal={()=> setDetailsModal(false)} 
+                    item={{
+                        title: lang === 'ar' ? item.title_ar : item.title_en,
+                        description: lang === 'ar' ? item.description_ar : item.description_en,
+                    }}
+                />
+            }
             </tr>
     )
 }

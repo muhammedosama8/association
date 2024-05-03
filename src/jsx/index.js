@@ -40,6 +40,7 @@ import ContactUs from "./pages/Website/ContactUs";
 import Notification from "./pages/Website/Notification";
 import AddNotification from "./pages/Website/Notification/AddNotification";
 import Diwans from "./pages/Website/Diwans";
+import Products from "./pages/Website/Products";
 
 const Markup = () => {
   const allroutes = [
@@ -64,6 +65,7 @@ const Markup = () => {
     { url: "activities", component: <Activities /> },
     { url: "members", component: <Members /> },
     { url: "shareholders", component: <Shareholders /> },
+    { url: "products", component: <Products /> },
     { url: "news", component: <News /> },
     { url: "diwans", component: <Diwans /> },
     { url: "offers", component: <Offers /> },

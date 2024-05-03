@@ -69,6 +69,11 @@ export const MenuList = [
           to: 'shareholders',
           rule: 'website',
         }, {
+          title:'Products',
+          text:'products',
+          to: 'products',
+          rule: 'website',
+        }, {
           title:'News',
           text:'news',
           to: 'news',

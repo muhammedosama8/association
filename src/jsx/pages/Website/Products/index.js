@@ -8,33 +8,28 @@ import {
   Button,
 } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import BrandsService from "../../../../services/BrandsService";
 import Loader from "../../../common/Loader";
 import NoData from "../../../common/NoData";
 import Pagination from "../../../common/Pagination/Pagination";
 import { Translate } from "../../../Enums/Tranlate";
 import CardItem from "./CardItem";
-import header from "../../../../images/header.jpeg"
 import './style.scss'
-import ShareholdersService from "../../../../services/ShareholdersService";
-import AddShareholdersModal from "./AddShareholdersModal";
+import ProductsService from "../../../../services/ProductsService";
+import AddProductsModal from "./AddProductsModal";
 import ImportModal from "../../../common/ImportModal";
 
-const Shareholders = () => {
-    const [data, setData] = useState([
-      // {id: 1, name: 'Muhammed osama nasser', civil_id: 12312, phone: "01002231233",shareholder_code_number: "34535253423424", boxـnumber: "43223423424234", family_card: '45632345243'},
-      // {id: 2, name: 'Muhammed nasser', civil_id: 12312, phone: "01002231233",shareholder_code_number: "34535253423424", boxـnumber: "43223423424234", family_card: '45632345243'},
-    ])
+const Products = () => {
+    const [data, setData] = useState([])
     const [addModal, setAddModal] = useState(false)
     const [importModal, setImportModal] = useState(false)
     const [item, setItem] = useState({})
-    const [hasData, setHasData] = useState(null)
+    const [hasData, setHasData] = useState(0)
     const [search, setSearch] = useState(null)
     const [loading, setLoading] = useState(false)
     const [shouldUpdate, setShouldUpdate] = useState(false)
     const Auth = useSelector(state=> state.auth?.auth)
     const lang = useSelector(state=> state.auth?.lang)
-    const shareholdersService = new ShareholdersService()
+    const productsService = new ProductsService()
     const isExist = (data)=> Auth?.admin?.admin_roles?.includes(data)
 
   return (
@@ -64,7 +59,7 @@ const Shareholders = () => {
               setItem({})
               setAddModal(true) }}>
               <i className="la la-plus mx-1"></i>
-              {Translate[lang]?.add} {Translate[lang]?.shareholders}
+              {Translate[lang]?.add} {Translate[lang]?.products}
             </Button>
           </div>}
         </Card.Body >
@@ -84,22 +79,19 @@ const Shareholders = () => {
                       <strong>I.D</strong>
                     </th>
                     <th>
-                      <strong>{Translate[lang]?.name}</strong>
+                      <strong>{Translate[lang]?.image}</strong>
                     </th>
                     <th>
-                      <strong>{Translate[lang]?.civil_id}</strong>
+                      <strong>{Translate[lang]?.product_name}</strong>
                     </th>
                     <th>
-                      <strong>{Translate[lang]?.phone}</strong>
+                      <strong>{Translate[lang]?.item_no}</strong>
                     </th>
                     <th>
-                      <strong>{Translate[lang]?.shareholder_code_number}</strong>
+                      <strong>{Translate[lang]?.price}</strong>
                     </th>
                     <th>
-                      <strong>{Translate[lang]?.box_number}</strong>
-                    </th>
-                    <th>
-                      <strong>{Translate[lang]?.family_card}</strong>
+                      <strong>{Translate[lang]?.code}</strong>
                     </th>
                     <th></th>
                   </tr>
@@ -119,21 +111,21 @@ const Shareholders = () => {
                 </tbody>
               </Table>}
               {hasData === 0 && <NoData />}
-              <Pagination
+              {/* <Pagination
                   setData={setData}
-                  service={shareholdersService}
+                  service={productsService}
                   shouldUpdate={shouldUpdate}
                   setHasData={setHasData}
                   setLoading={setLoading}
                   search={search}
-              />
+              /> */}
             </Card.Body>
           </Card>
         </Col>
       </Row>
 
       {addModal && 
-        <AddShareholdersModal
+        <AddProductsModal
           item={item} 
           addModal={addModal} 
           setShouldUpdate={setShouldUpdate}
@@ -143,12 +135,12 @@ const Shareholders = () => {
       {importModal && <ImportModal 
         addModal={importModal} 
         setAddModal={()=> setImportModal(false)} 
-        name={'shareholders'} 
-        service={shareholdersService}
+        name={'product'} 
+        service={productsService}
         setShouldUpdate={setShouldUpdate}
       />}
     </Fragment>
   );
 };
 
-export default Shareholders;
+export default Products;

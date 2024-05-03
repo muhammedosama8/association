@@ -11,7 +11,7 @@ import CardItem from "./CardItem";
 
 const Notification = ()=>{
     const [notification, setNotification] = useState([])
-    const [hasData, setHasData] = useState(0)
+    const [hasData, setHasData] = useState(null)
     const [shouldUpdate, setShouldUpdate] = useState(false)
     const Auth = useSelector(state=> state.auth?.auth)
     const [loading, setLoading] =useState(false)
@@ -64,13 +64,13 @@ const Notification = ()=>{
                 </tbody>
               </Table>}
               {hasData === 0 && <NoData />}
-              {/* <Pagination
+              <Pagination
                   setData={setNotification}
                   service={notificationService}
                   shouldUpdate={shouldUpdate}
                   setHasData={setHasData}
                   setLoading={setLoading}
-              /> */}
+              />
             </Card.Body>
         </Card>
         </>

@@ -12,7 +12,7 @@ const AddShareholdersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
         civil_id: '',
         phone: "",
         shareholder_code_number: "",
-        boxـnumber: "",
+        box_number: "",
         family_card: ""
     })
     const [isAdd, setIsAdd] = useState(false)
@@ -31,7 +31,7 @@ const AddShareholdersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
                 civil_id: item?.civil_id,
                 phone: item?.phone,
                 shareholder_code_number: item?.shareholder_code_number,
-                boxـnumber: item?.boxـnumber,
+                box_number: item?.box_number,
                 family_card: item?.family_card
             })
         }
@@ -39,7 +39,15 @@ const AddShareholdersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
 
     const submit = (e) =>{
         e.preventDefault();
-        let data ={ ...formData }
+        let data ={ 
+                name: formData?.name,
+                civil_id: formData?.civil_id,
+                phone: formData?.phone,
+                shareholder_code_number: formData?.shareholder_code_number,
+                box_number: formData?.box_number,
+                family_card: formData?.family_card
+        }
+        setLoading(true)
 
         if(isAdd){
             shareholdersService.create(data)?.then(res=>{
@@ -48,7 +56,8 @@ const AddShareholdersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
                     setShouldUpdate(prev=> !prev)
                     setAddModal()
                 }
-            })
+                setLoading(false)
+            }).catch(()=> setLoading(false))
         } else {
             shareholdersService.update(formData?.id, data)?.then(res=>{
                 if(res && res?.status === 200){
@@ -56,7 +65,8 @@ const AddShareholdersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
                     setShouldUpdate(prev=> !prev)
                     setAddModal()
                 }
-            })
+                setLoading(false)
+            }).catch(()=> setLoading(false))
         }
     }
 
@@ -118,19 +128,19 @@ const AddShareholdersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
                         </Col>
                         <Col md={6}>
                             <AvField
-                                label={Translate[lang]?.boxـnumber}
+                                label={Translate[lang]?.box_number}
                                 type='text'
-                                placeholder={Translate[lang]?.boxـnumber}
+                                placeholder={Translate[lang]?.box_number}
                                 bsSize="lg"
-                                name='boxـnumber'
+                                name='box_number'
                                 validate={{
                                     required: {
                                         value: true,
                                         errorMessage: Translate[lang].field_required
                                     }
                                 }}
-                                value={formData.boxـnumber}
-                                onChange={(e) => setFormData({...formData, boxـnumber: e.target.value})}
+                                value={formData.box_number}
+                                onChange={(e) => setFormData({...formData, box_number: e.target.value})}
                             />
                         </Col>
                         <Col md={6}>
