@@ -81,7 +81,7 @@ const Profits = () => {
               setItem({})
               setAddModal(true) }}>
               <i className="la la-plus mx-1"></i>
-                {Translate[lang]?.choiceـshowroom}
+                {Translate[lang]?.chooseـaـyearـofـoffer}
             </Button>
           </div>}
         </Card.Body >

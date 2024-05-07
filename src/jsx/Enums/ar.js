@@ -4,7 +4,7 @@ export const Arabic = {
   from_back: "من الخلف",
   freeze: "تجميد",
   profits: "الأرباح",
-  choiceـshowroom: "اختيار صاله العرض",
+  chooseـaـyearـofـoffer: "اختيار سنه العرض",
   dashboard: "الصفحه الرئيسيه",
   admins: "المدراء",
   admin: "المشرف",
