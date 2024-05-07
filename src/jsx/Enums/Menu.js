@@ -83,6 +83,11 @@ export const MenuList = [
           text:'products',
           to: 'products',
           rule: 'website',
+        },  {
+          title:'Profits',
+          text:'profits',
+          to: 'profits',
+          rule: 'website',
         }, {
           title:'News',
           text:'news',

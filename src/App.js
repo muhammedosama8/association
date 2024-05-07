@@ -16,6 +16,7 @@ import { checkAutoLogin } from "./services/AuthService";
 import { isAuthenticated } from "./store/selectors/AuthSelectors";
 /// Style
 // import "./vendor/bootstrap-select/dist/css/bootstrap-select.min.css";
+import 'bootstrap-daterangepicker/daterangepicker.css';
 import "./css/style.css";
 import http from "./services/HttpService";
 import { setLang } from "./store/actions/AuthActions";

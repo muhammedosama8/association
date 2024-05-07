@@ -3,6 +3,8 @@ export const Arabic = {
   from_front: "من الأمام",
   from_back: "من الخلف",
   freeze: "تجميد",
+  profits: "الأرباح",
+  choiceـshowroom: "اختيار صاله العرض",
   dashboard: "الصفحه الرئيسيه",
   admins: "المدراء",
   admin: "المشرف",

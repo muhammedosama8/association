@@ -20,7 +20,6 @@ import AddAdmin from "./pages/Admin/AddAdmin";
 import Banners from "./pages/Banners";
 import Users from "./pages/Users";
 import Home from "./pages/Dashboard";
-import AdScreen from "./pages/AdScreen";
 import SocialMedia from "./pages/Setting/SocialMedia";
 import Permission from "./pages/Rules";
 import Profile from "./pages/Profile";
@@ -45,6 +44,7 @@ import ShareholdersRequests from "./pages/Website/ShareholdersRequests";
 import Attachments from "./pages/Website/ShareholdersRequests/Attachments";
 import FamilyCard from "./pages/Website/FamilyCard";
 import People from "./pages/Website/FamilyCard/People";
+import Profits from "./pages/Website/Profits";
 
 const Markup = () => {
   const allroutes = [
@@ -78,6 +78,7 @@ const Markup = () => {
     { url: "diwans", component: <Diwans /> },
     { url: "offers", component: <Offers /> },
     { url: "contact-us", component: <ContactUs /> },
+    { url: "profits", component: <Profits /> },
     { url: "notification", component: <Notification /> },
     { url: "notification/add-notification", component: <AddNotification /> },
 
