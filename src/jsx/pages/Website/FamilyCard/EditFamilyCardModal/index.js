@@ -30,7 +30,7 @@ const EditFamilyCardModal = ({editModal, setEditModal, item, data, setData})=>{
 
         familyCardService.updateFamilyMember(formData?.id, body)?.then(res=>{
             if(res && res?.status === 200){
-                toast.success('Family Card Updated Successfully')
+                toast.success(Translate[lang].updated_successfully)
                 let update = data?.map(d=>{
                     if(d.id === formData.id){
                         return formData

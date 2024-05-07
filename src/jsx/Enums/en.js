@@ -163,6 +163,7 @@ export const English = {
   to: "To",
   coupon: "Coupon",
   verified: "Verified",
+  updated_successfully: "Updated Successfully",
   updated_status_successfully: "Updated Status Successfully",
   profile_updated_successfully: "Profile Updated Successfully",
   banners_updated_successfully: "Banners Updated Successfully",

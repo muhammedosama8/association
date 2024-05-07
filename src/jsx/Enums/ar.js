@@ -165,6 +165,7 @@ export const Arabic = {
   to: "إلي",
   coupon: "كود الخصم",
   verified: "تم التحقق",
+  updated_successfully: "تم التحديث بنجاح",
   updated_status_successfully: "تم تحديث الحالة بنجاح",
   profile_updated_successfully: "تم تحديث الملف الشخصي بنجاح",
   banners_updated_successfully: "تم تحديث اللافتات بنجاح",
