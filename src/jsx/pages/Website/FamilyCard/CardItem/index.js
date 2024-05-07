@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Dropdown ,Form} from "react-bootstrap";
+import { Dropdown } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import FamilyCardService from "../../../../../services/FamilyCardService";
@@ -23,7 +23,7 @@ const CardItem = ({item, setItem, index, setAddModal, setShouldUpdate}) =>{
             </td>
             <td>{item.civil_id}</td>
             <td>
-                <Link to='/family_card/people' state={{people: item.people}}>
+                <Link to='/family_card/people' state={{people: item.family_members}}>
                     {item.number_of_people}
                 </Link>
             </td>

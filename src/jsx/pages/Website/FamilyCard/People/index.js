@@ -1,18 +1,19 @@
 import { useLocation, useNavigate } from "react-router-dom"
 import {
-    Row,
-    Col,
     Card,
     Table,
     Button,
+    Dropdown,
 } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { Translate } from "../../../../Enums/Tranlate";
 import { useSelector } from "react-redux";
+import EditFamilyCardModal from "../EditFamilyCardModal";
 
 const People = () =>{
     const [data, setData] = useState([])
-    const [loading, setLoading] = useState(false)
+    const [editModal, setEditModal] = useState(false)
+    const [item, setItem] = useState({})
     const location = useLocation()
     const navigate = useNavigate()
     const lang = useSelector(state=> state.auth.lang)
@@ -36,6 +37,7 @@ const People = () =>{
                     <th>
                       <strong>{Translate[lang]?.membership_number}</strong>
                     </th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody className="table-body">
@@ -48,6 +50,21 @@ const People = () =>{
                             {item?.name}
                         </td>
                         <td>{item.membership_number}</td>
+                        <td>
+                            <Dropdown>
+                                <Dropdown.Toggle
+                                    className="light sharp i-false"
+                                >
+                                    <i className="la la-ellipsis-v" style={{fontSize: '27px'}}></i>
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu>
+                                    <Dropdown.Item onClick={()=> {
+                                        setItem(item)
+                                        setEditModal(true)
+                                    }}> {Translate[lang]?.edit}</Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
+            </td>
                     </tr>
                 })}
             </tbody>
@@ -57,6 +74,14 @@ const People = () =>{
             </Button>
         </Card.Body>
     </Card>
+    {editModal && 
+        <EditFamilyCardModal
+          item={item} 
+          editModal={editModal} 
+          setEditModal={()=> setEditModal(false)}
+          data={data}
+          setData={setData}
+      />}
     </>
 }
 export default People

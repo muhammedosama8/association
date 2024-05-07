@@ -1,4 +1,8 @@
 export const Arabic = {
+  att_alert: "يرجي ادخال صورتين",
+  from_front: "من الأمام",
+  from_back: "من الخلف",
+  freeze: "تجميد",
   dashboard: "الصفحه الرئيسيه",
   admins: "المدراء",
   admin: "المشرف",

@@ -5,18 +5,21 @@ import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import ShareholdersRequestsService from "../../../../../services/ShareholdersRequestsService";
 import { Translate } from "../../../../Enums/Tranlate";
+import Loader from "../../../../common/Loader";
+import uploadImg from '../../../../../images/upload-img.png';
+import BaseService from "../../../../../services/BaseService";
 
 const AddShareholdersRequestsModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
     const [formData, setFormData] = useState({
         name: '',
         civil_id: '',
         phone: "",
-        shareholder_code_number: "",
-        box_number: "",
-        family_card: ""
+        shareholder_attach: ["", ""],
+        status: true
     })
     const [isAdd, setIsAdd] = useState(false)
     const [loading, setLoading] = useState(false)
+    const [loading1, setLoading1] = useState(false)
     const shareholdersRequestsService = new ShareholdersRequestsService()
     const lang = useSelector(state=> state.auth.lang)
 
@@ -30,12 +33,42 @@ const AddShareholdersRequestsModal = ({addModal, setAddModal, item, setShouldUpd
                 name: item?.name,
                 civil_id: item?.civil_id,
                 phone: item?.phone,
-                shareholder_code_number: item?.shareholder_code_number,
-                box_number: item?.box_number,
-                family_card: item?.family_card
+                shareholder_attach: item?.shareholder_attach?.map(res=> res?.url),
+                status: item?.status
             })
         }
     },[item])
+
+    const fileHandler = (e, ind) => {
+        let files = e.target.files
+        const filesData = Object.values(files)
+
+        if (filesData?.length) {
+            if(ind === 0){
+                setLoading(true)
+            } else {
+                setLoading1(true)
+            }
+            
+            new BaseService().postUpload(filesData[0]).then(res=>{
+                if(res?.status === 200){
+                    let update = formData.shareholder_attach?.map((att, index)=>{
+                        if(index === ind){
+                            return res?.data?.url 
+                        } else{
+                            return att
+                        }
+                    })
+                    setFormData({...formData, shareholder_attach: [...update]})
+                }
+                if(ind === 0){
+                    setLoading(false)
+                } else {
+                    setLoading1(false)
+                }
+            })
+        }
+    }
 
     const submit = (e) =>{
         e.preventDefault();
@@ -43,16 +76,15 @@ const AddShareholdersRequestsModal = ({addModal, setAddModal, item, setShouldUpd
                 name: formData?.name,
                 civil_id: formData?.civil_id,
                 phone: formData?.phone,
-                shareholder_code_number: formData?.shareholder_code_number,
-                box_number: formData?.box_number,
-                family_card: formData?.family_card
+                shareholder_attach: formData?.shareholder_attach,
+                status: formData?.status,
         }
         setLoading(true)
 
         if(isAdd){
             shareholdersRequestsService.create(data)?.then(res=>{
                 if(res && res?.status === 201){
-                    toast.success('Shareholder Added Successfully')
+                    toast.success('Shareholder Requests Added Successfully')
                     setShouldUpdate(prev=> !prev)
                     setAddModal()
                 }
@@ -61,13 +93,24 @@ const AddShareholdersRequestsModal = ({addModal, setAddModal, item, setShouldUpd
         } else {
             shareholdersRequestsService.update(formData?.id, data)?.then(res=>{
                 if(res && res?.status === 200){
-                    toast.success('Shareholder Updated Successfully')
+                    toast.success('Shareholder Requests Updated Successfully')
                     setShouldUpdate(prev=> !prev)
                     setAddModal()
                 }
                 setLoading(false)
             }).catch(()=> setLoading(false))
         }
+    }
+
+    const deleteAttachment = (index) => {
+        let update = formData?.shareholder_attach?.map((att, ind) => {
+            if(index === ind){
+                return ""
+            } else {
+                return att
+            }
+        })
+        setFormData({...formData, shareholder_attach: update})
     }
 
     return(
@@ -78,7 +121,7 @@ const AddShareholdersRequestsModal = ({addModal, setAddModal, item, setShouldUpd
                     className='form-horizontal'
                     onValidSubmit={submit}>
             <Modal.Header>
-            <Modal.Title>{isAdd ? Translate[lang]?.add : Translate[lang]?.edit} {Translate[lang]?.shareholders}</Modal.Title>
+            <Modal.Title>{isAdd ? Translate[lang]?.add : Translate[lang]?.edit} {Translate[lang]?.shareholders_requests}</Modal.Title>
             <Button
                 variant=""
                 className="close"
@@ -128,23 +171,6 @@ const AddShareholdersRequestsModal = ({addModal, setAddModal, item, setShouldUpd
                         </Col>
                         <Col md={6}>
                             <AvField
-                                label={Translate[lang]?.box_number}
-                                type='text'
-                                placeholder={Translate[lang]?.box_number}
-                                bsSize="lg"
-                                name='box_number'
-                                validate={{
-                                    required: {
-                                        value: true,
-                                        errorMessage: Translate[lang].field_required
-                                    }
-                                }}
-                                value={formData.box_number}
-                                onChange={(e) => setFormData({...formData, box_number: e.target.value})}
-                            />
-                        </Col>
-                        <Col md={6}>
-                            <AvField
                                 label={Translate[lang]?.phone}
                                 type='text'
                                 placeholder={Translate[lang]?.phone}
@@ -160,39 +186,90 @@ const AddShareholdersRequestsModal = ({addModal, setAddModal, item, setShouldUpd
                                 onChange={(e) => setFormData({...formData, phone: e.target.value})}
                             />
                         </Col>
-                        <Col md={6}>
-                            <AvField
-                                label={Translate[lang]?.shareholder_code_number}
-                                type='text'
-                                placeholder={Translate[lang]?.shareholder_code_number}
-                                bsSize="lg"
-                                name='shareholder_code_number'
-                                validate={{
-                                    required: {
-                                        value: true,
-                                        errorMessage: Translate[lang].field_required
-                                    }
-                                }}
-                                value={formData.shareholder_code_number}
-                                onChange={(e) => setFormData({...formData, shareholder_code_number: e.target.value})}
-                            />
+                        <Col md={6} className='mt-3'>
+                            <div className='form-group w-100'>
+                                <label className="m-0">{Translate[lang]?.image} {Translate[lang]?.from_front}</label>
+                                <div className="image-placeholder">	
+                                    <div className="avatar-edit">
+                                        <input type="file" onChange={(e) => fileHandler(e, 0)} id={`imageUpload1`} /> 					
+                                        <label htmlFor={`imageUpload1`}  name=''></label>
+                                    </div>
+                                    <div className="avatar-preview2 m-auto">
+                                        <div id={`imagePreview`}>
+                                        {!!formData?.shareholder_attach[0] && 
+                                                <img alt='icon'
+                                                    className='w-100 h-100' 
+                                                    style={{borderRadius: '30px'}} 
+                                                    src={formData?.shareholder_attach[0]}
+                                                />}
+                                                {!!formData?.shareholder_attach[0] && <button
+                                                    style={{
+                                                        border: '1px solid #dedede',
+                                                        borderRadius:' 50%',
+                                                        padding: '2px 5px',
+                                                        position: 'absolute',
+                                                        zIndex: '999'
+                                                    }}
+                                                    type="button"
+                                                    onClick={() => deleteAttachment(0)}
+                                                    >
+                                                    <i className="la la-trash text-danger"></i>
+                                                </button>}
+                                        {(!formData?.shareholder_attach[0] && !loading) && 
+                                            <img  
+                                                src={uploadImg} alt='icon'
+                                                style={{
+                                                    width: '80px', height: '80px',
+                                                }}
+                                            />}
+                                            {(!formData?.shareholder_attach[0] && loading) && <Loader />}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </Col>
-                        <Col md={6}>
-                            <AvField
-                                label={Translate[lang]?.family_card}
-                                type='text'
-                                placeholder={Translate[lang]?.family_card}
-                                bsSize="lg"
-                                name='family_card'
-                                validate={{
-                                    required: {
-                                        value: true,
-                                        errorMessage: Translate[lang].field_required
-                                    }
-                                }}
-                                value={formData.family_card}
-                                onChange={(e) => setFormData({...formData, family_card: e.target.value})}
-                            />
+                        <Col md={6} className='mt-3'>
+                            <div className='form-group w-100'>
+                                <label className="m-0">{Translate[lang]?.image} {Translate[lang]?.from_back}</label>
+                                <div className="image-placeholder">	
+                                    <div className="avatar-edit">
+                                        <input type="file" multiple onChange={(e) => fileHandler(e, 1)} id={`imageUpload`} /> 					
+                                        <label htmlFor={`imageUpload`}  name=''></label>
+                                    </div>
+                                    <div className="avatar-preview2 m-auto">
+                                        <div id={`imagePreview`}>
+                                        {!!formData?.shareholder_attach[1] && 
+                                            <img alt='icon'
+                                                className='w-100 h-100' 
+                                                style={{borderRadius: '30px'}} 
+                                                src={formData?.shareholder_attach[1]}
+                                        />}
+                                        {!!formData?.shareholder_attach[1] && <button
+                                            style={{
+                                                border: '1px solid #dedede',
+                                                borderRadius:' 50%',
+                                                padding: '2px 5px',
+                                                position: 'absolute',
+                                                zIndex: '999'
+                                            }}
+                                            type="button"
+                                            onClick={() => deleteAttachment(1)}
+                                            >
+                                            <i className="la la-trash text-danger"></i>
+                                        </button>}
+                                        {(!formData?.shareholder_attach[1] && !loading1) && 
+                                            <img 
+                                                src={uploadImg} alt='icon'
+                                                style={{
+                                                    width: '80px',
+                                                    height: '80px',
+                                                }}
+                                        />}
+                                        {(!formData?.shareholder_attach[1] && loading1) && <Loader />}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </Col>
                     </Row>
             </Modal.Body>

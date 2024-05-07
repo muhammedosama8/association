@@ -8,24 +8,20 @@ import {
   Button,
 } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import BrandsService from "../../../../services/BrandsService";
 import Loader from "../../../common/Loader";
 import NoData from "../../../common/NoData";
 import Pagination from "../../../common/Pagination/Pagination";
 import { Translate } from "../../../Enums/Tranlate";
 import CardItem from "./CardItem";
-import header from "../../../../images/header.jpeg"
 import './style.scss'
 import ShareholdersService from "../../../../services/ShareholdersService";
 import AddShareholdersModal from "./AddShareholdersModal";
 import ImportModal from "../../../common/ImportModal";
 
 const Shareholders = () => {
-    const [data, setData] = useState([
-      // {id: 1, name: 'Muhammed osama nasser', civil_id: 12312, phone: "01002231233",shareholder_code_number: "34535253423424", boxـnumber: "43223423424234", family_card: '45632345243'},
-      // {id: 2, name: 'Muhammed nasser', civil_id: 12312, phone: "01002231233",shareholder_code_number: "34535253423424", boxـnumber: "43223423424234", family_card: '45632345243'},
-    ])
+    const [data, setData] = useState([])
     const [addModal, setAddModal] = useState(false)
+    const [type, setType] = useState('')
     const [importModal, setImportModal] = useState(false)
     const [item, setItem] = useState({})
     const [hasData, setHasData] = useState(null)
@@ -57,7 +53,24 @@ const Shareholders = () => {
             ></div>
           </div>
           {isExist('website') && <div>
-            <Button variant="secondary" className='mx-3 h-75' onClick={()=> setImportModal(true)}>
+            <Button 
+              variant="info" 
+              style={{
+                background: 'rgb(243, 246, 249)',
+                border: 0, color: '#555'
+              }}
+              className='h-75' 
+              onClick={()=> {
+                setImportModal(true)
+                setType('freeze')
+              }}>
+              {Translate[lang]?.freeze}
+            </Button>
+            <Button variant="secondary" className='mx-3 h-75' 
+              onClick={()=> {
+                setImportModal(true)
+                setType('import')
+              }}>
               {Translate[lang]?.import}
             </Button>
             <Button variant="primary" className='me-2 h-75' onClick={()=> { 
@@ -143,6 +156,7 @@ const Shareholders = () => {
       {importModal && <ImportModal 
         addModal={importModal} 
         setAddModal={()=> setImportModal(false)} 
+        type={type}
         name={'shareholders'} 
         service={shareholdersService}
         setShouldUpdate={setShouldUpdate}

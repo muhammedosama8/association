@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Dropdown ,Form} from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import ShareholdersService from "../../../../../services/ShareholdersService";
+import { toast } from "react-toastify";
+import ShareholdersRequestsService from "../../../../../services/ShareholdersRequestsService";
 import DeleteModal from "../../../../common/DeleteModal";
 import { Translate } from "../../../../Enums/Tranlate";
 
@@ -11,9 +12,8 @@ const CardItem = ({item, setItem, index, setAddModal, setShouldUpdate}) =>{
     const Auth = useSelector(state=> state.auth?.auth)
     const lang = useSelector(state=> state.auth?.lang)
     const isExist = (data)=> Auth?.admin?.admin_roles?.includes(data)
-    const shareholdersService = new ShareholdersService()
+    const shareholdersRequestsService = new ShareholdersRequestsService()
 
-    const changeStatus = (stat) => {}
 
     return(
         <tr key={index} className='text-center'>
@@ -26,7 +26,7 @@ const CardItem = ({item, setItem, index, setAddModal, setShouldUpdate}) =>{
             <td>{item.civil_id}</td>
             <td>{item.phone}</td>
             <td>
-                <Link to='/shareholders_requests/attachments' state={{attachments: item.attachments}}>
+                <Link to='/shareholders_requests/attachments' state={{item: item}}>
                     {Translate[lang].attachments}
                 </Link>
             </td>
@@ -34,8 +34,8 @@ const CardItem = ({item, setItem, index, setAddModal, setShouldUpdate}) =>{
                 <Form.Check
                     type="switch"
                     id={`status${item?.id}`}
-                    checked={item.status}
-                   onChange={(e)=> changeStatus(e.target.checked)}
+                    checked={item?.status}
+                    // onChange={(e)=> changeStatus(e.target.checked)}
                  />
             </td>
             <td>
@@ -58,7 +58,7 @@ const CardItem = ({item, setItem, index, setAddModal, setShouldUpdate}) =>{
                       open={deleteModal}
                       titleMsg={item.name}
                       deletedItem={item}
-                      modelService={shareholdersService}
+                      modelService={shareholdersRequestsService}
                       onCloseModal={setDeleteModal}
                       setShouldUpdate={setShouldUpdate}
                     />}

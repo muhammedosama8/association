@@ -8,51 +8,21 @@ import {
   Button,
 } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import BrandsService from "../../../../services/BrandsService";
 import Loader from "../../../common/Loader";
 import NoData from "../../../common/NoData";
 import Pagination from "../../../common/Pagination/Pagination";
 import { Translate } from "../../../Enums/Tranlate";
 import CardItem from "./CardItem";
-import header from "../../../../images/header.jpeg"
 import './style.scss'
 import ShareholdersRequestsService from "../../../../services/ShareholdersRequestsService";
 import AddShareholdersRequestsModal from "./AddShareholdersRequestsModal";
 import ImportModal from "../../../common/ImportModal";
 
 const ShareholdersRequests = () => {
-    const [data, setData] = useState([
-      {
-        id: 1, 
-        name: 'Muhammed osama nasser', 
-        civil_id: "12312",
-        phone: "01002231233",
-        attachments: [
-          "https://back.sabahalsalemco-op.com/download-1714570771840.jpeg",
-          "https://back.sabahalsalemco-op.com/download-1714570771840.jpeg",
-          "https://back.sabahalsalemco-op.com/download-1714570771840.jpeg",
-          "https://back.sabahalsalemco-op.com/download-1714570771840.jpeg",
-        ], 
-        status: true
-      },
-      {
-        id: 2, 
-        name: 'Muhammed nasser', 
-        civil_id: "3333",
-        phone: "01002231233",
-        attachments: [
-          "https://back.sabahalsalemco-op.com/download-1714570771840.jpeg",
-          "https://back.sabahalsalemco-op.com/download-1714570771840.jpeg",
-          "https://back.sabahalsalemco-op.com/download-1714570771840.jpeg",
-          "https://back.sabahalsalemco-op.com/download-1714570771840.jpeg",
-        ], 
-        status: false
-      },
-    ])
+    const [data, setData] = useState([])
     const [addModal, setAddModal] = useState(false)
-    const [importModal, setImportModal] = useState(false)
     const [item, setItem] = useState({})
-    const [hasData, setHasData] = useState(1)
+    const [hasData, setHasData] = useState(null)
     const [search, setSearch] = useState(null)
     const [loading, setLoading] = useState(false)
     const [shouldUpdate, setShouldUpdate] = useState(false)
@@ -81,14 +51,11 @@ const ShareholdersRequests = () => {
             ></div>
           </div>
           {isExist('website') && <div>
-            <Button variant="secondary" className='mx-3 h-75' onClick={()=> setImportModal(true)}>
-              {Translate[lang]?.import}
-            </Button>
             <Button variant="primary" className='me-2 h-75' onClick={()=> { 
               setItem({})
               setAddModal(true) }}>
               <i className="la la-plus mx-1"></i>
-              {Translate[lang]?.add} {Translate[lang]?.shareholders}
+              {Translate[lang]?.add} {Translate[lang]?.shareholders_requests}
             </Button>
           </div>}
         </Card.Body >
@@ -140,14 +107,14 @@ const ShareholdersRequests = () => {
                 </tbody>
               </Table>}
               {hasData === 0 && <NoData />}
-              {/* <Pagination
+              <Pagination
                   setData={setData}
-                  service={shareholdersService}
+                  service={shareholdersRequestsService}
                   shouldUpdate={shouldUpdate}
                   setHasData={setHasData}
                   setLoading={setLoading}
                   search={search}
-              /> */}
+              />
             </Card.Body>
           </Card>
         </Col>
@@ -159,14 +126,6 @@ const ShareholdersRequests = () => {
           addModal={addModal} 
           setShouldUpdate={setShouldUpdate}
           setAddModal={()=> setAddModal(false)}
-      />}
-
-      {importModal && <ImportModal 
-        addModal={importModal} 
-        setAddModal={()=> setImportModal(false)} 
-        name={'shareholders'} 
-        service={shareholdersRequestsService}
-        setShouldUpdate={setShouldUpdate}
       />}
     </Fragment>
   );

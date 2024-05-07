@@ -1,4 +1,8 @@
 export const English = {
+  att_alert: 'Please Enter Two Photos',
+  from_front: "From Front",
+  from_back: "From Back",
+  freeze: "Freeze",
   dashboard: "Dashboard",
   admins: "Admins",
   admin: "Admin",

@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import BaseService from "../../../services/BaseService";
 import { Translate } from "../../Enums/Tranlate";
 
-const ImportModal = ({addModal, setAddModal, name, service, setShouldUpdate})=>{
+const ImportModal = ({addModal, setAddModal, type, name, service, setShouldUpdate})=>{
     const [formData, setFormData] = useState({
         file: ''
     })
@@ -31,17 +31,31 @@ const ImportModal = ({addModal, setAddModal, name, service, setShouldUpdate})=>{
     }
 
     const submit = () =>{
-        let data ={...formData}
+        let data ={
+            sheet_url: formData?.file
+        }
 
         setLoading(true)
-        service.create(data).then(res=>{
-            if(res && res?.status === 201){
-                toast.success('Added Successfully')
-                setShouldUpdate(prev=> !prev)
-                setAddModal()
-            }
-            setLoading(false)
-        }).catch(()=> setLoading(false))
+        if(type === 'import'){
+            service.uploadSheet(data).then(res=>{
+                if(res && res?.status === 201){
+                    toast.success('Added Successfully')
+                    setShouldUpdate(prev=> !prev)
+                    setAddModal()
+                }
+                setLoading(false)
+            }).catch(()=> setLoading(false))
+        } else {
+            service.delete(data).then(res=>{
+                if(res && res?.status === 201){
+                    toast.success('Sheet Freeze Successfully')
+                    setShouldUpdate(prev=> !prev)
+                    setAddModal()
+                }
+                setLoading(false)
+            }).catch(()=> setLoading(false))
+        }
+        
     }
 
     return(
@@ -52,7 +66,7 @@ const ImportModal = ({addModal, setAddModal, name, service, setShouldUpdate})=>{
                     className='form-horizontal'
                     onValidSubmit={submit}>
             <Modal.Header>
-            <Modal.Title>{Translate[lang]?.add} {Translate[lang][name]}</Modal.Title>
+            <Modal.Title>{type === 'import' ? Translate[lang]?.import : Translate[lang]?.freeze} {Translate[lang][name]}</Modal.Title>
             <Button
                 variant=""
                 className="close"
@@ -71,18 +85,27 @@ const ImportModal = ({addModal, setAddModal, name, service, setShouldUpdate})=>{
                             <label className="m-0">{Translate[lang]?.file}</label>
                             <div className="image-placeholder">	
                                         <div className="avatar-edit">
-                                            <input type="file" onChange={(e) => fileHandler(e)} id={`imageUpload`} /> 					
+                                            <input 
+                                                type="file" 
+                                                accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt"
+                                                onChange={(e) => fileHandler(e)} id={`imageUpload`} /> 					
                                             <label htmlFor={`imageUpload`}  name=''></label>
                                         </div>
                                         <div className="avatar-preview2 m-auto">
                                             <div id={`imagePreview`}>
                                             {!!formData?.file && 
-                                                <img alt='icon'
-                                                    id={`saveImageFile`} 
-                                                    className='w-100 h-100' 
-                                                    style={{borderRadius: '30px'}} 
-                                                    src={formData?.img}
-                                                />}
+                                                <i 
+                                                    className="la la-check-circle"
+                                                    style={{
+                                                        fontSize: '6rem',
+                                                        color: 'green',
+                                                        position: 'absolute',
+                                                        top: '50%',
+                                                        left: '50%',
+                                                        transform: 'translate(-50%, -50%)'
+                                                    }}
+                                                ></i>
+                                            }
                                             {(!formData?.file && !loading) && 
                                                 <img 
                                                     id={`saveImageFile`} 

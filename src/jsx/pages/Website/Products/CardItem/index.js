@@ -27,7 +27,7 @@ const CardItem = ({item, setItem, index, setAddModal, setShouldUpdate}) =>{
                 />
             </td>
             <td>
-                {item?.product_name}
+                {item?.name}
             </td>
             <td>{item.item_no}</td>
             <td>{item.price}</td>

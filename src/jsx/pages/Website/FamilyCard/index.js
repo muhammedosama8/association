@@ -19,36 +19,12 @@ import AddFamilyCardModal from "./AddFamilyCardModal";
 import ImportModal from "../../../common/ImportModal";
 
 const FamilyCard = () => {
-    const [data, setData] = useState([
-      {
-        id: 1, 
-        name: 'Muhammed osama nasser', 
-        civil_id: "12312",
-        number_of_people: "5",
-        people: [
-          {id:1, name: "os", membership_number: '3456789'},
-          {id:2, name: "os", membership_number: '3456789'},
-          {id:3, name: "os", membership_number: '3456789'},
-          {id:4, name: "os", membership_number: '3456789'},
-          {id:5, name: "os", membership_number: '3456789'},
-        ]
-      },
-      {
-        id: 2, 
-        name: 'Muhammed osama', 
-        civil_id: "12315672",
-        number_of_people: "3",
-        people: [
-          {id:1, name: "os", membership_number: '3456789'},
-          {id:2, name: "os", membership_number: '3456789'},
-          {id:3, name: "os", membership_number: '3456789'},
-        ]
-      },
-    ])
+    const [data, setData] = useState([])
     const [addModal, setAddModal] = useState(false)
+    const [type, setType] = useState('')
     const [importModal, setImportModal] = useState(false)
     const [item, setItem] = useState({})
-    const [hasData, setHasData] = useState(1)
+    const [hasData, setHasData] = useState(null)
     const [search, setSearch] = useState(null)
     const [loading, setLoading] = useState(false)
     const [shouldUpdate, setShouldUpdate] = useState(false)
@@ -77,7 +53,25 @@ const FamilyCard = () => {
             ></div>
           </div>
           {isExist('website') && <div>
-            <Button variant="secondary" className='mx-3 h-75' onClick={()=> setImportModal(true)}>
+          <Button 
+              variant="info" 
+              style={{
+                background: 'rgb(243, 246, 249)',
+                border: 0, color: '#555'
+              }}
+              className='h-75' 
+              onClick={()=> {
+                setImportModal(true)
+                setType('freeze')
+              }}>
+              {Translate[lang]?.freeze}
+            </Button>
+            <Button 
+              onClick={()=> {
+                setImportModal(true)
+                setType('import')
+              }}
+              variant="secondary" className='mx-3 h-75'>
               {Translate[lang]?.import}
             </Button>
             <Button variant="primary" className='me-2 h-75' onClick={()=> { 
@@ -130,14 +124,14 @@ const FamilyCard = () => {
                 </tbody>
               </Table>}
               {hasData === 0 && <NoData />}
-              {/* <Pagination
+              <Pagination
                   setData={setData}
-                  service={shareholdersService}
+                  service={familyCardService}
                   shouldUpdate={shouldUpdate}
                   setHasData={setHasData}
                   setLoading={setLoading}
                   search={search}
-              /> */}
+              />
             </Card.Body>
           </Card>
         </Col>
@@ -154,6 +148,7 @@ const FamilyCard = () => {
       {importModal && <ImportModal 
         addModal={importModal} 
         setAddModal={()=> setImportModal(false)} 
+        type={type}
         name={'family-card'} 
         service={familyCardService}
         setShouldUpdate={setShouldUpdate}

@@ -4,7 +4,6 @@ import {AvField, AvForm} from "availity-reactstrap-validation";
 import { toast } from "react-toastify";
 import uploadImg from '../../../../../images/upload-img.png';
 import BaseService from "../../../../../services/BaseService";
-import BrandsService from "../../../../../services/BrandsService";
 import Loader from "../../../../common/Loader";
 import { useSelector } from "react-redux";
 import { Translate } from "../../../../Enums/Tranlate";

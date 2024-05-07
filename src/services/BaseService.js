@@ -59,9 +59,18 @@ export default class BaseService {
     return http.delete(this.entityUrl([id]));
   }
 
+  delete(data) {
+    return http.delete(this.apiEndpoint, data);
+  }
+
   postUpload(file) {
     const formData = new FormData();
     formData.append("img", file);
     return http.post(apiUploadEndpoint, formData);
   }
+
+  uploadSheet(data){
+    return http.post(`${this.apiEndpoint}/sheet`, data);
+  }
+
 }

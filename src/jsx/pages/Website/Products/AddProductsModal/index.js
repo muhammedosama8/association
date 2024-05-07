@@ -12,7 +12,7 @@ import BaseService from "../../../../../services/BaseService";
 const AddProductsModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
     const [formData, setFormData] = useState({
         item_no: '',
-        product_name: '',
+        name: '',
         price: "",
         code: "",
         barcode: "",
@@ -30,9 +30,9 @@ const AddProductsModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
             setIsAdd(false)
             setFormData({
                 id: item?.id,
-                item_no: item?.item_no,
-                product_name: item?.product_name,
-                price: item?.price,
+                item_no: String(item?.item_no),
+                name: item?.name,
+                price: String(item?.price),
                 code: item?.code,
                 barcode: item?.barcode,
                 image: item?.image
@@ -58,7 +58,12 @@ const AddProductsModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
     const submit = (e) =>{
         e.preventDefault();
         let data ={ 
-            ...formData
+            item_no: formData?.item_no,
+            name: formData?.name,
+            price: formData?.price,
+            code: formData?.code,
+            barcode: formData?.barcode,
+            image: formData?.image
         }
 
         if(isAdd){
@@ -104,19 +109,19 @@ const AddProductsModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
                     <Row>
                         <Col md={12}>
                             <AvField
-                                label={Translate[lang]?.product_name}
+                                label={Translate[lang]?.name}
                                 type='text'
-                                placeholder={Translate[lang]?.product_name}
+                                placeholder={Translate[lang]?.name}
                                 bsSize="lg"
-                                name='product_name'
+                                name='name'
                                 validate={{
                                     required: {
                                         value: true,
                                         errorMessage: Translate[lang].field_required
                                     }
                                 }}
-                                value={formData.product_name}
-                                onChange={(e) => setFormData({...formData, product_name: e.target.value})}
+                                value={formData.name}
+                                onChange={(e) => setFormData({...formData, name: e.target.value})}
                             />
                         </Col>
                         <Col md={6}>

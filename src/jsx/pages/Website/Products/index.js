@@ -23,7 +23,7 @@ const Products = () => {
     const [addModal, setAddModal] = useState(false)
     const [importModal, setImportModal] = useState(false)
     const [item, setItem] = useState({})
-    const [hasData, setHasData] = useState(0)
+    const [hasData, setHasData] = useState(null)
     const [search, setSearch] = useState(null)
     const [loading, setLoading] = useState(false)
     const [shouldUpdate, setShouldUpdate] = useState(false)
@@ -111,14 +111,14 @@ const Products = () => {
                 </tbody>
               </Table>}
               {hasData === 0 && <NoData />}
-              {/* <Pagination
+              <Pagination
                   setData={setData}
                   service={productsService}
                   shouldUpdate={shouldUpdate}
                   setHasData={setHasData}
                   setLoading={setLoading}
                   search={search}
-              /> */}
+              />
             </Card.Body>
           </Card>
         </Col>

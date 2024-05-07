@@ -11,7 +11,7 @@ const AddShareholdersRequestsModal = ({addModal, setAddModal, item, setShouldUpd
         name: '',
         civil_id: '',
         number_of_people: "",
-        people: []
+        family_members: []
     })
     const [isAdd, setIsAdd] = useState(false)
     const [loading, setLoading] = useState(false)
@@ -23,15 +23,13 @@ const AddShareholdersRequestsModal = ({addModal, setAddModal, item, setShouldUpd
             setIsAdd(true)
         } else {
             setIsAdd(false)
-            // setFormData({
-            //     id: item?.id,
-            //     name: item?.name,
-            //     civil_id: item?.civil_id,
-            //     phone: item?.phone,
-            //     shareholder_code_number: item?.shareholder_code_number,
-            //     box_number: item?.box_number,
-            //     family_card: item?.family_card
-            // })
+            setFormData({
+                id: item?.id,
+                name: item?.name,
+                civil_id: item?.civil_id,
+                number_of_people: item?.number_of_people,
+                family_members: item?.family_members
+            })
         }
     },[item])
 
@@ -40,17 +38,15 @@ const AddShareholdersRequestsModal = ({addModal, setAddModal, item, setShouldUpd
         let data ={ 
                 name: formData?.name,
                 civil_id: formData?.civil_id,
-                phone: formData?.phone,
-                shareholder_code_number: formData?.shareholder_code_number,
-                box_number: formData?.box_number,
-                family_card: formData?.family_card
+                number_of_people: formData?.number_of_people,
+                family_members: formData?.family_members
         }
         setLoading(true)
 
         if(isAdd){
             familyCardService.create(data)?.then(res=>{
                 if(res && res?.status === 201){
-                    toast.success('Shareholder Added Successfully')
+                    toast.success('Family Card Added Successfully')
                     setShouldUpdate(prev=> !prev)
                     setAddModal()
                 }
@@ -59,7 +55,7 @@ const AddShareholdersRequestsModal = ({addModal, setAddModal, item, setShouldUpd
         } else {
             familyCardService.update(formData?.id, data)?.then(res=>{
                 if(res && res?.status === 200){
-                    toast.success('Shareholder Updated Successfully')
+                    toast.success('Family Card Updated Successfully')
                     setShouldUpdate(prev=> !prev)
                     setAddModal()
                 }
@@ -147,14 +143,13 @@ const AddShareholdersRequestsModal = ({addModal, setAddModal, item, setShouldUpd
                                     setFormData({
                                         ...formData, 
                                         number_of_people: e.target.value,
-                                        people: arr
+                                        family_members: arr
                                     })
                                 }}
                             />
                         </Col>
                         <Col md={12}><hr/></Col>
-                        
-                        {formData?.people?.map((item,index)=>{
+                        {formData?.family_members?.map((item,index)=>{
                             return <Fragment key={index}>
                             <Col md={6}>
                             <AvField
@@ -171,7 +166,7 @@ const AddShareholdersRequestsModal = ({addModal, setAddModal, item, setShouldUpd
                                 }}
                                 value={item.name}
                                 onChange={(e) => {
-                                    let update = formData.people?.map((res, ind)=> {
+                                    let update = formData.family_members?.map((res, ind)=> {
                                         if(ind === index){
                                             return {
                                                 ...res,
@@ -181,7 +176,7 @@ const AddShareholdersRequestsModal = ({addModal, setAddModal, item, setShouldUpd
                                             return res
                                         }
                                     })
-                                    setFormData({...formData, people: update})
+                                    setFormData({...formData, family_members: update})
                                 }}
                             />
                         </Col>
@@ -200,7 +195,7 @@ const AddShareholdersRequestsModal = ({addModal, setAddModal, item, setShouldUpd
                                 }}
                                 value={item.membership_number}
                                 onChange={(e) => {
-                                    let update = formData.people?.map((res, ind)=> {
+                                    let update = formData.family_members?.map((res, ind)=> {
                                         if(ind === index){
                                             return {
                                                 ...res,
@@ -210,7 +205,7 @@ const AddShareholdersRequestsModal = ({addModal, setAddModal, item, setShouldUpd
                                             return res
                                         }
                                     })
-                                    setFormData({...formData, people: update})
+                                    setFormData({...formData, family_members: update})
                                 }}
                             />
                         </Col>
