@@ -59,6 +59,11 @@ export const MenuList = [
           to: 'offers',
           rule: 'website',
         }, {
+          title:'People of Determination Offers',
+          text:'peopleOfDeterminationOffers',
+          to: 'peopleOfDeterminationOffers',
+          rule: 'website',
+        }, {
           title:'Members',
           text:'members',
           to: 'members',

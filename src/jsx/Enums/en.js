@@ -4,6 +4,7 @@ export const English = {
   from_back: "From Back",
   profits: "Profits",
   chooseـaـyearـofـoffer: "Choose a year of Offer",
+  peopleOfDeterminationOffers: "People of Determination Offers",
   freeze: "Freeze",
   dashboard: "Dashboard",
   admins: "Admins",

@@ -5,6 +5,7 @@ export const Arabic = {
   freeze: "تجميد",
   profits: "الأرباح",
   chooseـaـyearـofـoffer: "اختيار سنه العرض",
+  peopleOfDeterminationOffers: "عروض ذو الهمم",
   dashboard: "الصفحه الرئيسيه",
   admins: "المدراء",
   admin: "المشرف",

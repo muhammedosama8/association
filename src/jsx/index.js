@@ -45,6 +45,7 @@ import Attachments from "./pages/Website/ShareholdersRequests/Attachments";
 import FamilyCard from "./pages/Website/FamilyCard";
 import People from "./pages/Website/FamilyCard/People";
 import Profits from "./pages/Website/Profits";
+import PeopleOfDeterminationOffers from "./pages/Website/PeopleOfDeterminationOffers";
 
 const Markup = () => {
   const allroutes = [
@@ -77,6 +78,7 @@ const Markup = () => {
     { url: "news", component: <News /> },
     { url: "diwans", component: <Diwans /> },
     { url: "offers", component: <Offers /> },
+    { url: "peopleOfDeterminationOffers", component: <PeopleOfDeterminationOffers /> },
     { url: "contact-us", component: <ContactUs /> },
     { url: "profits", component: <Profits /> },
     { url: "notification", component: <Notification /> },
