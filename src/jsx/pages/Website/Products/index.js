@@ -25,6 +25,7 @@ const Products = () => {
     const [item, setItem] = useState({})
     const [hasData, setHasData] = useState(null)
     const [search, setSearch] = useState(null)
+    const [type, setType] = useState('')
     const [loading, setLoading] = useState(false)
     const [shouldUpdate, setShouldUpdate] = useState(false)
     const Auth = useSelector(state=> state.auth?.auth)
@@ -52,7 +53,10 @@ const Products = () => {
             ></div>
           </div>
           {isExist('website') && <div>
-            <Button variant="secondary" className='mx-3 h-75' onClick={()=> setImportModal(true)}>
+            <Button variant="secondary" className='mx-3 h-75' onClick={()=> {
+              setImportModal(true)
+              setType('import')
+            }}>
               {Translate[lang]?.import}
             </Button>
             <Button variant="primary" className='me-2 h-75' onClick={()=> { 
@@ -135,6 +139,7 @@ const Products = () => {
       {importModal && <ImportModal 
         addModal={importModal} 
         setAddModal={()=> setImportModal(false)} 
+        type={type}
         name={'product'} 
         service={productsService}
         setShouldUpdate={setShouldUpdate}
