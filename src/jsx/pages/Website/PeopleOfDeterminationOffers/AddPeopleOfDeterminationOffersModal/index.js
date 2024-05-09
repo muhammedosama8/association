@@ -37,11 +37,6 @@ const AddPeopleOfDeterminationOffersModal = ({addModal, setAddModal, item, setSh
     },[item])
 
     const submit = () =>{
-        // if(!formData?.pdf || !formData?.img){
-        //     toast.error(`Upload ${!formData?.pdf ? 'Offer' : ''} ${!formData?.pdf && !formData?.img ? "&" : ''} ${!formData?.img ? 'Image' : ''} First`)
-        //     return
-        // }
-
         let data ={
             title: formData?.title,
             image: formData?.image,
@@ -51,7 +46,7 @@ const AddPeopleOfDeterminationOffersModal = ({addModal, setAddModal, item, setSh
         if(isAdd){
             peopleOfDeterminationOffersService.create(data)?.then(res=>{
                 if(res && res?.status === 201){
-                    toast.success('Brand Added Successfully')
+                    toast.success('Offer Added Successfully')
                     setShouldUpdate(prev=> !prev)
                     setAddModal()
                 }
@@ -59,7 +54,7 @@ const AddPeopleOfDeterminationOffersModal = ({addModal, setAddModal, item, setSh
         } else {
             peopleOfDeterminationOffersService.update(formData?.id, data)?.then(res=>{
                 if(res && res?.status === 200){
-                    toast.success('Brand Updated Successfully')
+                    toast.success('Offer Updated Successfully')
                     setShouldUpdate(prev=> !prev)
                     setAddModal()
                 }
