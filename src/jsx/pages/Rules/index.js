@@ -183,13 +183,13 @@ const Permission = () => {
                 })}
               </tbody>
             </Table>
-            {isExist("rules") && (
+            {/* {isExist("rules") && ( */}
               <div className="d-flex justify-content-end mt-5">
                 <Button variant="primary" type="submit">
                   {Translate[lang]?.edit}
                 </Button>
               </div>
-            )}
+            {/* )} */}
           </div>
         </Card.Body>
       </Card>
