@@ -11,6 +11,7 @@ const AddShareholdersRequestsModal = ({addModal, setAddModal, item, setShouldUpd
         name: '',
         civil_id: '',
         number_of_people: "",
+        box_number: '',
         family_members: []
     })
     const [isAdd, setIsAdd] = useState(false)
@@ -27,6 +28,7 @@ const AddShareholdersRequestsModal = ({addModal, setAddModal, item, setShouldUpd
                 id: item?.id,
                 name: item?.name,
                 civil_id: item?.civil_id,
+                box_number: item?.box_number,
                 number_of_people: item?.number_of_people,
                 family_members: item?.family_members
             })
@@ -38,6 +40,7 @@ const AddShareholdersRequestsModal = ({addModal, setAddModal, item, setShouldUpd
         let data ={ 
                 name: formData?.name,
                 civil_id: formData?.civil_id,
+                box_number: formData?.box_number,
                 number_of_people: formData?.number_of_people,
                 family_members: formData?.family_members
         }
@@ -72,7 +75,7 @@ const AddShareholdersRequestsModal = ({addModal, setAddModal, item, setShouldUpd
                     className='form-horizontal'
                     onValidSubmit={submit}>
             <Modal.Header>
-            <Modal.Title>{isAdd ? Translate[lang]?.add : Translate[lang]?.edit} {Translate[lang]?.shareholders}</Modal.Title>
+            <Modal.Title>{isAdd ? Translate[lang]?.add : Translate[lang]?.edit} {Translate[lang]?.family_card}</Modal.Title>
             <Button
                 variant=""
                 className="close"
@@ -118,6 +121,23 @@ const AddShareholdersRequestsModal = ({addModal, setAddModal, item, setShouldUpd
                                 }}
                                 value={formData.civil_id}
                                 onChange={(e) => setFormData({...formData, civil_id: e.target.value})}
+                            />
+                        </Col>
+                        <Col md={6}>
+                            <AvField
+                                label={Translate[lang]?.box_number}
+                                type='text'
+                                placeholder={Translate[lang]?.box_number}
+                                bsSize="lg"
+                                name='box_number'
+                                validate={{
+                                    required: {
+                                        value: true,
+                                        errorMessage: Translate[lang].field_required
+                                    }
+                                }}
+                                value={formData.box_number}
+                                onChange={(e) => setFormData({...formData, box_number: e.target.value})}
                             />
                         </Col>
                         <Col md={6}>

@@ -104,6 +104,9 @@ const FamilyCard = () => {
                       <strong>{Translate[lang]?.civil_id}</strong>
                     </th>
                     <th>
+                      <strong>{Translate[lang]?.box_number}</strong>
+                    </th>
+                    <th>
                       <strong>{Translate[lang]?.number_of_people}</strong>
                     </th>
                     <th></th>

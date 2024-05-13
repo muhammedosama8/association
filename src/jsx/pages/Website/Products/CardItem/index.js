@@ -17,21 +17,20 @@ const CardItem = ({item, setItem, index, setAddModal, setShouldUpdate}) =>{
             <td>
                 <strong>{item.id}</strong>
             </td>
-            <td>
-                <img
+            <td >
+                {!!item?.image ? <img
                     src={item?.image}
                     className="rounded-lg"
                     width="40"
                     height="40"
                     alt={item.id}
-                />
+                />: '-'}
             </td>
             <td>
                 {item?.name}
             </td>
             <td>{item.item_no}</td>
             <td>{item.price}</td>
-            <td>{item.code}</td>
             <td>
                 {isExist('website') && <Dropdown>
                     <Dropdown.Toggle

@@ -14,7 +14,7 @@ const AddProductsModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
         item_no: '',
         name: '',
         price: "",
-        code: "",
+        // code: "",
         barcode: "",
         image: "",
     })
@@ -33,7 +33,7 @@ const AddProductsModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
                 item_no: String(item?.item_no),
                 name: item?.name,
                 price: String(item?.price),
-                code: item?.code,
+                // code: item?.code,
                 barcode: item?.barcode,
                 image: item?.image
             })
@@ -61,7 +61,7 @@ const AddProductsModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
             item_no: formData?.item_no,
             name: formData?.name,
             price: formData?.price,
-            code: formData?.code,
+            // code: formData?.code,
             barcode: formData?.barcode,
             image: formData?.image
         }
@@ -160,7 +160,7 @@ const AddProductsModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
                             />
                         </Col>
                         <Col md={6}>
-                            <AvField
+                            {/* <AvField
                                 label={Translate[lang]?.code}
                                 type='text'
                                 placeholder={Translate[lang]?.code}
@@ -174,7 +174,7 @@ const AddProductsModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
                                 }}
                                 value={formData.code}
                                 onChange={(e) => setFormData({...formData, code: e.target.value})}
-                            />
+                            /> */}
                             <AvField
                                 label={Translate[lang]?.barcode}
                                 type='text'

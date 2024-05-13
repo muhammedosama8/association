@@ -22,6 +22,7 @@ const CardItem = ({item, setItem, index, setAddModal, setShouldUpdate}) =>{
                 {item?.name}
             </td>
             <td>{item.civil_id}</td>
+            <td>{item?.box_number}</td>
             <td>
                 <Link to='/family_card/people' state={{people: item.family_members}}>
                     {item.number_of_people}

@@ -94,9 +94,6 @@ const Products = () => {
                     <th>
                       <strong>{Translate[lang]?.price}</strong>
                     </th>
-                    <th>
-                      <strong>{Translate[lang]?.code}</strong>
-                    </th>
                     <th></th>
                   </tr>
                 </thead>
