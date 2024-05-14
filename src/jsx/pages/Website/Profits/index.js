@@ -111,7 +111,7 @@ const Profits = () => {
                     <th>
                       <strong>{Translate[lang]?.year}</strong>
                     </th>
-                    <th></th>
+                    {/* <th></th> */}
                   </tr>
                 </thead>
 
@@ -144,9 +144,7 @@ const Profits = () => {
 
       {addModal && 
         <AddProfitsModal
-          item={item} 
           addModal={addModal} 
-          setShouldUpdate={setShouldUpdate}
           setAddModal={()=> setAddModal(false)}
       />}
 

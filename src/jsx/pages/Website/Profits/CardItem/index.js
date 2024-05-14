@@ -24,7 +24,7 @@ const CardItem = ({item, setItem, index, setAddModal, setShouldUpdate}) =>{
             <td>{item.box_number}</td>
             <td>{item.profit}</td>
             <td>{item.year}</td>
-            <td>
+            {/* <td>
                 {isExist('website') && <Dropdown>
                     <Dropdown.Toggle
                         className="light sharp i-false"
@@ -32,14 +32,10 @@ const CardItem = ({item, setItem, index, setAddModal, setShouldUpdate}) =>{
                         <i className="la la-ellipsis-v" style={{fontSize: '27px'}}></i>
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
-                        <Dropdown.Item onClick={()=> {
-                            setItem(item)
-                            setAddModal(true)
-                        }}> {Translate[lang]?.edit}</Dropdown.Item>
                         <Dropdown.Item onClick={()=> setDeleteModal(true)}>{Translate[lang]?.delete}</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>}
-            </td>
+            </td> */}
             {deleteModal && <DeleteModal
                       open={deleteModal}
                       titleMsg={item.name}
