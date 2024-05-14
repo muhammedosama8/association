@@ -22,7 +22,8 @@ const CardItem = ({item, setItem, index, setAddModal, setShouldUpdate}) =>{
             </td>
             <td>{item.civil_id}</td>
             <td>{item.box_number}</td>
-            <td>{item.profits}</td>
+            <td>{item.profit}</td>
+            <td>{item.year}</td>
             <td>
                 {isExist('website') && <Dropdown>
                     <Dropdown.Toggle

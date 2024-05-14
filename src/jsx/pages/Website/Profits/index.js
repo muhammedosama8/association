@@ -19,16 +19,12 @@ import AddProfitsModal from "./AddProfitsModal";
 import ImportModal from "../../../common/ImportModal";
 
 const Profits = () => {
-    const [data, setData] = useState([
-      {id: 1, name: 'muhammed1', civil_id: '345fdg', box_number: '234234', profits: '123'},
-      {id: 2, name: 'muhammed2', civil_id: 'dfgjh7', box_number: '234934', profits: '444'},
-      {id: 3, name: 'muhammed3', civil_id: '3453h5', box_number: '234234', profits: '777'},
-    ])
+    const [data, setData] = useState([])
     const [addModal, setAddModal] = useState(false)
     const [type, setType] = useState('')
     const [importModal, setImportModal] = useState(false)
     const [item, setItem] = useState({})
-    const [hasData, setHasData] = useState(1)
+    const [hasData, setHasData] = useState(null)
     const [search, setSearch] = useState(null)
     const [loading, setLoading] = useState(false)
     const [shouldUpdate, setShouldUpdate] = useState(false)
@@ -112,6 +108,9 @@ const Profits = () => {
                     <th>
                       <strong>{Translate[lang]?.profits}</strong>
                     </th>
+                    <th>
+                      <strong>{Translate[lang]?.year}</strong>
+                    </th>
                     <th></th>
                   </tr>
                 </thead>
@@ -130,14 +129,14 @@ const Profits = () => {
                 </tbody>
               </Table>}
               {hasData === 0 && <NoData />}
-              {/* <Pagination
+              <Pagination
                   setData={setData}
                   service={profitsService}
                   shouldUpdate={shouldUpdate}
                   setHasData={setHasData}
                   setLoading={setLoading}
                   search={search}
-              /> */}
+              />
             </Card.Body>
           </Card>
         </Col>

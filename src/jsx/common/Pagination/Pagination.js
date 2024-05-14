@@ -16,14 +16,15 @@ const Pagination = ({
 }) => {
   const [totalPages, setTotalPages] = useState();
   const [page, setPage] = useState(1);
+  const [pages, setPages] = useState([]);
   const [pageShow, setPageShow] = useState(1);
   const lang = useSelector((state) => state.auth.lang);
 
   useEffect(() => {
     setLoading(true);
     let params = {
-      offset: (page - 1) * 15,
-      limit: 15,
+      offset: (page - 1) * 25,
+      limit: 25,
       isDeleted: isDeleted,
     };
     if (!!type) params["type"] = type;
@@ -32,8 +33,9 @@ const Pagination = ({
     service?.getList({ ...params }).then((res) => {
       if (res?.status === 200) {
         setData([...res.data?.data?.data]);
-        let total = Math.ceil(res.data?.data?.totalItems / 15);
+        let total = Math.ceil(res.data?.data?.totalItems / 25);
         setTotalPages(total);
+        generatePagination(page, total)
         if (res.data?.data?.totalItems > 0) {
           setHasData(1);
         } else {
@@ -45,9 +47,42 @@ const Pagination = ({
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, [page, isDeleted, shouldUpdate, search]);
 
+  function generatePagination(activePage, totalPages) {
+    const pagination = [];
+    const maxPagesToShow = 10;
+    let startPage, endPage;
+
+    if (totalPages <= maxPagesToShow) {
+        startPage = 1;
+        endPage = totalPages;
+    } else {
+        const halfMaxPagesToShow = Math.floor(maxPagesToShow / 2);
+        if (activePage <= halfMaxPagesToShow) {
+            startPage = 1;
+            endPage = maxPagesToShow;
+        } else if (activePage + halfMaxPagesToShow >= totalPages) {
+            startPage = totalPages - maxPagesToShow + 1;
+            endPage = totalPages;
+        } else {
+            startPage = activePage - halfMaxPagesToShow;
+            endPage = activePage + halfMaxPagesToShow;
+        }
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+        pagination.push(i);
+    }
+
+    setPages(pagination);
+  }
+
   useEffect(() => {
     setPage(1);
   }, [isDeleted, shouldUpdate]);
+
+  useEffect(() => {
+    generatePagination(page, totalPages)
+  }, [page]);
 
   if (totalPages > 1) {
     return (
@@ -69,12 +104,9 @@ const Pagination = ({
               )}{" "}
               {Translate[lang]?.previous}
             </button>
-            {8 <= 6 ? (
+            {/* {8 <= 6 ? ( */}
               <div className="d-flex" style={{ gap: "5px" }}>
-                {Array.from(
-                  { length: totalPages },
-                  (_, index) => index + 1
-                )?.map((num) => {
+                {pages?.map((num) => {
                   return (
                     <p
                       onClick={() => {
@@ -96,9 +128,9 @@ const Pagination = ({
                   );
                 })}
               </div>
-            ) : (
-              <div className="d-flex" style={{ gap: "5px" }}>
-                {Array.from({ length: 8 }, (_, index) => index + 1)
+            {/* // ) : ( */}
+              {/* <div className="d-flex" style={{ gap: "5px" }}>
+                {Array.from({ length: totalPages }, (_, index) => index + 1)
                   ?.slice(page - 1, page + 6)
                   ?.map((num, index) => {
                     // if (index < 3 || index >= 8 - 3) {
@@ -124,8 +156,8 @@ const Pagination = ({
                     // }
                     // return <span>...</span>;
                   })}
-              </div>
-            )}
+              </div> */}
+            {/* // )} */}
             <button
               className="next-button"
               onClick={() => {

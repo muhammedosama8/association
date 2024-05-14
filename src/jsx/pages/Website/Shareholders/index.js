@@ -102,18 +102,18 @@ const Shareholders = () => {
                     <th>
                       <strong>{Translate[lang]?.civil_id}</strong>
                     </th>
-                    <th>
+                    {/* <th>
                       <strong>{Translate[lang]?.phone}</strong>
-                    </th>
+                    </th> */}
                     <th>
                       <strong>{Translate[lang]?.shareholder_code_number}</strong>
                     </th>
                     <th>
                       <strong>{Translate[lang]?.box_number}</strong>
                     </th>
-                    <th>
+                    {/* <th>
                       <strong>{Translate[lang]?.family_card}</strong>
-                    </th>
+                    </th> */}
                     <th></th>
                   </tr>
                 </thead>

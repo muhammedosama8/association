@@ -21,10 +21,10 @@ const CardItem = ({item, setItem, index, setAddModal, setShouldUpdate}) =>{
                 {item?.name}
             </td>
             <td>{item.civil_id}</td>
-            <td>{item.phone}</td>
+            {/* <td>{item.phone}</td> */}
             <td>{item.shareholder_code_number}</td>
             <td>{item.box_number}</td>
-            <td>{item.family_card}</td>
+            {/* <td>{item.family_card}</td> */}
             <td>
                 {isExist('website') && <Dropdown>
                     <Dropdown.Toggle

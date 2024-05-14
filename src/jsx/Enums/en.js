@@ -3,6 +3,7 @@ export const English = {
   from_front: "From Front",
   from_back: "From Back",
   profits: "Profits",
+  year: "Year",
   chooseـaـyearـofـoffer: "Choose a year of Offer",
   peopleOfDeterminationOffers: "People of Determination Offers",
   freeze: "Freeze",

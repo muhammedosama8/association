@@ -10,10 +10,10 @@ const AddShareholdersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
     const [formData, setFormData] = useState({
         name: '',
         civil_id: '',
-        phone: "",
+        // phone: "",
         shareholder_code_number: "",
         box_number: "",
-        family_card: ""
+        // family_card: ""
     })
     const [isAdd, setIsAdd] = useState(false)
     const [loading, setLoading] = useState(false)
@@ -29,10 +29,10 @@ const AddShareholdersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
                 id: item?.id,
                 name: item?.name,
                 civil_id: item?.civil_id,
-                phone: item?.phone,
+                // phone: item?.phone,
                 shareholder_code_number: item?.shareholder_code_number,
                 box_number: item?.box_number,
-                family_card: item?.family_card
+                // family_card: item?.family_card
             })
         }
     },[item])
@@ -42,10 +42,10 @@ const AddShareholdersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
         let data ={ 
                 name: formData?.name,
                 civil_id: formData?.civil_id,
-                phone: formData?.phone,
+                // phone: formData?.phone,
                 shareholder_code_number: formData?.shareholder_code_number,
                 box_number: formData?.box_number,
-                family_card: formData?.family_card
+                // family_card: formData?.family_card
         }
         setLoading(true)
 
@@ -143,7 +143,7 @@ const AddShareholdersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
                                 onChange={(e) => setFormData({...formData, box_number: e.target.value})}
                             />
                         </Col>
-                        <Col md={6}>
+                        {/* <Col md={6}>
                             <AvField
                                 label={Translate[lang]?.phone}
                                 type='text'
@@ -159,7 +159,7 @@ const AddShareholdersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
                                 value={formData.phone}
                                 onChange={(e) => setFormData({...formData, phone: e.target.value})}
                             />
-                        </Col>
+                        </Col> */}
                         <Col md={6}>
                             <AvField
                                 label={Translate[lang]?.shareholder_code_number}
@@ -177,7 +177,7 @@ const AddShareholdersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
                                 onChange={(e) => setFormData({...formData, shareholder_code_number: e.target.value})}
                             />
                         </Col>
-                        <Col md={6}>
+                        {/* <Col md={6}>
                             <AvField
                                 label={Translate[lang]?.family_card}
                                 type='text'
@@ -193,7 +193,7 @@ const AddShareholdersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
                                 value={formData.family_card}
                                 onChange={(e) => setFormData({...formData, family_card: e.target.value})}
                             />
-                        </Col>
+                        </Col> */}
                     </Row>
             </Modal.Body>
             <Modal.Footer>

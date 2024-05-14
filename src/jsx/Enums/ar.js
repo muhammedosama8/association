@@ -4,6 +4,7 @@ export const Arabic = {
   from_back: "من الخلف",
   freeze: "تجميد",
   profits: "الأرباح",
+  year: 'سنه',
   chooseـaـyearـofـoffer: "اختيار سنه العرض",
   peopleOfDeterminationOffers: "عروض ذو الهمم",
   dashboard: "الصفحه الرئيسيه",
