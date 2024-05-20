@@ -14,7 +14,9 @@ const AddShareholdersRequestsModal = ({addModal, setAddModal, item, setShouldUpd
         name: '',
         civil_id: '',
         phone: "",
-        shareholder_attach: ["", ""],
+        image_front: '',
+        image_back: "",
+        expire_date: '',
         status: true
     })
     const [isAdd, setIsAdd] = useState(false)
@@ -33,7 +35,9 @@ const AddShareholdersRequestsModal = ({addModal, setAddModal, item, setShouldUpd
                 name: item?.name,
                 civil_id: item?.civil_id,
                 phone: item?.phone,
-                shareholder_attach: item?.shareholder_attach?.map(res=> res?.url),
+                image_back: item?.image_back,
+                image_front: item?.image_front,
+                expire_date: item?.expire_date?.split('T')[0],
                 status: item?.status
             })
         }
@@ -52,14 +56,11 @@ const AddShareholdersRequestsModal = ({addModal, setAddModal, item, setShouldUpd
             
             new BaseService().postUpload(filesData[0]).then(res=>{
                 if(res?.status === 200){
-                    let update = formData.shareholder_attach?.map((att, index)=>{
-                        if(index === ind){
-                            return res?.data?.url 
-                        } else{
-                            return att
-                        }
-                    })
-                    setFormData({...formData, shareholder_attach: [...update]})
+                    if(ind === 0){
+                        setFormData({...formData, image_front: res?.data?.url })
+                    } else {
+                        setFormData({...formData, image_back: res?.data?.url })
+                    }
                 }
                 if(ind === 0){
                     setLoading(false)
@@ -76,8 +77,9 @@ const AddShareholdersRequestsModal = ({addModal, setAddModal, item, setShouldUpd
                 name: formData?.name,
                 civil_id: formData?.civil_id,
                 phone: formData?.phone,
-                shareholder_attach: formData?.shareholder_attach,
-                status: formData?.status,
+                image_front: formData?.image_front,
+                image_back: formData?.image_back,
+                expire_date: formData?.expire_date,
         }
         setLoading(true)
 
@@ -91,6 +93,7 @@ const AddShareholdersRequestsModal = ({addModal, setAddModal, item, setShouldUpd
                 setLoading(false)
             }).catch(()=> setLoading(false))
         } else {
+            data['status'] = formData?.status
             shareholdersRequestsService.update(formData?.id, data)?.then(res=>{
                 if(res && res?.status === 200){
                     toast.success('Shareholder Requests Updated Successfully')
@@ -100,17 +103,6 @@ const AddShareholdersRequestsModal = ({addModal, setAddModal, item, setShouldUpd
                 setLoading(false)
             }).catch(()=> setLoading(false))
         }
-    }
-
-    const deleteAttachment = (index) => {
-        let update = formData?.shareholder_attach?.map((att, ind) => {
-            if(index === ind){
-                return ""
-            } else {
-                return att
-            }
-        })
-        setFormData({...formData, shareholder_attach: update})
     }
 
     return(
@@ -186,6 +178,24 @@ const AddShareholdersRequestsModal = ({addModal, setAddModal, item, setShouldUpd
                                 onChange={(e) => setFormData({...formData, phone: e.target.value})}
                             />
                         </Col>
+                        <Col md={6}>
+                            <AvField
+                                label={Translate[lang]?.expire_date}
+                                type='date'
+                                placeholder={Translate[lang]?.expire_date}
+                                bsSize="lg"
+                                name='expire_date'
+                                validate={{
+                                    required: {
+                                        value: true,
+                                        errorMessage: Translate[lang].field_required
+                                    }
+                                }}
+                                value={formData.expire_date}
+                                onChange={(e) => setFormData({...formData, expire_date: e.target.value})}
+                            />
+                        </Col>
+                        <Col md={6} className='mt-3'></Col>
                         <Col md={6} className='mt-3'>
                             <div className='form-group w-100'>
                                 <label className="m-0">{Translate[lang]?.image} {Translate[lang]?.from_front}</label>
@@ -196,13 +206,13 @@ const AddShareholdersRequestsModal = ({addModal, setAddModal, item, setShouldUpd
                                     </div>
                                     <div className="avatar-preview2 m-auto">
                                         <div id={`imagePreview`}>
-                                        {!!formData?.shareholder_attach[0] && 
+                                        {!!formData?.image_front && 
                                                 <img alt='icon'
                                                     className='w-100 h-100' 
                                                     style={{borderRadius: '30px'}} 
-                                                    src={formData?.shareholder_attach[0]}
+                                                    src={formData?.image_front}
                                                 />}
-                                                {!!formData?.shareholder_attach[0] && <button
+                                                {!!formData?.image_front && <button
                                                     style={{
                                                         border: '1px solid #dedede',
                                                         borderRadius:' 50%',
@@ -211,18 +221,18 @@ const AddShareholdersRequestsModal = ({addModal, setAddModal, item, setShouldUpd
                                                         zIndex: '999'
                                                     }}
                                                     type="button"
-                                                    onClick={() => deleteAttachment(0)}
+                                                    onClick={() => setFormData({...formData, image_front: ""})}
                                                     >
                                                     <i className="la la-trash text-danger"></i>
                                                 </button>}
-                                        {(!formData?.shareholder_attach[0] && !loading) && 
+                                        {(!formData?.image_front && !loading) && 
                                             <img  
                                                 src={uploadImg} alt='icon'
                                                 style={{
                                                     width: '80px', height: '80px',
                                                 }}
                                             />}
-                                            {(!formData?.shareholder_attach[0] && loading) && <Loader />}
+                                            {(!formData?.image_front && loading) && <Loader />}
                                         </div>
                                     </div>
                                 </div>
@@ -238,13 +248,13 @@ const AddShareholdersRequestsModal = ({addModal, setAddModal, item, setShouldUpd
                                     </div>
                                     <div className="avatar-preview2 m-auto">
                                         <div id={`imagePreview`}>
-                                        {!!formData?.shareholder_attach[1] && 
+                                        {!!formData?.image_back && 
                                             <img alt='icon'
                                                 className='w-100 h-100' 
                                                 style={{borderRadius: '30px'}} 
-                                                src={formData?.shareholder_attach[1]}
+                                                src={formData?.image_back}
                                         />}
-                                        {!!formData?.shareholder_attach[1] && <button
+                                        {!!formData?.image_back && <button
                                             style={{
                                                 border: '1px solid #dedede',
                                                 borderRadius:' 50%',
@@ -253,11 +263,11 @@ const AddShareholdersRequestsModal = ({addModal, setAddModal, item, setShouldUpd
                                                 zIndex: '999'
                                             }}
                                             type="button"
-                                            onClick={() => deleteAttachment(1)}
+                                            onClick={() => setFormData({...formData, image_back: ""})}
                                             >
                                             <i className="la la-trash text-danger"></i>
                                         </button>}
-                                        {(!formData?.shareholder_attach[1] && !loading1) && 
+                                        {(!formData?.image_back && !loading1) && 
                                             <img 
                                                 src={uploadImg} alt='icon'
                                                 style={{
@@ -265,7 +275,7 @@ const AddShareholdersRequestsModal = ({addModal, setAddModal, item, setShouldUpd
                                                     height: '80px',
                                                 }}
                                         />}
-                                        {(!formData?.shareholder_attach[1] && loading1) && <Loader />}
+                                        {(!formData?.image_back && loading1) && <Loader />}
                                         </div>
                                     </div>
                                 </div>
@@ -280,7 +290,7 @@ const AddShareholdersRequestsModal = ({addModal, setAddModal, item, setShouldUpd
             <Button 
                     variant="primary" 
                     type='submit'
-                    disabled={loading}
+                    disabled={loading || loading1}
                 >{isAdd ? Translate[lang]?.add : Translate[lang]?.edit}</Button>
             </Modal.Footer>
             </AvForm>

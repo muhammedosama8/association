@@ -84,6 +84,9 @@ const ShareholdersRequests = () => {
                       <strong>{Translate[lang]?.phone}</strong>
                     </th>
                     <th>
+                      <strong>{Translate[lang]?.expire_date}</strong>
+                    </th>
+                    <th>
                       <strong>{Translate[lang]?.attachments}</strong>
                     </th>
                     <th>

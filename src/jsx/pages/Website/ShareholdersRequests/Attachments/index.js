@@ -24,13 +24,14 @@ const Attachments = () =>{
         setData(res)
     },[])
 
-    const acceptRequest = () => {
+    const acceptRequest = (stat) => {
         let body ={ 
             name: data?.name,
             civil_id: data?.civil_id,
             phone: data?.phone,
-            shareholder_attach: data?.shareholder_attach?.map(res=> res.url),
-            status: true,
+            image_front: data?.image_front,
+            image_back: data?.image_back,
+            status: stat,
         }
         setLoading(true)
         shareholdersRequestsService.update(data?.id, body)?.then(res=>{
@@ -46,17 +47,25 @@ const Attachments = () =>{
     <Card className="mb-3">
         <Card.Body>
             <Row>
-                {data?.shareholder_attach?.map((attachment, index)=> {
-                    return <Col md={6} sm={6} key={index} className='mb-3'>
-                        <a href={attachment?.url} target='_blank'>
-                            <img src={attachment?.url} alt={index} className='w-100' />
-                        </a>
-                    </Col>
-                })}
+                <Col md={6} sm={6} className='mb-3'>
+                    <a href={data?.image_front} target='_blank'>
+                        <img src={data?.image_front} alt='image_front' className='w-100' />
+                    </a>
+                </Col>
+                <Col md={6} sm={6} className='mb-3'>
+                    <a href={data?.image_back} target='_blank'>
+                        <img src={data?.image_back} alt='image_back' className='w-100' />
+                    </a>
+                </Col>
             </Row>
-            {!data?.status && <Button variant="primary" type='button' onClick={acceptRequest} disabled={loading} className='mt-5' >
-                {Translate[lang]?.add}
-            </Button>}
+            {data?.status === 'pending' && <div className="d-flex justify-content-between"> 
+                <Button variant="primary" type='button' onClick={()=> acceptRequest('accept')} disabled={loading} className='mt-5' >
+                    {Translate[lang]?.accept}
+                </Button>
+                <Button variant="danger" type='button' onClick={()=> acceptRequest('reject')} disabled={loading} className='mt-5' >
+                    {Translate[lang]?.reject}
+                </Button>
+            </div>}
         </Card.Body>
     </Card>
     </>

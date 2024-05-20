@@ -1,4 +1,8 @@
 export const English = {
+  accept: "Accept",
+  pending: "Pending",
+  reject: "Reject",
+  expire_date: "Expiry Date",
   att_alert: 'Please Enter Two Photos',
   from_front: "From Front",
   from_back: "From Back",

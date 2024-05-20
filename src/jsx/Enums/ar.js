@@ -1,4 +1,8 @@
 export const Arabic = {
+  accept: "قبول",
+  reject: "رفض",
+  pending: 'معلق',
+  expire_date: 'تاريخ انتهاء الصلاحية',
   att_alert: "يرجي ادخال صورتين",
   from_front: "من الأمام",
   from_back: "من الخلف",

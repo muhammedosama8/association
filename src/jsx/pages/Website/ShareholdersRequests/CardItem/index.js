@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Dropdown ,Form} from "react-bootstrap";
+import { useState } from "react";
+import { Dropdown , Badge} from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -25,18 +25,16 @@ const CardItem = ({item, setItem, index, setAddModal, setShouldUpdate}) =>{
             </td>
             <td>{item.civil_id}</td>
             <td>{item.phone}</td>
+            <td>{item.expire_date?.split('T')[0] || '-'}</td>
             <td>
                 <Link to='/shareholders_requests/attachments' state={{item: item}}>
                     {Translate[lang].attachments}
                 </Link>
             </td>
             <td>
-                <Form.Check
-                    type="switch"
-                    id={`status${item?.id}`}
-                    checked={item?.status}
-                    // onChange={(e)=> changeStatus(e.target.checked)}
-                 />
+                <Badge 
+                    variant={`${item.status === 'accept' ? 'primary' : item.status === 'pending' ? 'warning' : 'danger' }`}
+                >{Translate[lang][item?.status]}</Badge>
             </td>
             <td>
                 {isExist('website') && <Dropdown>
