@@ -1,11 +1,6 @@
 import React, { useEffect, useReducer, useState } from "react";
-/// Scroll
-// import PerfectScrollbar from "react-perfect-scrollbar";
 import Collapse from 'react-bootstrap/Collapse';
-/// Link
 import { Link } from "react-router-dom";
-
-
 import {MenuList} from '../../Enums/Menu';
 import {useScrollPosition} from "@n8tb1t/use-scroll-position";
 import { useSelector } from "react-redux";
@@ -21,7 +16,7 @@ const initialState = {
   activeSubmenu : "",
 }
 
-const SideBar = (props) => {
+const SideBar = () => {
   const [active, setActive] =useState('')
   const [state, setState] = useReducer(reducer, initialState);	
   const lang = useSelector(state=> state.auth?.lang)

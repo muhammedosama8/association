@@ -126,70 +126,6 @@ export const MenuList = [
         },
     ]
 },
-// Notification
-  // {
-  //     title:'Notification',
-  //     classsChange: 'mm-collapse',
-  //     iconStyle: <i className='la la-bell'></i>,
-  //     to: 'notification',
-  //     text: 'notification',
-  // },
-  // Tankers
-  // {
-  //   title: "Tankers",
-  //   classsChange: "mm-collapse",
-  //   iconStyle: <i className="la la-clock"></i>,
-  //   to: "tankers",
-  //   text: "tankers",
-  // },
-  // Wallet Management
-  // {
-  //     title:'Wallet Management',
-  //     classsChange: 'mm-collapse',
-  //     iconStyle: <i className='la la-dollar'></i>,
-  //     to: 'wallet-management',
-  //     text: 'wallet_management',
-  // },
-  // Time Slot
-  // {
-  //     title:'Time Slot',
-  //     classsChange: 'mm-collapse',
-  //     iconStyle: <i className='la la-clock'></i>,
-  //     to: 'time-slot',
-  //     text: 'time_slot',
-  // },
-  // Banners
-  // {
-  //   title: "Banners",
-  //   classsChange: "mm-collapse",
-  //   iconStyle: <i class="las la-image"></i>,
-  //   to: "banners",
-  //   text: "banners",
-  // },
-  // Activities
-  // {
-  //   title: "Activities",
-  //   classsChange: "mm-collapse",
-  //   iconStyle: <i className="la la-cubes"></i>,
-  //   to: "",
-  //   text: "activities",
-  // },
-  // Time Slot
-  // {
-  //   title: "Time Slot",
-  //   classsChange: "mm-collapse",
-  //   iconStyle: <i className="la la-clock"></i>,
-  //   to: "time-slot",
-  //   text: "time_slot",
-  // },
-  // Ad Screen
-  // {
-  //   title: "Ad Screen",
-  //   classsChange: "mm-collapse",
-  //   iconStyle: <i className="la la-thumb-tack" />,
-  //   to: "ad-screen",
-  //   text: "ad_screen",
-  // },
   // Setting
   {
       title:'Setting',
@@ -197,30 +133,12 @@ export const MenuList = [
       classsChange: 'mm-collapse',
       iconStyle: <i className='la la-cog'></i>,
       content : [
-          // {
-          //     title:'Delivery',
-          //     text:'delivery',
-          //     to: 'delivery',
-          //     rule: 'delivery',
-          // },
           {
               title:'Social Media',
               text:'social_media',
               to: 'social',
               rule: 'social_media',
           },
-          // {
-          //     title:'Currency',
-          //     text: 'currency',
-          //     to: 'currency',
-          //     rule: 'currency',
-          // },
-          // {
-          //     title:'Payment',
-          //     text: 'payment',
-          //     to: 'payment',
-          //     rule: 'payment',
-          // },
           {
               title:'Pages',
               text: 'pages',
@@ -229,14 +147,4 @@ export const MenuList = [
           },
       ]
   },
-
-  // <i className='la la-cubes'></i>,
-  // <i className='la la-cube'></i>,
-  // <i className="la la-slack" />,
-  // <i className="flaticon-381-notepad" />,
-  // <i className="la la-qrcode"></i>
-  // <i className='la la-truck'></i>
-  // <i className='la la-pie-chart'></i>
-  // <i className='la la-dollar'></i>
-  // <i className="la la-wrench" />
 ];

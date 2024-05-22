@@ -14,7 +14,6 @@ import Pagination from "../../../common/Pagination/Pagination";
 import { Translate } from "../../../Enums/Tranlate";
 import AddOffersModal from "./AddOffersModal";
 import CardItem from "./CardItem";
-import header from "../../../../images/header.jpeg"
 import './style.scss'
 import OfferService from "../../../../services/OfferService";
 

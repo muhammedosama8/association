@@ -10,7 +10,6 @@ import { Translate } from "../../../../Enums/Tranlate";
 import OfferService from "../../../../../services/OfferService";
 
 const AddOffersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
-    const [files, setFiles] = useState([])
     const [formData, setFormData] = useState({
         title: '',
         image: '',
@@ -102,7 +101,6 @@ const AddOffersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
                                                         new BaseService().postUpload(filesData[0]).then(res=>{
                                                             if(res?.data?.status){
                                                                 setFormData({...formData, image: res.data.url})
-                                                                setFiles(filesData[0])
                                                             }
                                                             setLoadingImg(false)
                                                         })
@@ -148,7 +146,6 @@ const AddOffersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
                                                         new BaseService().postUpload(filesData[0]).then(res=>{
                                                             if(res?.data?.status){
                                                                 setFormData({...formData, cover_image: res.data.url})
-                                                                setFiles(filesData[0])
                                                             }
                                                             setLoading(false)
                                                         })

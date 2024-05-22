@@ -1,7 +1,6 @@
 import React from "react";
 
-import { Link, useNavigate } from "react-router-dom";
-/// Image
+import { Link } from "react-router-dom";
 import { Dropdown } from "react-bootstrap";
 import Logout from "../../pages/Authintication/Logout";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,7 +11,6 @@ import kwait from "../../../images/kwait.svg";
 
 const Header = ({ onNote }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const lang = useSelector((state) => state.auth.lang);
   const admin = useSelector((state) => state.auth.auth.admin);
   var path = window.location.pathname.split("/");

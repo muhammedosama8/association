@@ -14,7 +14,6 @@ import NoData from "../../../common/NoData";
 import Pagination from "../../../common/Pagination/Pagination";
 import AddMembersModal from "./AddMembersModal";
 import CardItem from "./CardItem";
-import header from "../../../../images/user.jpeg"
 import './style.scss'
 import BoardOfDirectorsService from "../../../../services/BoardOfDirectorsService";
 

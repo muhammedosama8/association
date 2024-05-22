@@ -9,14 +9,13 @@ import {
 } from "../../../store/actions/AuthActions";
 import { Translate } from "../../Enums/Tranlate";
 import login from "../../../images/logo1.png";
-import logo from "../../../images/logo1.png";
 
 function Login(props) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const dispatch = useDispatch();
   const Auth = useSelector((state) => state.auth);
   const lang = useSelector((state) => state.auth.lang);
 
@@ -141,23 +140,6 @@ function Login(props) {
               leap solutions kw{" "}
             </a>
           </label>
-          {/* <p style={{ fontSize: "14px", color: "rgba(0, 0, 0, 0.87)" }}>
-            <a
-              href="https://www.leapsolutionskw.com/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Terms and conditions
-            </a>
-            <div className="dot"></div>
-            <a
-              href="https://www.leapsolutionskw.com/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Privacy policy
-            </a>
-          </p> */}
         </div>
             </div>
           </div>

@@ -5,7 +5,6 @@ import {
   Col,
   Card,
   Table,
-  Button,
 } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import Loader from "../../../common/Loader";
@@ -25,10 +24,8 @@ const ContactUs = () => {
     const [search, setSearch] = useState(null)
     const [loading, setLoading] = useState(false)
     const [shouldUpdate, setShouldUpdate] = useState(false)
-    const Auth = useSelector(state=> state.auth?.auth)
     const lang = useSelector(state=> state.auth?.lang)
     const contactUsService = new ContactUsService()
-    const isExist = (data)=> Auth?.admin?.admin_roles?.includes(data)
 
   return (
     <Fragment>

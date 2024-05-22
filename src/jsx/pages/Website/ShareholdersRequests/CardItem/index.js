@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Dropdown , Badge} from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
 import ShareholdersRequestsService from "../../../../../services/ShareholdersRequestsService";
 import DeleteModal from "../../../../common/DeleteModal";
 import { Translate } from "../../../../Enums/Tranlate";

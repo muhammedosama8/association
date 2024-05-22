@@ -16,7 +16,6 @@ import CardItem from "./CardItem";
 import './style.scss'
 import ShareholdersRequestsService from "../../../../services/ShareholdersRequestsService";
 import AddShareholdersRequestsModal from "./AddShareholdersRequestsModal";
-import ImportModal from "../../../common/ImportModal";
 
 const ShareholdersRequests = () => {
     const [data, setData] = useState([])

@@ -23,7 +23,6 @@ const Profits = () => {
     const [addModal, setAddModal] = useState(false)
     const [type, setType] = useState('')
     const [importModal, setImportModal] = useState(false)
-    const [item, setItem] = useState({})
     const [hasData, setHasData] = useState(null)
     const [search, setSearch] = useState(null)
     const [loading, setLoading] = useState(false)
@@ -74,7 +73,6 @@ const Profits = () => {
               {Translate[lang]?.import}
             </Button>
             <Button variant="primary" className='me-2 h-75' onClick={()=> { 
-              setItem({})
               setAddModal(true) }}>
               <i className="la la-plus mx-1"></i>
                 {Translate[lang]?.chooseـaـyearـofـoffer}
@@ -121,7 +119,6 @@ const Profits = () => {
                             index= {index}
                             key= {index}
                             item={item}
-                            setItem={setItem}
                             setAddModal={setAddModal}
                             setShouldUpdate={setShouldUpdate}
                         />

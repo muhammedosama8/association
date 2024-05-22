@@ -14,7 +14,6 @@ const Admins = () => {
   const [admins, setAdmins] = useState(null);
   const [hasData, setHasData] = useState(null);
   const [search, setSearch] = useState(null);
-  const [tab, setTab] = useState("admins");
   const [shouldUpdate, setShouldUpdate] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -25,28 +24,6 @@ const Admins = () => {
 
   return (
     <div className="admin">
-      {/* <div className="tabs-div">
-        <span
-          style={{
-            color: tab === "admins" ? "var(--primary)" : "#7E7E7E",
-            borderBottom: tab === "admins" ? "2px solid" : "none",
-          }}
-          onClick={() => setTab("admins")}
-        >
-          All Employees
-        </span>
-        <span
-          style={{
-            padding: "5px 16px",
-            color: tab === "rule" ? "var(--primary)" : "#7E7E7E",
-            borderBottom: tab === "rule" ? "2px solid" : "none",
-          }}
-          onClick={() => setTab("rule")}
-          className="mx-2"
-        >
-          Rules
-        </span>
-      </div> */}
       <Card className="mb-3">
         <Card.Body className="d-flex justify-content-between p-3 align-items-center">
           <div className="input-group w-50">

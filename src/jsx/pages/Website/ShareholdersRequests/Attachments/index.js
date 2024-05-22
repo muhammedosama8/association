@@ -22,7 +22,7 @@ const Attachments = () =>{
     useEffect(()=> {
         let res = location?.state?.item
         setData(res)
-    },[])
+    },[location?.state?.item])
 
     const acceptRequest = (stat) => {
         let body ={ 
@@ -48,12 +48,12 @@ const Attachments = () =>{
         <Card.Body>
             <Row>
                 <Col md={6} sm={6} className='mb-3'>
-                    <a href={data?.image_front} target='_blank'>
+                    <a href={data?.image_front} target='_blank' rel="noreferrer">
                         <img src={data?.image_front} alt='image_front' className='w-100' />
                     </a>
                 </Col>
                 <Col md={6} sm={6} className='mb-3'>
-                    <a href={data?.image_back} target='_blank'>
+                    <a href={data?.image_back} target='_blank' rel="noreferrer">
                         <img src={data?.image_back} alt='image_back' className='w-100' />
                     </a>
                 </Col>

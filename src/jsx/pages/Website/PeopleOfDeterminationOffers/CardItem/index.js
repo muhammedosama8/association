@@ -27,7 +27,7 @@ const CardItem = ({item, setItem, index, setAddModal, setShouldUpdate}) =>{
                 />
             </td>
             <td>
-                <a href={item?.cover_image} target="_blank">
+                <a href={item?.cover_image} target="_blank" rel="noreferrer">
                     <i className="la la-file-pdf" style={{fontSize: "35px", color: '#03447b'}}/>
                 </a>
             </td>

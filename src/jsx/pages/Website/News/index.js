@@ -8,14 +8,12 @@ import {
   Button,
 } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import BrandsService from "../../../../services/BrandsService";
 import Loader from "../../../common/Loader";
 import NoData from "../../../common/NoData";
 import Pagination from "../../../common/Pagination/Pagination";
 import { Translate } from "../../../Enums/Tranlate";
 import AddNewsModal from "./AddNewsModal";
 import CardItem from "./CardItem";
-import header from "../../../../images/header.jpeg"
 import './style.scss'
 import NewsService from "../../../../services/NewsService";
 

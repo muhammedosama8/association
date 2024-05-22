@@ -8,14 +8,12 @@ import {
   Button,
 } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import BrandsService from "../../../../services/BrandsService";
 import Loader from "../../../common/Loader";
 import NoData from "../../../common/NoData";
 import Pagination from "../../../common/Pagination/Pagination";
 import { Translate } from "../../../Enums/Tranlate";
 import AddActivitiesModal from "./AddActivitiesModal";
 import CardItem from "./CardItem";
-import activityLogo from "../../../../images/activityLogo.svg"
 import './style.scss'
 import ActivitiesAndEventsService from "../../../../services/ActivitiesAndEventsService";
 

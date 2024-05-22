@@ -10,7 +10,6 @@ import { Translate } from "../../../../Enums/Tranlate";
 import PeopleOfDeterminationOffersService from "../../../../../services/PeopleOfDeterminationOffersService";
 
 const AddPeopleOfDeterminationOffersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
-    const [files, setFiles] = useState([])
     const [formData, setFormData] = useState({
         title: '',
         image: '',
@@ -97,7 +96,6 @@ const AddPeopleOfDeterminationOffersModal = ({addModal, setAddModal, item, setSh
                                                         new BaseService().postUpload(filesData[0]).then(res=>{
                                                             if(res?.data?.status){
                                                                 setFormData({...formData, image: res.data.url})
-                                                                setFiles(filesData[0])
                                                             }
                                                             setLoadingImg(false)
                                                         })
@@ -143,7 +141,6 @@ const AddPeopleOfDeterminationOffersModal = ({addModal, setAddModal, item, setSh
                                                         new BaseService().postUpload(filesData[0]).then(res=>{
                                                             if(res?.data?.status){
                                                                 setFormData({...formData, cover_image: res.data.url})
-                                                                setFiles(filesData[0])
                                                             }
                                                             setLoading(false)
                                                         })

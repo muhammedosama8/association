@@ -24,12 +24,12 @@ function LogoutPage(props) {
   const adminService = new AdminService();
   const lang = useSelector((state) => state.auth.lang);
   function onLogout() {
-    dispatch(Logout(navigate));
-    //  adminService.logout().then(res=>{
-    //   if(res?.status === 200){
-    //     dispatch(Logout(navigate));
-    //   }
-    //  })
+    // dispatch(Logout(navigate));
+     adminService.logout().then(res=>{
+      if(res?.status === 200){
+        dispatch(Logout(navigate));
+      }
+     })
   }
   return (
     <>

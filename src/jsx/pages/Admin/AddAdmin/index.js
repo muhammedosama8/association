@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 import AdminService from "../../../../services/AdminService";
 import {useLocation} from 'react-router-dom';
 import Select from 'react-select';
-import CountryiesService from "../../../../services/CountriesService";
 import {AvField, AvForm} from "availity-reactstrap-validation";
 import { useSelector } from "react-redux";
 import { Translate } from "../../../Enums/Tranlate";
@@ -28,7 +27,6 @@ const AddAdmin = () => {
    const [showPassword, setShowPassword] = useState(false)
    const navigate = useNavigate()
    const adminService = new AdminService()
-   const countryiesService = new CountryiesService()
    const lang = useSelector(state=> state.auth?.lang)
 
    useEffect(() => {
@@ -68,10 +66,6 @@ const AddAdmin = () => {
 
    const onSubmit = (e) =>{
       e.preventDefault();
-      // if(!location?.state?.edit && formData.password.length < 6){
-      //    setError({...formData, password: true})
-      //    return
-      // }
       
       let data = {
          f_name: formData?.first_name,

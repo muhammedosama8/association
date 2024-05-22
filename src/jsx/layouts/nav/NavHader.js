@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import logoImg from '../../../images/logo1.png'
-// import logoImg from '../../../images/logo.svg'
 
 export function  NavMenuToggle(){
 	setTimeout(()=>{	

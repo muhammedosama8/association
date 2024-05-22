@@ -1,15 +1,9 @@
 import { useState } from "react";
-import { Dropdown } from "react-bootstrap";
-import { useSelector } from "react-redux";
 import ShareholdersService from "../../../../../services/ShareholdersService";
 import DeleteModal from "../../../../common/DeleteModal";
-import { Translate } from "../../../../Enums/Tranlate";
 
-const CardItem = ({item, setItem, index, setAddModal, setShouldUpdate}) =>{
+const CardItem = ({item, index, setShouldUpdate}) =>{
     const [deleteModal, setDeleteModal] = useState(false)
-    const Auth = useSelector(state=> state.auth?.auth)
-    const lang = useSelector(state=> state.auth?.lang)
-    const isExist = (data)=> Auth?.admin?.admin_roles?.includes(data)
     const shareholdersService = new ShareholdersService()
 
     return(
