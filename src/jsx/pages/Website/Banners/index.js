@@ -22,11 +22,11 @@ const WebsiteBanners = () => {
   const bannerService = new BannerService();
 
   const [formData, setFormData] = useState([
-    { src: "", title: "", description: "", loading: false },
-    { src: "", title: "", description: "", loading: false },
-    { src: "", title: "", description: "", loading: false },
-    { src: "", title: "", description: "", loading: false },
-    { src: "", title: "", description: "", loading: false },
+    { src: "", title: "", description: "", url_link: "", loading: false },
+    { src: "", title: "", description: "", url_link: "", loading: false },
+    { src: "", title: "", description: "", url_link: "", loading: false },
+    { src: "", title: "", description: "", url_link: "", loading: false },
+    { src: "", title: "", description: "", url_link: "", loading: false },
   ]);
 
   useEffect(() => {
@@ -39,6 +39,7 @@ const WebsiteBanners = () => {
           let obj = {
             id: item.id,
             src: item?.image,
+            url_link: item?.url_link,
             title: item?.title || "",
             description: item?.description || "",
             loading: false,
@@ -48,7 +49,7 @@ const WebsiteBanners = () => {
         if (data?.length < 5) {
           let complete = [];
           for (let i = data?.length; i < 5; i++) {
-            complete.push({ src: "", title: "", description: "", loading: false });
+            complete.push({ src: "", title: "", description: "", url_link: "", loading: false });
           }
           setFormData([...data, ...complete]);
         } else {
@@ -63,6 +64,7 @@ const WebsiteBanners = () => {
     let update = formData?.map((item, ind) => {
       if (ind === index) {
         return {
+          ...item,
           src: "",
           loading: false,
         };
@@ -104,6 +106,7 @@ const WebsiteBanners = () => {
         let updateImages = formData.map((item, ind) => {
           if (ind === index) {
             return {
+              ...item,
               src: res.data.url,
               loading: false,
             };
@@ -128,7 +131,8 @@ const WebsiteBanners = () => {
           let res = {
             image: item?.src,
             title: item?.title,
-            description: item?.description
+            description: item?.description,
+            url_link: item?.url_link
           };
 
           return res;
@@ -272,6 +276,35 @@ const WebsiteBanners = () => {
                     }}
                   />
               </Col>
+              <Col md={6}>
+                  <AvField
+                    label={Translate[lang].link}
+                    type='text'
+                    name={`url_link${index}`}
+                    className='w-100'
+                    placeholder={Translate[lang].link}
+                    value={data?.url_link}
+                    validate={{
+                      required: {
+                        value: !!data?.src,
+                        errorMessage: Translate[lang].field_required
+                      },
+                    }}
+                    onChange={(e)=>{
+                      let update = formData?.map((res, ind)=>{
+                        if(ind === index){
+                          return {
+                            ...res,
+                            url_link: e?.target?.value
+                          }
+                        } else{
+                          return res
+                        }
+                      })
+                      setFormData(update)
+                    }}
+                  />
+              </Col>
               <Col md={12}>
                   <AvField
                     label={Translate[lang].description}
@@ -301,6 +334,7 @@ const WebsiteBanners = () => {
                     }}
                   />
               </Col>
+              
             </Row>
           </Card>
         );
