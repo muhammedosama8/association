@@ -17,7 +17,6 @@ import ScrollToTop from "./layouts/ScrollToTop";
 
 import Admins from "./pages/Admin";
 import AddAdmin from "./pages/Admin/AddAdmin";
-import Banners from "./pages/Banners";
 import Users from "./pages/Users";
 import Home from "./pages/Dashboard";
 import SocialMedia from "./pages/Setting/SocialMedia";
@@ -60,9 +59,6 @@ const Markup = () => {
     // Rules
     { url: "rules", component: <Permission /> },
     { url: "rules/:id", component: <Permission /> },
-
-    // Banners
-    { url: "banners", component: <Banners /> },
 
     // Website
     { url : "website-banners", component: <WebsiteBanners />},
