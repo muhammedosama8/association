@@ -4,11 +4,11 @@
     }
 }
 .tabs-div{
-    padding-bottom: 3px;
-    border-bottom: 2px solid var(--primary);
+    padding-bottom: 0;
 
     .tab{
-        padding: 6px 18px 2px;
+        padding: 8px 20px;
+        display: inline-block;
     }
     .active-tab{
         background-color: var(--primary);
