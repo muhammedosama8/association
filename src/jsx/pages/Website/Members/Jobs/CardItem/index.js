@@ -1,38 +1,21 @@
 import { useState } from "react";
 import { Dropdown } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import OfferService from "../../../../../services/OfferService";
-import DeleteModal from "../../../../common/DeleteModal";
-import { Translate } from "../../../../Enums/Tranlate";
+import DeleteModal from "../../../../../common/DeleteModal";
+import { Translate } from "../../../../../Enums/Tranlate";
+import JobTitleService from "../../../../../../services/JobTitleService";
 
 const CardItem = ({item, setItem, index, setAddModal, setShouldUpdate}) =>{
     const [deleteModal, setDeleteModal] = useState(false)
     const Auth = useSelector(state=> state.auth?.auth)
     const lang = useSelector(state=> state.auth?.lang)
     const isExist = (data)=> Auth?.admin?.admin_roles?.includes(data)
-    const offerService = new OfferService()
+    const jobTitleService = new JobTitleService()
 
     return(
         <tr key={index} className='text-center'>
             <td>
                 <strong>{item.id}</strong>
-            </td>
-            <td>
-                <img
-                    src={item?.image}
-                    className="rounded-lg"
-                    width="50"
-                    height="50"
-                    alt={item.id}
-                />
-            </td>
-            <td>{(item.cover_image.endsWith('.pdf') || item.cover_image.endsWith('.docx') || 
-                item.cover_image.endsWith('.doc') || item.cover_image.endsWith('.txt')) ? 
-                <a href={item?.cover_image} target="_blank" rel="noreferrer">
-                    <i className="la la-file-pdf" style={{fontSize: "35px", color: '#03447b'}}/>
-                </a> :  <a href={item?.cover_image} target="_blank" rel="noreferrer">
-                <img src={item.cover_image} alt='offer' className="rounded-lg" width="50" height="50"/>
-                </a>}
             </td>
             <td>{item.title}</td>
             <td>
@@ -53,9 +36,9 @@ const CardItem = ({item, setItem, index, setAddModal, setShouldUpdate}) =>{
             </td>
             {deleteModal && <DeleteModal
                       open={deleteModal}
-                      titleMsg={item.title}
+                      titleMsg={item?.title}
                       deletedItem={item}
-                      modelService={offerService}
+                      modelService={jobTitleService}
                       onCloseModal={setDeleteModal}
                       setShouldUpdate={setShouldUpdate}
                     />}

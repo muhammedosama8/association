@@ -3,6 +3,19 @@
         padding: 12px 20px!important;
     }
 }
+.tabs-div{
+    padding-bottom: 3px;
+    border-bottom: 2px solid var(--primary);
+
+    .tab{
+        padding: 6px 18px 2px;
+    }
+    .active-tab{
+        background-color: var(--primary);
+        border-radius: 4px 4px 0 0;
+        color: #fff;
+    }
+}
 .addMember .avatar-preview2{
     background-color: hsl(0, 0%, 90%) !important;
     height: 13rem!important;

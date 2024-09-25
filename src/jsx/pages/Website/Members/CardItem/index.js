@@ -27,7 +27,7 @@ const CardItem = ({item, setItem, index, setAddModal, setShouldUpdate}) =>{
                         />
                     </td>
             <td>{item.name}</td>
-            <td>{item.job_title}</td>
+            <td>{item.job_title?.title}</td>
             <td>
                 {isExist('website') && <Dropdown>
                     <Dropdown.Toggle

@@ -8,6 +8,7 @@ import Loader from "../../../../common/Loader";
 import { useSelector } from "react-redux";
 import { Translate } from "../../../../Enums/Tranlate";
 import OfferService from "../../../../../services/OfferService";
+import Select from 'react-select'
 
 const AddOffersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
     const [formData, setFormData] = useState({
@@ -20,7 +21,10 @@ const AddOffersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
     const [loadingImg, setLoadingImg] = useState(false)
     const offerService = new OfferService()
     const lang = useSelector(state=> state.auth.lang)
-
+    const types=[
+        {label: Translate[lang].service_offers, value:"service offers"},
+        {label: Translate[lang].social_offers, value:"social offers"},
+    ]
     useEffect(() => {
         if(Object.keys(item)?.length === 0){
             setIsAdd(true)
@@ -31,26 +35,28 @@ const AddOffersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
                 title: item?.title,
                 image: item?.image,
                 cover_image: item?.cover_image,
+                type: types.find(res=> res.value === item?.type)
             })
         }
     },[item])
 
     const submit = () =>{
-        // if(!formData?.pdf || !formData?.img){
-        //     toast.error(`Upload ${!formData?.pdf ? 'Offer' : ''} ${!formData?.pdf && !formData?.img ? "&" : ''} ${!formData?.img ? 'Image' : ''} First`)
-        //     return
-        // }
+        if(!formData?.type){
+            toast.error(`Select Type`)
+            return
+        }
 
         let data ={
             title: formData?.title,
             image: formData?.image,
-            cover_image: formData?.cover_image
+            cover_image: formData?.cover_image,
+            type: formData?.type?.value
         }
 
         if(isAdd){
             offerService.create(data)?.then(res=>{
                 if(res && res?.status === 201){
-                    toast.success('Brand Added Successfully')
+                    toast.success('Offer Added Successfully')
                     setShouldUpdate(prev=> !prev)
                     setAddModal()
                 }
@@ -58,7 +64,7 @@ const AddOffersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
         } else {
             offerService.update(formData?.id, data)?.then(res=>{
                 if(res && res?.status === 200){
-                    toast.success('Brand Updated Successfully')
+                    toast.success('Offer Updated Successfully')
                     setShouldUpdate(prev=> !prev)
                     setAddModal()
                 }
@@ -138,7 +144,8 @@ const AddOffersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
                                 <label className="mx-4">{Translate[lang]?.offer}</label>
                                 <div className="image-placeholder">	
                                             <div className="avatar-edit">
-                                                <input type="file" accept=".pdf, .txt,.doc, .docx" onChange={(e) => {
+                                                <input type="file" 
+                                                onChange={(e) => {
                                                     let files = e.target.files
                                                     const filesData = Object.values(files)
                                                     if (filesData.length) {
@@ -155,7 +162,11 @@ const AddOffersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
                                             </div>
                                             <div className="avatar-preview2 m-auto">
                                                 <div id={`imagePreview`} className='d-flex align-items-center justify-content-center' style={{fontSize: '61px', color: '#03447b'}}>
-                                                {!!formData?.cover_image &&  <i className="la la-check-circle" />}
+                                                {!!formData?.cover_image &&  (formData.cover_image.endsWith('.pdf') || 
+                                                    formData.cover_image.endsWith('.docx') || 
+                                                    formData.cover_image.endsWith('.doc') || 
+                                                    formData.cover_image.endsWith('.txt')) ? <i className="la la-check-circle"/> :
+                                                    <img src={formData?.cover_image} alt='offer' className="w-100 h-100" />}
                                                 {(!formData?.cover_image && !loading) && 
                                                     <img 
                                                         id={`saveImageFile`} 
@@ -186,6 +197,16 @@ const AddOffersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
                                 }}
                                 value={formData.title}
                                 onChange={(e) => setFormData({...formData, title: e.target.value})}
+                            />
+                        </Col>
+                        <Col md={12}>
+                            <label>{Translate[lang]?.type}</label>
+                            <Select
+                                value={formData.type}
+                                name="types"
+                                placeholder={Translate[lang]?.select}
+                                options={types}
+                                onChange={(e)=> setFormData({...formData, type: e})}
                             />
                         </Col>
                     </Row>

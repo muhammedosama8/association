@@ -7,8 +7,10 @@ import BaseService from "../../../../../services/BaseService";
 import Loader from "../../../../common/Loader";
 import { useSelector } from "react-redux";
 import { Translate } from "../../../../Enums/Tranlate";
-import "../style.scss"
+import Select from 'react-select'
 import BoardOfDirectorsService from "../../../../../services/BoardOfDirectorsService";
+import JobTitleService from "../../../../../services/JobTitleService";
+import "../style.scss"
 
 const AddMembersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
     const [files, setFiles] = useState([])
@@ -19,8 +21,23 @@ const AddMembersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
     })
     const [isAdd, setIsAdd] = useState(false)
     const [loading, setLoading] = useState(false)
+    const [jobsOptions, setJobsOptions] = useState([])
     const boardOfDirectorsService = new BoardOfDirectorsService()
     const lang = useSelector(state=> state.auth.lang)
+
+    useEffect(() => {
+        new JobTitleService().getList().then(res=>{
+            if(res?.status){
+              let response = res?.data?.data?.map(res=>{
+                return {
+                    label: res?.title,
+                    value: res?.id,
+                }
+              })
+              setJobsOptions(response)
+            }
+          })
+    },[])
 
     useEffect(() => {
         if(Object.keys(item)?.length === 0){
@@ -58,7 +75,7 @@ const AddMembersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
         }
         let data ={
             name: formData?.name,
-            job_title: formData?.job,
+            job_title_id: formData?.job?.value,
             image: formData?.img
         }
         setLoading(true)
@@ -157,19 +174,13 @@ const AddMembersModal = ({addModal, setAddModal, item, setShouldUpdate})=>{
                         </Col>
 
                         <Col md={12}>
-                            <AvField
-                                label={Translate[lang]?.job}
-                                type='text'
-                                placeholder={Translate[lang]?.job}
+                            <label>{Translate[lang]?.job}</label>
+                            <Select
                                 value={formData.job}
-                                name='job'
-                                validate={{
-                                    required: {
-                                        value:true,
-                                        errorMessage: Translate[lang].field_required
-                                    }
-                                }}
-                                onChange={(e) => setFormData({...formData, job: e.target.value})}
+                                name="job"
+                                placeholder={Translate[lang]?.select}
+                                options={jobsOptions}
+                                onChange={(e)=> setFormData({...formData, job: e})}
                             />
                         </Col>
                     </Row>

@@ -16,9 +16,12 @@ import AddMembersModal from "./AddMembersModal";
 import CardItem from "./CardItem";
 import './style.scss'
 import BoardOfDirectorsService from "../../../../services/BoardOfDirectorsService";
+import Jobs from "./Jobs";
 
 const Members = () => {
+    const tabs = ["members", "jobs"]
     const [data, setData] = useState([])
+    const [selectTab, setSelectTab] = useState("members")
     const [addModal, setAddModal] = useState(false)
     const [item, setItem] = useState({})
     const [hasData, setHasData] = useState(null)
@@ -56,9 +59,20 @@ const Members = () => {
               {Translate[lang]?.add} {Translate[lang]?.members}
           </Button>}
         </Card.Body >
+        <div className="tabs-div mt-4 px-2">
+          {tabs?.map((tab, index) => {
+            return <span 
+              key={index}
+              onClick={()=> setSelectTab(tab)}
+              className={`mx-2 tab ${tab === selectTab ? 'active-tab' : ''}`}
+            >
+              {Translate[lang][tab]}
+            </span>
+          })}
+        </div>
       </Card>
       
-      <Row>
+      {selectTab === 'members' && <Row>
         <Col lg={12}>
           <Card>
             <Card.Body className={`${hasData === 0 && 'text-center'} `}>
@@ -109,7 +123,9 @@ const Members = () => {
             </Card.Body>
           </Card>
         </Col>
-      </Row>
+      </Row>}
+
+      {selectTab === 'jobs' && <Jobs />}
 
       {addModal && 
         <AddMembersModal

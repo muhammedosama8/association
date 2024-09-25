@@ -20,6 +20,10 @@ import OfferService from "../../../../services/OfferService";
 const Offers = () => {
     const [data, setData] = useState([])
     const [addModal, setAddModal] = useState(false)
+    const tabs = [
+      {value: "service offers", name: "service_offers"},
+      {value: "social offers", name: "social_offers"},]
+    const [selectedTab, setSelectedTab] = useState({value: "service offers", name: "service_offers"})
     const [item, setItem] = useState({})
     const [hasData, setHasData] = useState(null)
     const [search, setSearch] = useState(null)
@@ -56,12 +60,24 @@ const Offers = () => {
               {Translate[lang]?.add} {Translate[lang]?.offer}
           </Button>}
         </Card.Body >
+        <div className="tabs-div mt-4 px-2">
+            {tabs?.map((tab, index) => {
+              return <span 
+                key={index}
+                onClick={()=> {
+                  setSelectedTab(tab)
+                  setShouldUpdate(prev => !prev)
+                }}
+                className={`mx-2 tab ${tab.name === selectedTab.name ? 'active-tab' : ''}`}
+              >
+                {Translate[lang][tab?.name]}
+              </span>
+            })}
+        </div>
       </Card>
       
-      <Row>
-        <Col lg={12}>
-          <Card>
-            <Card.Body className={`${hasData === 0 && 'text-center'} `}>
+      <Card>
+          <Card.Body className={`${hasData === 0 && 'text-center'} `}>
             {loading && <div style={{height: '300px'}}>
                 <Loader />
               </div>}
@@ -105,11 +121,10 @@ const Offers = () => {
                   setHasData={setHasData}
                   setLoading={setLoading}
                   search={search}
+                  type={selectedTab?.value}
               />
             </Card.Body>
-          </Card>
-        </Col>
-      </Row>
+        </Card>
 
       {addModal && 
         <AddOffersModal
