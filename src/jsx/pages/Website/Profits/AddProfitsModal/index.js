@@ -65,7 +65,7 @@ const AddProfitsModal = ({addModal, setAddModal})=>{
                     className='form-horizontal'
                     onValidSubmit={submit}>
             <Modal.Header>
-            <Modal.Title>{Translate[lang]?.chooseـaـyearـofـoffer}</Modal.Title>
+            <Modal.Title>{Translate[lang]?.choose_a_year_of_offer}</Modal.Title>
             <Button
                 variant=""
                 className="close"

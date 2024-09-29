@@ -14,23 +14,22 @@ import Pagination from "../../../common/Pagination/Pagination";
 import { Translate } from "../../../Enums/Tranlate";
 import CardItem from "./CardItem";
 import './style.scss'
-import ProfitsService from "../../../../services/ProfitsService";
-import AddProfitsModal from "./AddProfitsModal";
-import ImportModal from "../../../common/ImportModal";
+import FamilyCardRequestService from "../../../../services/FamilyCardRequestService";
+import { useNavigate } from "react-router-dom";
 
-const Profits = () => {
+const FamilyCardRequest = () => {
     const [data, setData] = useState([])
-    const [addModal, setAddModal] = useState(false)
-    const [type, setType] = useState('')
-    const [importModal, setImportModal] = useState(false)
+    const tabs = ["head of household", "divorced", "widow"]
+    const [selectTab, setSelectTab] = useState("head of household")
     const [hasData, setHasData] = useState(null)
     const [search, setSearch] = useState(null)
     const [loading, setLoading] = useState(false)
     const [shouldUpdate, setShouldUpdate] = useState(false)
     const Auth = useSelector(state=> state.auth?.auth)
     const lang = useSelector(state=> state.auth?.lang)
-    const profitsService = new ProfitsService()
+    const familyCardService = new FamilyCardRequestService()
     const isExist = (data)=> Auth?.admin?.admin_roles?.includes(data)
+    const navigate = useNavigate()
 
   return (
     <Fragment>
@@ -52,33 +51,26 @@ const Profits = () => {
             ></div>
           </div>
           {isExist('website') && <div>
-            <Button 
-              variant="info" 
-              style={{
-                background: 'rgb(243, 246, 249)',
-                border: 0, color: '#555'
-              }}
-              className='h-75' 
-              onClick={()=> {
-                setImportModal(true)
-                setType('freeze')
-              }}>
-              {Translate[lang]?.freeze}
-            </Button>
-            <Button variant="secondary" className='mx-3 h-75' 
-              onClick={()=> {
-                setImportModal(true)
-                setType('import')
-              }}>
-              {Translate[lang]?.import}
-            </Button>
-            <Button variant="primary" className='me-2 h-75' onClick={()=> { 
-              setAddModal(true) }}>
+            <Button variant="primary" className='me-2 h-75' onClick={()=> navigate('/add_family_card_request')}>
               <i className="la la-plus mx-1"></i>
-                {Translate[lang]?.choose_a_year_of_offer}
+              {Translate[lang]?.add} {Translate[lang]?.family_card}
             </Button>
           </div>}
         </Card.Body >
+        <div className="tabs-div mt-4 px-2">
+          {tabs?.map((tab, index) => {
+            return <span 
+              key={index}
+              onClick={()=> {
+                setShouldUpdate(prev => !prev)
+                setSelectTab(tab)
+              }}
+              className={`mx-2 tab ${tab === selectTab ? 'active-tab' : ''}`}
+            >
+              {Translate[lang][tab?.replaceAll(' ','_')]}
+            </span>
+          })}
+        </div>
       </Card>
       
       <Row>
@@ -101,15 +93,39 @@ const Profits = () => {
                       <strong>{Translate[lang]?.civil_id}</strong>
                     </th>
                     <th>
-                      <strong>{Translate[lang]?.box_number}</strong>
+                      <strong>{Translate[lang]?.phone}</strong>
+                    </th>
+                    {selectTab === "head of household" && <>
+                      <th>
+                        <strong>{Translate[lang]?.father}</strong>
+                      </th>
+                      <th>
+                        <strong>{Translate[lang]?.mother}</strong>
+                      </th>
+                      <th>
+                        <strong>{Translate[lang]?.marriage_certificate}</strong>
+                      </th>
+                    </>}
+                    {selectTab === "divorced" && <>
+                      <th>
+                        <strong>{Translate[lang]?.divorce_document}</strong>
+                      </th>
+                      <th>
+                        <strong>{Translate[lang]?.custody_decision}</strong>
+                      </th>
+                    </>}
+                    {selectTab === "widow" && <>
+                      <th>
+                        <strong>{Translate[lang]?.husband_death_certificate}</strong>
+                      </th>
+                    </>}
+                    <th>
+                      <strong>{Translate[lang]?.civilian_boys}</strong>
                     </th>
                     <th>
-                      <strong>{Translate[lang]?.profits}</strong>
+                      <strong>{Translate[lang]?.status}</strong>
                     </th>
-                    <th>
-                      <strong>{Translate[lang]?.year}</strong>
-                    </th>
-                    {/* <th></th> */}
+                    <th></th>
                   </tr>
                 </thead>
 
@@ -119,7 +135,7 @@ const Profits = () => {
                             index= {index}
                             key= {index}
                             item={item}
-                            setAddModal={setAddModal}
+                            type={selectTab}
                             setShouldUpdate={setShouldUpdate}
                         />
                     })}
@@ -128,33 +144,19 @@ const Profits = () => {
               {hasData === 0 && <NoData />}
               <Pagination
                   setData={setData}
-                  service={profitsService}
+                  service={familyCardService}
                   shouldUpdate={shouldUpdate}
                   setHasData={setHasData}
                   setLoading={setLoading}
+                  type={selectTab}
                   search={search}
               />
             </Card.Body>
           </Card>
         </Col>
       </Row>
-
-      {addModal && 
-        <AddProfitsModal
-          addModal={addModal} 
-          setAddModal={()=> setAddModal(false)}
-      />}
-
-      {importModal && <ImportModal 
-        addModal={importModal} 
-        setAddModal={()=> setImportModal(false)} 
-        type={type}
-        name={'profits'} 
-        service={profitsService}
-        setShouldUpdate={setShouldUpdate}
-      />}
     </Fragment>
   );
 };
 
-export default Profits;
+export default FamilyCardRequest;

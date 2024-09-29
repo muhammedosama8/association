@@ -84,6 +84,11 @@ export const MenuList = [
           to: 'family_card',
           rule: 'website',
         }, {
+          title:'Family Card Request',
+          text:'family_card_request',
+          to: 'family_card_request',
+          rule: 'website',
+        }, {
           title:'Products',
           text:'products',
           to: 'products',

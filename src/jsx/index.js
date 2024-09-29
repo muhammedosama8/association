@@ -45,6 +45,8 @@ import FamilyCard from "./pages/Website/FamilyCard";
 import People from "./pages/Website/FamilyCard/People";
 import Profits from "./pages/Website/Profits";
 import PeopleOfDeterminationOffers from "./pages/Website/PeopleOfDeterminationOffers";
+import FamilyCardRequest from "./pages/Website/FamilyCardRequest";
+import AddFamilyCardRequest from "./pages/Website/FamilyCardRequest/AddFamilyCardRequest";
 
 const Markup = () => {
   const allroutes = [
@@ -68,6 +70,8 @@ const Markup = () => {
     { url: "shareholders", component: <Shareholders /> },
     { url: "shareholders_requests", component: <ShareholdersRequests /> },
     { url: "shareholders_requests/attachments", component: <Attachments /> },
+    { url: "family_card_request", component: <FamilyCardRequest /> },
+    { url: "add_family_card_request", component: <AddFamilyCardRequest /> },
     { url: "family_card", component: <FamilyCard /> },
     { url: "family_card/people", component: <People /> },
     { url: "products", component: <Products /> },
